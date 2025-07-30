@@ -1,7 +1,6 @@
 /*
 
 Leer el README.md
-By Pinto.
 
 */
 
@@ -12,7 +11,8 @@ public class Matrix {
     public static void main(String[] args) {
         try(Scanner sc = new Scanner(System.in)){
             int tipoEvento = 1;
-            System.out.print("""
+            int registro;
+                System.out.print("""
                 |---------------------------------------|
                 |  Universidad Tecnológica de Tijuana   |
                 |                                       |
@@ -28,6 +28,23 @@ public class Matrix {
             sc.nextLine();
 
             // Antes de que pase a la pregunta, deberiamos agregar que servicio ofrecemos
+            System.out.println("BIENVENIDO A _______- UN SERVICIO DE RENTA DE SALONES PARA EVENTOS");
+         System.out.println("¿DESEA HACER SU REGISTRO?");
+         System.out.println(" PRESIONAR 1 SI DESEA RELLENAR EL REGISTRO DE LO CONTRARIO PRESIONAR 2");
+         registro = sc.nextInt();
+ if (registro ==2){ 
+System.out.println(" VUELVA PRONTO");
+ } else if (registro ==1 ){ 
+
+    // REGISTRO Y DATOS DEL USUARIO
+    System.out.println("Introduzca su Nombre Completo: ");
+    String nombreUsuario = sc.nextLine();
+    System.out.println("Introduzca su Numero Telefonico: ");
+    int telefonoUsuario = sc.nextInt();
+    System.out.println(" Introduzca su Correo Electronico");
+    String Correo = sc.nextLine();
+
+
             do {
                 System.out.println();
                 System.out.print("""
@@ -52,7 +69,6 @@ public class Matrix {
                             break;
                         case 2: // Adjuntar función para el evento empresarial
                             System.out.println();
-                            eventoEmpresarial(sc);
                             System.out.println("Evento empresarial en mantenimiento.");
                             break;
                         case 3: // El usuario no eligió ninguna opción 
@@ -97,7 +113,7 @@ public class Matrix {
         System.out.print("Elige el evento (1 - 7): ");
         try {
             tipoReservacion = sc.nextInt();
-            sc.nextLine(); //
+            sc.nextLine(); // 
 
             switch(tipoReservacion){
                 case 1:
@@ -136,59 +152,8 @@ public class Matrix {
 
 /* En esta parte irá el evento empresarial */
     public static void eventoEmpresarial(Scanner sc){
-    int tipoReservacion = 1;
-    do {
-        System.out.println("""
-            |----------------------------------------------------------------|
-            | El evento cuenta con los siguientes tipos de reservaciones     |
-            |----------------------------------------------------------------|
-            | 1. Conferencia                                                 |
-            | 2. Teatro                                                      |
-            | 3. Recepción                                                   |
-            | 4. Banquete                                                    |
-            | 5. Salón                                                       |
-            | 6. Disposición en forma de U                                   |
-            | 7. Salir                                                       |
-            |----------------------------------------------------------------|
-            """);
-        System.out.print("Elige el evento (1 - 7): ");
-        try {
-            tipoReservacion = sc.nextInt();
-            sc.nextLine(); //
 
-            switch(tipoReservacion){
-                case 1:
-                    System.out.println("Conferencia en mantenimiento");
-                    break;
-                case 2:
-                    System.out.println("Teatro en mantenimiento");
-                    break;
-                case 3:
-                    System.out.println("Recepción en mantenimiento");
-                    break;
-                case 4:
-                    System.out.println("Banquete en mantenimiento");
-                    break;
-                case 5:
-                    System.out.println("Salón en mantenimiento");
-                    break;
-                case 6:
-                    System.out.println("Disposición en forma de U en mantenimiento");
-                    break;
-                case 7:
-                    System.out.println("Saliendo del evento social...");
-                    break;
-                default:
-                    System.out.println("Opción no válida. Intenta nuevamente.");
-            }
-        } catch (InputMismatchException e) {
-            System.out.println();
-            System.out.println("Error, debes ingresar un número entre 1 y 7.");
-            sc.nextLine(); // Impide un ciclo infinito
-        }
 
-    } while (tipoReservacion != 7);
+ }
     }
-
-
-    }
+}
