@@ -233,4 +233,10 @@ public class Matrix {
             }
         } while (tipoReservacion != 5);
     }
+
+    public static void montaje_conferencia(){
+        //1.La funcion principal del montaje
+        System.out.println("montaje del teatro en mantenimiento");
+        
+    }
 }
