@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Matrix {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            int tipoEvento = 1;
-            int registro;
+            int registro = 1; // Se inicializa porque si no da error en el do-while
+
             System.out.print("""
                 |---------------------------------------|
                 |  Universidad Tecnológica de Tijuana   |
@@ -22,12 +22,12 @@ public class Matrix {
                 |                                       |
                 |---------------------------------------|
                 """);
-            System.out.print("Bienvenido, pulsa enter para continuar: ");
+            System.out.print("Bienvenido/a, pulsa enter para continuar: ");
             sc.nextLine();
 
-            // Antes de que pase a la pregunta, deberiamos agregar que servicio ofrecemos
-            System.out.println(); // Salto de linea para mejor apariencia
-            System.out.print("""
+            do {
+                System.out.println(); // Salto de linea para mejor apariencia
+                System.out.print("""
                     |-------------------------------------------------------------------|
                     | Bienvenido a Matrix                                               |
                     |-------------------------------------------------------------------|
@@ -40,78 +40,92 @@ public class Matrix {
                     | 5. Entre otros más!                                               |
                     |-------------------------------------------------------------------|
                     """);
-            try {
-            System.out.print("Desea hacer su registro?\n1. Si\n2. No\nDecisión: ");
-            registro = sc.nextInt();
-            sc.nextLine(); // Limpia el buffer después de nextInt()
+                try {
+                    System.out.print("Desea hacer su registro?\n1. Si\n2. No\nDecisión: ");
+                    registro = sc.nextInt();
+
+                    switch (registro) {
+                        case 1: // Recolecta los datos del usuario
+                            System.out.println(); // Salto de linea para mejor apariencia
+                            sc.nextLine(); // Limpia el buffer
+
+                            System.out.print("Ingrese su nombre completo (Empezando por apellidos): ");
+                            String nombreUsuario = sc.nextLine();
+
+                            System.out.print("Ingrese su número de telefono: ");
+                            String telefonoUsuario = sc.nextLine();
+                            //sc.nextLine(); // Importante, debe ir debajo de -> "Ingrese su número de telefono"
+
+                            System.out.print("Ingrese su correo electrónico: ");
+                            String correoUsuario = sc.nextLine();
+                            
+                            opciones(sc); // Entra a la parte de las opciones
+
+                            break;
+                        case 2: // No entra a ninguna función
+                        System.out.println(); // Salto de linea para mejor apariencia
+                            System.out.println("👋 Vuelva pronto.");
+                            break;
+                        default:
+                            System.out.println(); // Salto de linea para mejor apariencia
+                            System.out.println("❌ Error: Ingresa un número entre (1 - 2).");
+                            sc.nextLine(); // Limpia el buffer
+                            continue;
+                    } 
+                } catch (InputMismatchException a) {
+                    System.out.println(); // Salto de linea para mejor apariencia
+                    System.out.println("❌ Error: No se permiten letras ni caracteres especiales (#, !, /, -, etc.).");
+                    sc.nextLine(); // Limpia el buffer
+                }
+            } while (registro != 2);
+        }
+    }
+
+    public static void opciones(Scanner sc){
+        int tipoEvento = 1; // Se inicializa porque si no da error en el do-while
+        do {
+            System.out.println();
+            System.out.print("""
+                |----------------------------------------|
+                | Qué tipo de evento deseas contratar?   |
+                |----------------------------------------|
+                | 1. Social                              |
+                | 2. Empresarial                         |
+                | 3. Ninguno                             |
+                |----------------------------------------|
+                """);
             
-                if(registro == 2){
-                    System.out.println("Vuelva prondo.");
-                }else if(registro == 1){
-                    System.out.println(); // Salto de linea para darle buen formato
+            try {
+                System.out.print("Ingresa una opción (1 - 3): ");
+                tipoEvento = sc.nextInt();
+                sc.nextLine();  // Importante, impide un ciclo fallido
 
-                    System.out.print("Ingrese su nombre completo: ");
-                    String nombreUsuario = sc.nextLine();
-
-                    System.out.print("Ingrese su número de telefono: ");
-                    int telefonoUsuario = sc.nextInt();
-                    sc.nextLine(); // Importante, debe ir debajo de -> "Ingrese su número de telefono"
-
-                    System.out.print("Ingrese su correo electrónico: ");
-                    String correoUsuario = sc.nextLine();
-                                        
-                    
-                    do {
+                switch (tipoEvento) {
+                    case 1: // Evento social
                         System.out.println();
-                        System.out.print("""
-                            |----------------------------------------|
-                            | Qué tipo de evento deseas contratar?   |
-                            |----------------------------------------|
-                            | 1. Social                              |
-                            | 2. Empresarial                         |
-                            | 3. Ninguno                             |
-                            |----------------------------------------|
-                            """);
-                        System.out.print("Ingresa una opción (1 - 3): ");
-                        try {
-                            tipoEvento = sc.nextInt();
-                            sc.nextLine();  // Importante, impide un ciclo fallido
+                        eventoSocial(sc);
+                        break;
+                    case 2: // Evento empresarial
+                        System.out.println();
+                        eventoEmpresarial(sc);
+                        break;
+                    case 3: // El usuario no eligió ninguna opción 
+                        System.out.println();
+                        System.out.println("👋 Adiós!\nNo has elegido ningún evento.");
+                        break;
+                    default:
+                        System.out.println();
+                        System.out.println("❌ Error: Ingresa un número entre (1 - 3).");
+                        continue;
+                }
 
-                            switch (tipoEvento) {
-                                case 1: // Evento social
-                                    System.out.println();
-                                    eventoSocial(sc);
-                                    break;
-                                case 2: // Evento empresarial
-                                    System.out.println();
-                                    eventoEmpresarial(sc);
-                                    break;
-                                case 3: // El usuario no eligió ninguna opción 
-                                    System.out.println();
-                                    System.out.println("Adiós!\nNo has elegido ningún evento.");
-                                    break;
-                                default:
-                                    System.out.println();
-                                    System.out.println("Error: Ingresa un número entre 1 y 3.");
-                                    continue;
-                            }
-
-                        } catch (InputMismatchException e) {
-                            System.out.println();
-                            System.out.println("Error: Debes ingresar un número entero.");
-                            sc.nextLine(); // Importante, impide un ciclo infinito
-                        }
-                    } while (tipoEvento != 3);
-                    }
-
-                
-                
-            } catch (InputMismatchException a) {
+            } catch (InputMismatchException b) {
                 System.out.println();
-                System.out.println("Error: Debes ingresar un número entero.");
+                System.out.println("❌ Error: Ingresa un número entre (1- 3).");
                 sc.nextLine(); // Importante, impide un ciclo infinito
             }
-        }
+        } while (tipoEvento != 3);
+
     }
 
     // Evento social
@@ -161,7 +175,7 @@ public class Matrix {
                     default:
                         System.out.println("Opción no válida. Intenta nuevamente.");
                 }
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException c) {
                 System.out.println();
                 System.out.println("Error, debes ingresar un número entre 1 y 7.");
                 sc.nextLine(); // Impide un ciclo infinito
@@ -208,11 +222,11 @@ public class Matrix {
                     default:
                         System.out.println("Opción no válida. Intenta nuevamente.");
                 }
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException d) {
                 System.out.println();
                 System.out.println("Error, debes ingresar un número entre 1 y 5.");
                 sc.nextLine(); // Impide un ciclo infinito
             }
         } while (tipoReservacion != 5);
     }
-     }
+}
