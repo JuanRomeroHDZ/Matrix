@@ -28,7 +28,7 @@ public class Matrix {
             sc.nextLine();
 
             // Antes de que pase a la pregunta, deberiamos agregar que servicio ofrecemos
-            System.out.println("BIENVENIDO A _______- UN SERVICIO DE RENTA DE SALONES PARA EVENTOS");
+            System.out.println("BIENVENIDO A _______- UN SERVICIO DE RENTA DE SALONES PARA EVENTOS SOCIALES Y EMPRESARIALES");
          System.out.println("¿DESEA HACER SU REGISTRO?");
          System.out.println(" PRESIONAR 1 SI DESEA RELLENAR EL REGISTRO DE LO CONTRARIO PRESIONAR 2");
          registro = sc.nextInt();
