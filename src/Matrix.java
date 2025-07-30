@@ -48,24 +48,14 @@ public class Matrix {
                         case 1: // Recolecta los datos del usuario
                             System.out.println(); // Salto de linea para mejor apariencia
                             sc.nextLine(); // Limpia el buffer
-
-                            System.out.print("Ingrese su nombre completo (Empezando por apellidos): ");
-                            String nombreUsuario = sc.nextLine();
-
-                            System.out.print("Ingrese su número de telefono: ");
-                            String telefonoUsuario = sc.nextLine();
-                            //sc.nextLine(); // Importante, debe ir debajo de -> "Ingrese su número de telefono"
-
-                            System.out.print("Ingrese su correo electrónico: ");
-                            String correoUsuario = sc.nextLine();
-                            
-                            opciones(sc); // Entra a la parte de las opciones
-
+                            datosUsuarios(sc); // Entra a la función para requerir los datos del usuario
                             break;
+
                         case 2: // No entra a ninguna función
                         System.out.println(); // Salto de linea para mejor apariencia
                             System.out.println("👋 Vuelva pronto.");
                             break;
+                            
                         default:
                             System.out.println(); // Salto de linea para mejor apariencia
                             System.out.println("❌ Error: Ingresa un número entre (1 - 2).");
@@ -79,6 +69,18 @@ public class Matrix {
                 }
             } while (registro != 2);
         }
+    }
+    public static void datosUsuarios(Scanner sc){
+        System.out.print("Ingrese su nombre completo (Empezando por apellidos): ");
+        String nombreUsuario = sc.nextLine();
+
+        System.out.print("Ingrese su número de telefono: ");
+        Long telefonoUsuario = sc.nextLong();
+        sc.nextLine(); // Importante, debe ir debajo de -> "Ingrese su número de telefono"
+
+        System.out.print("Ingrese su correo electrónico: ");
+        String correoUsuario = sc.nextLine();
+        opciones(sc); // Entra a la parte de las opciones
     }
 
     public static void opciones(Scanner sc){
@@ -128,6 +130,8 @@ public class Matrix {
 
     }
 
+
+/*  - - - - - - - - Eventos Principales  - - - - - - - -*/
     // Evento social
     public static void eventoSocial(Scanner sc) {
         int tipoReservacion = 1;
