@@ -11,6 +11,7 @@ public class Matrix {
     public static void main(String[] args) {
         try(Scanner sc = new Scanner(System.in)){
             int tipoEvento = 1;
+            hcilqucihwicbibcp
             System.out.print("""
                 |---------------------------------------|
                 |  Universidad Tecnológica de Tijuana   |
