@@ -228,4 +228,4 @@ public class matrixContinuarJuan {
             }
         } while (tipoReservacion != 5);
     }
-     }
+}
