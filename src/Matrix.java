@@ -157,6 +157,7 @@ public class Matrix {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println("Conferencia en mantenimiento");
+                        montaje_conferencia();
                         break;
                     case 2:
                         System.out.println("Teatro en mantenimiento");
@@ -232,5 +233,10 @@ public class Matrix {
                 sc.nextLine(); // Impide un ciclo infinito
             }
         } while (tipoReservacion != 5);
+    }
+    public static void montaje_conferencia(){
+        //1.La funcion principal del montaje
+        System.out.println("montaje del teatro en mantenimiento");
+        
     }
 }
