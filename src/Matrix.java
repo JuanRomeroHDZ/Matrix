@@ -11,7 +11,20 @@ public class Matrix {
     public static void main(String[] args) {
         try(Scanner sc = new Scanner(System.in)){
             int tipoEvento = 1;
-    System.out.println("Bienvenidos");
+            System.out.print("""
+                |---------------------------------------|
+                |  Universidad Tecnológica de Tijuana   |
+                |                                       |
+                |                 Matrix                |
+                |                                       |
+                | Heredia Avalos Jose Angel             |
+                | Montaño Lopez Ángel Isaac             |
+                | Romero Hernández Juan José            |
+                |                                       |
+                |---------------------------------------|
+                """);
+            System.out.print("Bienvenido, pulsa enter para continuar: ");
+            sc.nextLine();
             do {
                 System.out.print("""
                         |----------------------------------------|
