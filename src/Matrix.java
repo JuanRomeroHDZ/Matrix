@@ -28,6 +28,7 @@ public class Matrix {
 
             // Antes de que pase a la pregunta, deberiamos agregar que servicio ofrecemos
             do {
+                System.out.println();
                 System.out.print("""
                         |----------------------------------------|
                         | Qué tipo de evento deseas contratar?   |
