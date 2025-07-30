@@ -1,1 +1,0 @@
-//Papus se ve?

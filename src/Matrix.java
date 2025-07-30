@@ -25,6 +25,8 @@ public class Matrix {
                 """);
             System.out.print("Bienvenido, pulsa enter para continuar: ");
             sc.nextLine();
+
+            // Antes de que pase a la pregunta, deberiamos agregar que servicio ofrecemos
             do {
                 System.out.print("""
                         |----------------------------------------|
