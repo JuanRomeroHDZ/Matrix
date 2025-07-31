@@ -13,17 +13,18 @@ public class Matrix {
             int registro = 1;//Se inicializa porque si no da error en el do-while
 
             System.out.print("""
-                |---------------------------------------|
-                |  Universidad Tecnológica de Tijuana   |
-                |                                       |
-                |                 Matrix                |
-                |                                       |
-                | Heredia Avalos Jose Angel             |
-                | Montaño Lopez Ángel Isaac             |
-                | Romero Hernández Juan José            |
-                |                                       |
-                |---------------------------------------|
-                """);
+            |-------------------------------------------------------------|
+            |             Universidad Tecnológica de Tijuana              |
+            |                                                             |
+            |                        📊  Matrix                           |
+            |                                                             |
+            |              Heredia Avalos Jose Angel                      |
+            |              Montaño López Ángel Isaac                      |
+            |              Romero Hernández Juan José                     |
+            |                                                             |
+            |-------------------------------------------------------------|
+            """); 
+
             System.out.print("Bienvenido/a, pulsa enter para continuar: ");
             sc.nextLine();
 
