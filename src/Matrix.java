@@ -42,7 +42,7 @@ public class Matrix {
                     |-------------------------------------------------------------------|
                     """);
                 try {
-                    System.out.print("Desea hacer su registro?\n1. Si\n2. No\nDecisión: ");
+                    System.out.print("Desea hacer su registro?\n1. Si\n2. No\nDecisión (Ingrese un número entre (1 - 2): ");
                     registro = sc.nextInt();
 
                     switch (registro) {
@@ -71,19 +71,35 @@ public class Matrix {
     }
 
     public static void datosUsuarios(Scanner sc){
-        System.out.print("Ingrese su nombre completo (Empezando por apellidos): ");
-        String nombreUsuario = sc.nextLine();
+        do {
+            System.out.print("Ingrese su nombre completo (Empezando por apellidos): ");
+            String nombreUsuario = sc.nextLine();
 
-        System.out.print("Ingrese su número de telefono: ");
-        Long telefonoUsuario = sc.nextLong();
-        sc.nextLine();
+            System.out.print("Ingrese su número de telefono: ");
+            Long telefonoUsuario = sc.nextLong();
+            sc.nextLine();
 
-        System.out.print("Ingrese su correo electrónico: ");
-        String correoUsuario = sc.nextLine();
-        opciones(sc);
+            System.out.print("Ingrese su correo electrónico: ");
+            String correoUsuario = sc.nextLine();
+
+            System.out.print("Cantidad de persona a asistir al evento: ");
+            int personasUsuario = sc.nextInt();
+            if(personasUsuario <= 0){
+                System.out.println(); // Salto de linea para mejor apariencia
+                System.out.println("❌ Error: Cantidad inválida");
+                sc.nextLine(); // Limpia buffer
+                System.out.println(); // Salto de linea para mejor apariencia
+            }else{
+                System.out.print("\nNota: El evento lo elegirá en el siguiente apartado\nCantidad de días que reservará el evento: ");
+                int diasUsuario = sc.nextInt();
+
+                opciones(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
+            }
+        } while (true);
+
     }
 
-    public static void opciones(Scanner sc){
+    public static void opciones(Scanner sc, String nombreUsuario, Long telefonoUsuario, String correoUsuario, int personasUsuario, int diasUsuario){
         int tipoEvento = 1;
         do {
             System.out.println();
@@ -104,7 +120,7 @@ public class Matrix {
                 switch (tipoEvento) {
                     case 1:
                         System.out.println();
-                        eventoSocial(sc);
+                        eventoSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
                         break;
                     case 2:
                         System.out.println();
@@ -126,7 +142,7 @@ public class Matrix {
         } while (tipoEvento != 3);
     }
 
-    public static void eventoSocial(Scanner sc) {
+    public static void eventoSocial(Scanner sc, String nombreUsuario, Long telefonoUsuario, String correoUsuario, int personasUsuario, int diasUsuario) {
         int tipoReservacion = 1;
         do {
             System.out.println("""
@@ -157,14 +173,17 @@ public class Matrix {
                         break;
                     case 3:
                         System.out.println("Iniciando configuración de recepción...");
-                        eventoRecepcion(sc, false); // ← NUEVA FUNCIÓN RECEPCIÓN
+                        eventoRecepcion(sc, false, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario); // ← NUEVA FUNCIÓN RECEPCIÓN
                         break;
                     case 4:
                         System.out.println("Iniciando configuración de banquete...");
                         eventoBanquete(sc, false); // ← NUEVA FUNCIÓN BANQUETE
                         break;
                     case 5:
+                        System.out.println();
                         System.out.println("Salón en mantenimiento");
+                        System.out.println(); // Borrar o considerar borrar al finalizar
+                        montajeSalonSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
                         break;
                     case 6:
                         System.out.println("Disposición en forma de U en mantenimiento");
@@ -235,7 +254,8 @@ public class Matrix {
         equipamiento_conferencial(sc, esEmpresarial);
         servicio_conferencial(sc);
     }
-//1.Conferencia, parte de Jose (yo).*/
+
+/*                                          1 .Conferencia, parte de Jose (yo).                                          */     
     public static void equipamiento_conferencial(Scanner sc, boolean esEmpresarial){
         System.out.println("Precio estandar para eventos sociales.");
         int[] equipamiento = new int[8];
@@ -261,22 +281,22 @@ public class Matrix {
     public static void servicio_conferencial(Scanner sc){
         // En construcción
     }
-/*Lo de el good Isaac, en construccion */
-    public static void eventoRecepcion(Scanner sc, boolean esEmpresarial) {
-        System.out.print("¿Cuántos días desea rentar el evento de Recepción?: ");
-        int dias = sc.nextInt();
+
+/*                                          Lo de el good Isaac, en construccion                                          */
+    public static void eventoRecepcion(Scanner sc, boolean esEmpresarial, String nombreUsuario, Long telefonoUsuario, String correoUsuario, int personasUsuario, int diasUsuario) {
+
         sc.nextLine();
 
-        if (dias <= 0) {
+        if (diasUsuario <= 0) {
             System.out.println("❌ Días inválidos. Se usará 1 día por defecto.");
-            dias = 1;
+            diasUsuario = 1;
         }
 
-        int totalEquipamiento = equipamientoRecepcion(esEmpresarial, dias);
-        int totalServicios = serviciosRecepcion(esEmpresarial, dias);
+        int totalEquipamiento = equipamientoRecepcion(esEmpresarial, diasUsuario);
+        int totalServicios = serviciosRecepcion(esEmpresarial, diasUsuario);
         int total = totalEquipamiento + totalServicios;
 
-        System.out.println(" Total por el evento Recepción (" + dias + " días): $" + total);
+        System.out.println(" Total por el evento Recepción (" + diasUsuario + " días): $" + total);
     }
 
     public static int equipamientoRecepcion(boolean esEmpresarial, int dias) {
@@ -386,5 +406,43 @@ public class Matrix {
             System.out.println(" - " + nombres[i] + ": $" + precioTotal);
         }
         return subtotal;
+    }
+
+    /*                                          Juan                                          */
+    public static void montajeSalonSocial(Scanner sc,String nombreUsuario,Long telefonoUsuario,String correoUsuario,int personasUsuario,int diasUsuario){
+        System.out.print("""
+                |-------------------------------------------------------------------------------------------|
+                | Bienvenido/a a la renta del salón, contamos con los siguientes equipamientos y servicios  |
+                | ------------------------------------------------------------------------------------------|
+                | Equipamientos:                                                                            |
+                | 1. Mesas y sillas                                                                         |
+                | 2. Sistema de climatización                                                               |
+                | 3. Pantallas o proyectores                                                                |
+                | 4. Ilumunación regulable                                                                  |
+                |                                                                                           |                                         
+                | Sevicios:                                                                                 |
+                | 1. Personal de limpieza                                                                   |
+                | 2. Soporte técnico                                                                        |
+                | 3. Wi-Fi                                                                                  |
+                | 4. Servicio de comida                                                                     |
+                |-------------------------------------------------------------------------------------------|    
+                """);
+    }
+    public static void equipamientoSalonSocial(Scanner sc,String nombreUsuario,Long telefonoUsuario,String correoUsuario,int personasUsuario,int diasUsuario){
+        mesasSillas(sc);
+
+    }
+    public static void mesasSillas(Scanner sc){
+        System.out.println("1. Mesas y sillas");
+        try {
+            System.out.print("Cantidad de mesas: ");
+            int cantidadMesas = sc.nextInt();
+
+            System.out.println("Cantidad de sillas: ");
+            int cantidadSillas = sc.nextInt();
+        } catch (InputMismatchException e) {
+            // TODO: handle exception
+        }
+
     }
 }
