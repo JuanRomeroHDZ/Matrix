@@ -42,7 +42,7 @@ public class Matrix {
                     |-------------------------------------------------------------------|
                     """);
                 try {
-                    System.out.print("Desea hacer su registro?\n1. Si\n2. No\nDecisión (Ingrese un número entre (1 - 2): ");
+                    System.out.print("Desea hacer su registro?\n1. Si\n2. No\nDecisión (Ingrese un número entre 1 y 2): ");
                     registro = sc.nextInt();
 
                     switch (registro) {
