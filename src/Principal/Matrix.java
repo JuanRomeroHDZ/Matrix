@@ -408,7 +408,7 @@ public class Matrix {
         }
         return subtotal;
     }
-
+// AQUI TERMINA ISAAC
     /*                                          Juan                                          */
     public static void montajeSalonSocial(Scanner sc,String nombreUsuario,Long telefonoUsuario,String correoUsuario,int personasUsuario,int diasUsuario){
         System.out.println(); // Salto de linea para mejor apariencia
