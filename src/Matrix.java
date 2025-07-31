@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Matrix {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            int registro = 1;
+            int registro = 1;//Se inicializa porque si no da error en el do-while
 
             System.out.print("""
                 |---------------------------------------|
@@ -150,7 +150,7 @@ public class Matrix {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println("Iniciando configuración de conferencia...");
-                        montaje_conferencia(sc, false);
+                        montaje_conferencia(sc, false);//Aplicar como boleano by: Jose
                         break;
                     case 2:
                         System.out.println("Teatro en mantenimiento");
@@ -205,7 +205,7 @@ public class Matrix {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println("Conferencia empresarial en mantenimiento");
-                        montaje_conferencia(sc, true);
+                        montaje_conferencia(sc, true);//Aplicar como boleano by:jose.
                         break;
                     case 2:
                         System.out.println("Junta empresarial en mantenimiento");
@@ -235,7 +235,7 @@ public class Matrix {
         equipamiento_conferencial(sc, esEmpresarial);
         servicio_conferencial(sc);
     }
-
+//1.Conferencia, parte de Jose (yo).*/
     public static void equipamiento_conferencial(Scanner sc, boolean esEmpresarial){
         System.out.println("Precio estandar para eventos sociales.");
         int[] equipamiento = new int[8];
@@ -261,7 +261,7 @@ public class Matrix {
     public static void servicio_conferencial(Scanner sc){
         // En construcción
     }
-
+/*Lo de el good Isaac, en construccion */
     public static void eventoRecepcion(Scanner sc, boolean esEmpresarial) {
         System.out.print("¿Cuántos días desea rentar el evento de Recepción?: ");
         int dias = sc.nextInt();
