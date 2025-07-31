@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Matrix {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            int registro = 1; // Se inicializa porque si no da error en el do-while
+            int registro = 1;
 
             System.out.print("""
                 |---------------------------------------|
@@ -48,7 +48,7 @@ public class Matrix {
                     switch (registro) {
                         case 1:
                             System.out.println();
-                            sc.nextLine(); // Limpia el buffer
+                            sc.nextLine();
                             datosUsuarios(sc);
                             break;
                         case 2:
@@ -63,7 +63,7 @@ public class Matrix {
                     }
                 } catch (InputMismatchException a) {
                     System.out.println();
-                    System.out.println("❌ Error: No se permiten letras ni caracteres especiales (#, !, /, -, etc.).");
+                    System.out.println("❌ Error: No se permiten letras ni caracteres especiales.");
                     sc.nextLine();
                 }
             } while (registro != 2);
@@ -150,16 +150,18 @@ public class Matrix {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println("Iniciando configuración de conferencia...");
-                        montaje_conferencia(sc, false); //Aplicar como boleano
+                        montaje_conferencia(sc, false);
                         break;
                     case 2:
                         System.out.println("Teatro en mantenimiento");
                         break;
                     case 3:
-                        System.out.println("Recepción en mantenimiento");
+                        System.out.println("Iniciando configuración de recepción...");
+                        eventoRecepcion(sc, false); // ← NUEVA FUNCIÓN RECEPCIÓN
                         break;
                     case 4:
-                        System.out.println("Banquete en mantenimiento");
+                        System.out.println("Iniciando configuración de banquete...");
+                        eventoBanquete(sc, false); // ← NUEVA FUNCIÓN BANQUETE
                         break;
                     case 5:
                         System.out.println("Salón en mantenimiento");
@@ -203,7 +205,7 @@ public class Matrix {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println("Conferencia empresarial en mantenimiento");
-                        montaje_conferencia(sc, true);//Para aplicar como boleano
+                        montaje_conferencia(sc, true);
                         break;
                     case 2:
                         System.out.println("Junta empresarial en mantenimiento");
@@ -226,7 +228,6 @@ public class Matrix {
                 sc.nextLine();
             }
         } while (tipoReservacion != 5);
-        
     }
 
     public static void montaje_conferencia(Scanner sc, boolean esEmpresarial){
@@ -240,7 +241,7 @@ public class Matrix {
         int[] equipamiento = new int[8];
         equipamiento[0] = 400;  // Sillas
         equipamiento[1] = 1000; // Escenario
-        equipamiento[2] = 500;  // Microfono
+        equipamiento[2] = 500;  // Micrófono
         equipamiento[3] = 750;  // Proyector y pantalla
         equipamiento[4] = 450;  // Sistema de sonido
         equipamiento[5] = 300;  // Podio
@@ -258,6 +259,132 @@ public class Matrix {
     }
 
     public static void servicio_conferencial(Scanner sc){
-    
-}
+        // En construcción
+    }
+
+    public static void eventoRecepcion(Scanner sc, boolean esEmpresarial) {
+        System.out.print("¿Cuántos días desea rentar el evento de Recepción?: ");
+        int dias = sc.nextInt();
+        sc.nextLine();
+
+        if (dias <= 0) {
+            System.out.println("❌ Días inválidos. Se usará 1 día por defecto.");
+            dias = 1;
+        }
+
+        int totalEquipamiento = equipamientoRecepcion(esEmpresarial, dias);
+        int totalServicios = serviciosRecepcion(esEmpresarial, dias);
+        int total = totalEquipamiento + totalServicios;
+
+        System.out.println(" Total por el evento Recepción (" + dias + " días): $" + total);
+    }
+
+    public static int equipamientoRecepcion(boolean esEmpresarial, int dias) {
+        String[] nombres = {
+            "Mesas altas tipo cóctel", "Barra de bebidas", "Sistema de sonido ambiental",
+            "Área de bienvenida", "Iluminación decorativa", "Decoración floral"
+        };
+        int[] precios = {300, 800, 400, 250, 500, 600};
+
+        if (esEmpresarial) {
+            for (int i = 0; i < precios.length; i++) {
+                precios[i] *= 1.1;
+            }
+        }
+
+        System.out.println(" Equipamiento para Recepción:");
+        int subtotal = 0;
+        for (int i = 0; i < precios.length; i++) {
+            int precioTotal = precios[i] * dias;
+            subtotal += precioTotal;
+            System.out.println(" - " + nombres[i] + ": $" + precioTotal);
+        }
+        return subtotal;
+    }
+
+    public static int serviciosRecepcion(boolean esEmpresarial, int dias) {
+        String[] nombres = {
+            "Servicio de catering", "DJ o música en vivo", "Fotografía y video",
+            "Guardarropa", "Valet parking", "Seguridad", "Meseros y anfitriones"
+        };
+        int[] precios = {1200, 1500, 1000, 300, 400, 350, 500};
+
+        if (esEmpresarial) {
+            for (int i = 0; i < precios.length; i++) {
+                precios[i] *= 1.1;
+            }
+        }
+
+        System.out.println(" Servicios para Recepción:");
+        int subtotal = 0;
+        for (int i = 0; i < precios.length; i++) {
+            int precioTotal = precios[i] * dias;
+            subtotal += precioTotal;
+            System.out.println(" - " + nombres[i] + ": $" + precioTotal);
+        }
+        return subtotal;
+    }
+
+    public static void eventoBanquete(Scanner sc, boolean esEmpresarial) {
+        System.out.print("¿Cuántos días desea rentar el evento de Banquete?: ");
+        int dias = sc.nextInt();
+        sc.nextLine();
+
+        if (dias <= 0) {
+            System.out.println(" Días inválidos. Se usará 1 día por defecto.");
+            dias = 1;
+        }
+
+        int totalEquipamiento = equipamientoBanquete(esEmpresarial, dias);
+        int totalServicios = serviciosBanquete(esEmpresarial, dias);
+        int total = totalEquipamiento + totalServicios;
+
+        System.out.println(" Total por el evento Banquete (" + dias + " días): $" + total);
+    }
+
+    public static int equipamientoBanquete(boolean esEmpresarial, int dias) {
+        String[] nombres = {
+            "Mesas redondas o rectangulares", "Sillas con fundas", "Mantelería y vajilla formal",
+            "Centros de mesa", "Iluminación ambiental", "Tarima para discursos"
+        };
+        int[] precios = {700, 400, 650, 300, 500, 350};
+
+        if (esEmpresarial) {
+            for (int i = 0; i < precios.length; i++) {
+                precios[i] *= 1.1;
+            }
+        }
+
+        System.out.println(" Equipamiento para Banquete:");
+        int subtotal = 0;
+        for (int i = 0; i < precios.length; i++) {
+            int precioTotal = precios[i] * dias;
+            subtotal += precioTotal;
+            System.out.println(" - " + nombres[i] + ": $" + precioTotal);
+        }
+        return subtotal;
+    }
+
+    public static int serviciosBanquete(boolean esEmpresarial, int dias) {
+        String[] nombres = {
+            "Menú completo", "Cocineros y meseros", "Música en vivo o DJ",
+            "Pastel formal", "Fotografía profesional", "Brindis y discursos", "Estación de bebidas"
+        };
+        int[] precios = {2500, 1800, 1500, 500, 1000, 600, 400};
+
+        if (esEmpresarial) {
+            for (int i = 0; i < precios.length; i++) {
+                precios[i] *= 1.1;
+            }
+        }
+
+        System.out.println(" Servicios para Banquete:");
+        int subtotal = 0;
+        for (int i = 0; i < precios.length; i++) {
+            int precioTotal = precios[i] * dias;
+            subtotal += precioTotal;
+            System.out.println(" - " + nombres[i] + ": $" + precioTotal);
+        }
+        return subtotal;
+    }
 }
