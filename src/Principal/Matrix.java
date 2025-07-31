@@ -34,7 +34,7 @@ public class Matrix {
                 |---------------------------------------------------------------------|
                 |                       Bienvenido a Matrix                           |
                 |---------------------------------------------------------------------|
-                | Ofrecemos servicios para eventos sociales y empresariales.          |       
+                | Ofrecemos servicios para eventos sociales y empresariales.          |
                 | Estos son algunos de nuestros servicios disponibles:                |
                 |   🔹 Conferencias                                                   |
                 |   🎭 Teatro                                                         |
@@ -252,12 +252,11 @@ public class Matrix {
     }
 
     public static void montaje_conferencia(Scanner sc, boolean esEmpresarial){
-        System.out.println("Montaje del teatro en mantenimiento");
         equipamiento_conferencial(sc, esEmpresarial);
-        servicio_conferencial(sc);
+        servicio_conferencial(sc, esEmpresarial);
     }
 
-/*                                          1 .Conferencia, parte de Jose (yo).                                          */     
+/*                                          1 .Conferencia, parte de Jose (yo).                                          */
     public static void equipamiento_conferencial(Scanner sc, boolean esEmpresarial){
         System.out.println("Precio estandar para eventos sociales.");
         int[] equipamiento = new int[8];
@@ -269,19 +268,46 @@ public class Matrix {
         equipamiento[5] = 300;  // Podio
         equipamiento[6] = 150;  // Pizarra y rotafolios
         equipamiento[7] = 525;  // Iluminacion focal
+        if(esEmpresarial==false){
+            System.out.println("Precio estandar en equipamiento para eventos sociales.");
+            System.out.println(Arrays.toString(equipamiento));
 
-        if (esEmpresarial) {
-            System.out.println("Se aplicará el 10% extra para eventos empresariales.");
+        }
+
+        else if(esEmpresarial) {
+            System.out.println("En equipamiento se aplicará el 10% extra para eventos empresariales.");
             for (int i = 0; i < equipamiento.length; i++) {
                 equipamiento[i] = (int)(equipamiento[i] *  1.1);
             }
+            System.out.println(Arrays.toString(equipamiento));
         }
-
-        System.out.println(Arrays.toString(equipamiento));
     }
 
-    public static void servicio_conferencial(Scanner sc){
-        // En construcción
+    public static void servicio_conferencial(Scanner sc, boolean esEmpresarial){
+        int[] servicios = new int[7];
+        servicios[0] = 700;  // Reagistro de asistentes.
+        servicios[1] = 1500; // Traduccion simultánea.
+        servicios[2] = 800;  // Tranmision en vivo o grabación.
+        servicios[3] = 350;  // Café o coffe break
+        servicios[4] = 2000;  // Personal tecnico(Audio y video).
+        servicios[5] = 740;  // Material de apoyo
+        servicios[6] = 350;  // Wi-fi.
+
+        if(esEmpresarial==false){
+            System.out.println("En servicios, precio estandar para eventos sociales.");
+            System.out.println(Arrays.toString(servicios));
+
+        }
+
+
+        else if (esEmpresarial) {
+            System.out.println("En servicios se aplicará el 10% extra para eventos empresariales.");
+            for (int i = 0; i < servicios.length; i++) {
+                servicios[i] = (int)(servicios[i] *  1.1);
+
+            }
+            System.out.println(Arrays.toString(servicios));
+        }
     }
 
 /*                                          Lo de el good Isaac, en construccion                                          */
