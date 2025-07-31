@@ -1,3 +1,4 @@
+package Principal;
 /*
 Leer el README.md
 */
@@ -29,20 +30,22 @@ public class Matrix {
             do {
                 System.out.println();
                 System.out.print("""
-                    |-------------------------------------------------------------------|
-                    | Bienvenido a Matrix                                               |
-                    |-------------------------------------------------------------------|
-                    | Ofrecemos un servicio para eventos sociales y empresariales.      |
-                    | Ambos eventos cuentan con los siguientes servicios;               |
-                    | 1. Conferencia                                                    |
-                    | 2. Teatro                                                         |
-                    | 3. Banquete                                                       |
-                    | 4. Renta de salones                                               |
-                    | 5. Entre otros más!                                               |
-                    |-------------------------------------------------------------------|
-                    """);
+                |---------------------------------------------------------------------|
+                |                       Bienvenido a Matrix                           |
+                |---------------------------------------------------------------------|
+                | Ofrecemos servicios para eventos sociales y empresariales.          |       
+                | Estos son algunos de nuestros servicios disponibles:                |
+                |   🔹 Conferencias                                                   |
+                |   🎭 Teatro                                                         |
+                |   🍽️  Banquetes                                                      |
+                |   🏛️  Renta de salones                                               |
+                |   ➕ ¡Y muchos más!                                                 |
+                |---------------------------------------------------------------------|
+                ¿Desea hacer su registro?
+                1. Sí
+                2. No
+                Decisión (Ingrese un número entre 1 y 2): """ + " ");
                 try {
-                    System.out.print("Desea hacer su registro?\n1. Si\n2. No\nDecisión (Ingrese un número entre 1 y 2): ");
                     registro = sc.nextInt();
 
                     switch (registro) {
@@ -72,17 +75,18 @@ public class Matrix {
 
     public static void datosUsuarios(Scanner sc){
         do {
-            System.out.print("Ingrese su nombre completo (Empezando por apellidos): ");
+            System.out.println("|-------------------------------------------------------");
+            System.out.print("| Ingrese su nombre completo (Empezando por apellidos): ");
             String nombreUsuario = sc.nextLine();
 
-            System.out.print("Ingrese su número de telefono: ");
+            System.out.print("| Ingrese su número de telefono: ");
             Long telefonoUsuario = sc.nextLong();
             sc.nextLine();
 
-            System.out.print("Ingrese su correo electrónico: ");
+            System.out.print("| Ingrese su correo electrónico: ");
             String correoUsuario = sc.nextLine();
 
-            System.out.print("Cantidad de persona a asistir al evento: ");
+            System.out.print("| Cantidad de persona a asistir al evento: ");
             int personasUsuario = sc.nextInt();
             if(personasUsuario <= 0){
                 System.out.println(); // Salto de linea para mejor apariencia
@@ -90,9 +94,9 @@ public class Matrix {
                 sc.nextLine(); // Limpia buffer
                 System.out.println(); // Salto de linea para mejor apariencia
             }else{
-                System.out.print("\nNota: El evento lo elegirá en el siguiente apartado\nCantidad de días que reservará el evento: ");
+                System.out.print("| Cantidad de días que reservará el evento: ");
                 int diasUsuario = sc.nextInt();
-
+                System.out.println("|-------------------------------------------------------");
                 opciones(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
             }
         } while (true);
@@ -145,7 +149,7 @@ public class Matrix {
     public static void eventoSocial(Scanner sc, String nombreUsuario, Long telefonoUsuario, String correoUsuario, int personasUsuario, int diasUsuario) {
         int tipoReservacion = 1;
         do {
-            System.out.println("""
+            System.out.print("""
                 |----------------------------------------------------------------|
                 | El evento cuenta con los siguientes tipos de reservaciones     |
                 |----------------------------------------------------------------|
@@ -180,9 +184,6 @@ public class Matrix {
                         eventoBanquete(sc, false); // ← NUEVA FUNCIÓN BANQUETE
                         break;
                     case 5:
-                        System.out.println();
-                        System.out.println("Salón en mantenimiento");
-                        System.out.println(); // Borrar o considerar borrar al finalizar
                         montajeSalonSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
                         break;
                     case 6:
@@ -205,7 +206,7 @@ public class Matrix {
     public static void eventoEmpresarial(Scanner sc) {
         int tipoReservacion = 1;
         do {
-            System.out.println("""
+            System.out.print("""
                 |--------------------------------------------------------------|
                 | El evento empresarial cuenta con los siguientes servicios     |
                 |--------------------------------------------------------------|
@@ -410,38 +411,42 @@ public class Matrix {
 
     /*                                          Juan                                          */
     public static void montajeSalonSocial(Scanner sc,String nombreUsuario,Long telefonoUsuario,String correoUsuario,int personasUsuario,int diasUsuario){
+        System.out.println(); // Salto de linea para mejor apariencia
         System.out.print("""
-                |-------------------------------------------------------------------------------------------|
-                | Bienvenido/a a la renta del salón, contamos con los siguientes equipamientos y servicios  |
-                | ------------------------------------------------------------------------------------------|
-                | Equipamientos:                                                                            |
-                | 1. Mesas y sillas                                                                         |
-                | 2. Sistema de climatización                                                               |
-                | 3. Pantallas o proyectores                                                                |
-                | 4. Ilumunación regulable                                                                  |
-                |                                                                                           |                                         
-                | Sevicios:                                                                                 |
-                | 1. Personal de limpieza                                                                   |
-                | 2. Soporte técnico                                                                        |
-                | 3. Wi-Fi                                                                                  |
-                | 4. Servicio de comida                                                                     |
-                |-------------------------------------------------------------------------------------------|    
-                """);
+        |---------------------------------------------------------------------------------------------|
+        | 🙌 Bienvenido/a a la renta del salón. Contamos con los siguientes equipamientos y servicios |
+        |---------------------------------------------------------------------------------------------|
+        | 🛠️  Equipamientos:                                                                           |
+        |    • 🪑 Mesas y sillas                                                                      |
+        |    • ❄️  Sistema de climatización                                                            |
+        |    • 📽️  Pantallas o proyectores                                                             |
+        |    • 💡 Iluminación regulable                                                               |
+        |                                                                                             |
+        | 🧰 Servicios:                                                                               |
+        |    • 🧹 Personal de limpieza                                                                |
+        |    • 🛠️  Soporte técnico                                                                     |
+        |    • 📶 Wi-Fi                                                                               |
+        |    • 🍽️  Servicio de comida                                                                  |
+        |---------------------------------------------------------------------------------------------|
+        """);
+        equipamientoSalonSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
     }
     public static void equipamientoSalonSocial(Scanner sc,String nombreUsuario,Long telefonoUsuario,String correoUsuario,int personasUsuario,int diasUsuario){
         mesasSillas(sc);
-
     }
     public static void mesasSillas(Scanner sc){
-        System.out.println("1. Mesas y sillas");
+        System.out.println(); // Salto de linea para mejor apariencia
+        System.out.println("🪑 Mesas y sillas");
         try {
             System.out.print("Cantidad de mesas: ");
             int cantidadMesas = sc.nextInt();
 
-            System.out.println("Cantidad de sillas: ");
+            System.out.print("Cantidad de sillas: ");
             int cantidadSillas = sc.nextInt();
         } catch (InputMismatchException e) {
-            // TODO: handle exception
+            System.out.println(); // Salto de linea para mejor apariencia
+            System.out.println("❌ Error: No se permiten letras ni caracteres especiales.");
+            
         }
 
     }
