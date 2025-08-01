@@ -121,13 +121,22 @@ public class Matrix {
                 """);
                 
             try {
+
                 System.out.print("Ingresa una opción (1 - 3): ");
                 tipoEvento = sc.nextInt();
                 sc.nextLine();
+                boolean social=false,empresarial=false;
 
                 if(tipoEvento>=1 && tipoEvento<=2){
                     System.out.println();
-                    eventoSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
+                    if (tipoEvento==1){
+                        social=true;
+                    }
+                    else{
+                        empresarial= true;
+                        
+                    }
+                    eventoSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario, social, empresarial);
 
 
                 }
@@ -145,7 +154,7 @@ public class Matrix {
         } while (tipoEvento != 3);
     }
 
-    public static void eventoSocial(Scanner sc, String nombreUsuario, Long telefonoUsuario, String correoUsuario, int personasUsuario, int diasUsuario) {
+    public static void eventoSocial(Scanner sc, String nombreUsuario, Long telefonoUsuario, String correoUsuario, int personasUsuario, int diasUsuario, boolean social, boolean empresarial) {
         int tipoReservacion = 1;
         do {
             System.out.print("""
@@ -169,7 +178,7 @@ public class Matrix {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println("Iniciando configuración de conferencia...");
-                        montaje_conferencia(sc, false);//Aplicar como boleano by: Jose
+                        montaje_conferencia(sc,social,empresarial );//Aplicar como boleano by: Jose
                         break;
                     case 2:
                         System.out.println("Teatro en mantenimiento");
@@ -203,7 +212,7 @@ public class Matrix {
 
 
     /*                                          1 .Conferencia, parte de Jose (yo).                                          */
-    public static void montaje_conferencia(Scanner sc, boolean esEmpresarial){
+    public static void montaje_conferencia(Scanner sc, boolean essocial, boolean esEmpresarial){
         int opcions;
         System.out.println(); // Salto de linea para mejor apariencia
         do{
@@ -240,10 +249,10 @@ public class Matrix {
             try{
                 switch (opcions) {
                     case 1:
-                    equipamiento_conferencial(sc, esEmpresarial);
+                    equipamiento_conferencial(sc, essocial, esEmpresarial);
                         break;
                     case 2:
-                        servicio_conferencial(sc, esEmpresarial);
+                        servicio_conferencial(sc,essocial, esEmpresarial);
                         break;
                     case 3:
                         System.out.println("Saliendo");
@@ -263,7 +272,7 @@ public class Matrix {
 
     }
 
-    public static void equipamiento_conferencial(Scanner sc, boolean esEmpresarial){
+    public static void equipamiento_conferencial(Scanner sc, boolean essocial,boolean esEmpresarial){
 
         int[] equipamiento = new int[]{
         400,  // Sillas
@@ -305,7 +314,7 @@ public class Matrix {
         }
     }
 
-    public static void servicio_conferencial(Scanner sc, boolean esEmpresarial){
+    public static void servicio_conferencial(Scanner sc, boolean essocial, boolean esEmpresarial){
         int[] servicios = new int[7];
         servicios[0] = 700;  // Reagistro de asistentes.
         servicios[1] = 1500; // Traduccion simultánea.
