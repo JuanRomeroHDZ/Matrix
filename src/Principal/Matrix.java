@@ -250,26 +250,82 @@ public class Matrix {
             }
         } while (tipoReservacion != 5);
     }
-
+    /*                                          1 .Conferencia, parte de Jose (yo).                                          */
     public static void montaje_conferencia(Scanner sc, boolean esEmpresarial){
-        equipamiento_conferencial(sc, esEmpresarial);
-        servicio_conferencial(sc, esEmpresarial);
+        int opcions;
+        System.out.println(); // Salto de linea para mejor apariencia
+        do{
+
+            System.out.print("""
+            +-------------------------------------------------------------------------------------------+
+            |                          Bienvenido/a a la renta de la conferencia                        |
+            +-------------------------------------------------------------------------------------------+
+            | 1.Equipamientos:                                                                          |
+            |     Mesas y sillas                                                                        |
+            |     Escenario.                                                                            |
+            |     Microfonos.                                                                           |
+            |     Proyector y pantalla                                                                  |
+            |     Sistema de sonido.                                                                    |
+            |     Podio.                                                                                |
+            |     Pizarra y rotafolios.                                                                 |
+            |     Iluminación.                                                                          |
+            |                                                                                           |
+            | 2.Servicios:                                                                              |
+            |     Registro de asistentes.                                                               |
+            |     Traducción simultanea.                                                                |
+            |     Transmisión en vivo o grabacion.                                                      |
+            |     Café o coffe break.                                                                   |
+            |     Personal técnico.                                                                     |
+            |     Material                                                                              |
+            |     Wi-Fi                                                                                 |
+            |                                                                                  |
+            | 3.Para salir.                                                                                 |
+            +-------------------------------------------------------------------------------------------+
+            """);
+            System.out.println("Selecciona con un numero:");
+            opcions=sc.nextInt();
+            sc.nextLine();
+            try{
+                switch (opcions) {
+                    case 1:
+                    equipamiento_conferencial(sc, esEmpresarial);
+                        break;
+                    case 2:
+                        servicio_conferencial(sc, esEmpresarial);
+                        break;
+                    case 3:
+                        System.out.println("Saliendo");
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Intenta nuevamente.");
+                        break;
+                }
+            }catch (InputMismatchException a) {
+                System.out.println();
+                System.out.println("❌ Error, debes ingresar un números 1 y 3 .");
+                sc.nextLine();
+            }
+            }while(opcions!=3);
+        }
+    public static void cantidad_jose(){
+
     }
 
-    /*                                          1 .Conferencia, parte de Jose (yo).                                          */
     public static void equipamiento_conferencial(Scanner sc, boolean esEmpresarial){
-        System.out.println("Precio estandar para eventos sociales.");
-        int[] equipamiento = new int[8];
-        equipamiento[0] = 400;  // Sillas
-        equipamiento[1] = 1000; // Escenario
-        equipamiento[2] = 500;  // Micrófono
-        equipamiento[3] = 750;  // Proyector y pantalla
-        equipamiento[4] = 450;  // Sistema de sonido
-        equipamiento[5] = 300;  // Podio
-        equipamiento[6] = 150;  // Pizarra y rotafolios
-        equipamiento[7] = 525;  // Iluminacion focal
+
+        int[] equipamiento = new int[]{
+        400,  // Sillas
+        1000, // Escenario
+        500,  // Micrófono
+        750, // Proyector y pantalla
+        450,  // Sistema de sonido
+        300,  // Podio
+        150,  // Pizarra y rotafolios
+         525  // Iluminacion focal
+        };
         if(esEmpresarial==false){
             System.out.println("Precio estandar en equipamiento para eventos sociales.");
+            System.out.println("Slecciona con numeros:\n0.Sillas\n1.Escenario");
             System.out.println(Arrays.toString(equipamiento));
 
         }
