@@ -221,24 +221,24 @@ public class Matrix {
             +---------------------------------------------------------------------------------------------+
             |                           Bienvenido/a a la renta de la conferencia                         |
             +---------------------------------------------------------------------------------------------+
-            | 1. Equipamientos:                                                                           |
-            |     > Mesas y sillas                                                                        |
-            |     > Escenario.                                                                            |
-            |     > Microfonos.                                                                           |
-            |     > Proyector y pantalla                                                                  |
-            |     > Sistema de sonido.                                                                    |
-            |     > Podio.                                                                                |
-            |     > Pizarra y rotafolios.                                                                 |
-            |     > Iluminación.                                                                          |
+            | 1. Equipamientos:                           Precios:                                        |
+            |     > Mesas y sillas                        60$                                             |
+            |     > Escenario.                            200$                                            |
+            |     > Microfonos.                           120$                                            |
+            |     > Proyector y pantalla                  65$                                             |
+            |     > Sistema de sonido.                    150$                                            |
+            |     > Podio.                                140$                                            |
+            |     > Pizarra y rotafolios.                 80$                                             |
+            |     > Iluminación.                          165$                                            |
             |                                                                                             |
             | 2. Servicios:                                                                               |
-            |     > Registro de asistentes.                                                               |
-            |     > Traducción simultanea.                                                                |
-            |     > Transmisión en vivo o grabacion.                                                      |
-            |     > Café o coffe break.                                                                   |
-            |     > Personal técnico.                                                                     |
-            |     > Material                                                                              |
-            |     > Wi-Fi                                                                                 |
+            |     > Registro de asistentes.               100$                                            |
+            |     > Traducción simultanea.                250$                                            |
+            |     > Transmisión en vivo o grabacion.      175$                                            |
+            |     > Café o coffe break.                   60$                                             |
+            |     > Personal técnico.                     250$                                            |
+            |     > Material                              120$                                            |
+            |     > Wi-Fi                                 40$                                             |
             |                                                                                             |
             | 3. Para salir.                                                                              |
             +---------------------------------------------------------------------------------------------+
@@ -274,15 +274,19 @@ public class Matrix {
 
     public static void equipamiento_conferencial(Scanner sc, boolean essocial,boolean esEmpresarial){
 
-        int[] equipamiento = new int[]{
-        400,  // Sillas
-        1000, // Escenario
-        500,  // Micrófono
-        750, // Proyector y pantalla
-        450,  // Sistema de sonido
-        300,  // Podio
-        150,  // Pizarra y rotafolios
-         525  // Iluminacion focal
+        int[] P_equipamiento = new int[]{
+        60,  // Sillas
+        200, // Escenario
+        120,  // Micrófono
+        65, // Proyector y pantalla
+        150,  // Sistema de sonido
+        140,  // Podio
+        80,  // Pizarra y rotafolios
+        125  // Iluminacion focal
+        };
+        String[] equipamiento = new String[]{
+                "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
+                "Total:"
         };
         if(esEmpresarial==false){
             int opcion;
@@ -295,35 +299,22 @@ public class Matrix {
                 sc.nextLine();
                 opcion=sc.nextInt();
 
-                for (int i = 0; i < 8; i++) {
-                    int cantidad=sc.nextInt();
-                    for (int b=0; b<=cantidad; b++){
-                    equipamiento[b]*=cantidad;
-                    System.out.println(b+":"+equipamiento[b]);
-                }
-            }
-        }while(opcion!=8);
-        }
 
-        else if(esEmpresarial) {
-            System.out.println("En equipamiento se aplicará el 10% extra para eventos empresariales.");
-            for (int i = 0; i < equipamiento.length; i++) {
-                equipamiento[i] = (int)(equipamiento[i] *  1.1);
-            }
-            System.out.println(Arrays.toString(equipamiento));
+        }while(opcion!=8);
         }
     }
 
-    public static void servicio_conferencial(Scanner sc, boolean essocial, boolean esEmpresarial){
-        int[] servicios = new int[7];
-        servicios[0] = 700;  // Reagistro de asistentes.
-        servicios[1] = 1500; // Traduccion simultánea.
-        servicios[2] = 800;  // Tranmision en vivo o grabación.
-        servicios[3] = 350;  // Café o coffe break
-        servicios[4] = 2000;  // Personal tecnico(Audio y video).
-        servicios[5] = 740;  // Material de apoyo
-        servicios[6] = 350;  // Wi-fi.
+        
 
+    public static void servicio_conferencial(Scanner sc, boolean essocial, boolean esEmpresarial){
+        int[] servicios = new int[]{
+        100,
+        250,
+        175,
+        60,
+        250,
+        120,
+        40};
         if(esEmpresarial==false){
             System.out.println("En servicios, precio estandar para eventos sociales.");
             System.out.println(Arrays.toString(servicios));
