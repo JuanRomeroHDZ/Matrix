@@ -6,7 +6,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class pruebas {
+public class Matrix {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             int registro = 1;//Se inicializa porque si no da error en el do-while
@@ -119,25 +119,24 @@ public class pruebas {
                 | 3. Ninguno                             |
                 +----------------------------------------+
                 """);
+                
             try {
                 System.out.print("Ingresa una opción (1 - 3): ");
                 tipoEvento = sc.nextInt();
                 sc.nextLine();
 
-                switch (tipoEvento) {
-                    case 1:
-                        System.out.println();
-                        eventoSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
-                        break;
-                    case 2:
-                        System.out.println();
-                        eventoEmpresarial(sc);
-                        break;
-                    case 3:
-                        System.out.println("\n👋 Adiós!\nNo has elegido ningún evento.");
-                        break;
-                    default:
-                        System.out.println("\n❌ Error: Ingresa un número entre (1 - 3).\n");
+                if(tipoEvento>=1 && tipoEvento<=2){
+                    System.out.println();
+                    eventoSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
+
+
+                }
+                else if(tipoEvento==3){
+                    System.out.println("\n👋 Adiós!\nNo has elegido ningún evento.");
+                    break;
+                }
+                else{
+                    System.out.println("\n❌ Error: Ingresa un número entre (1 - 3).\n");
                 }
             } catch (InputMismatchException b) {
                 System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales.\n");
@@ -202,53 +201,7 @@ public class pruebas {
         } while (tipoReservacion != 7);
     }
 
-    public static void eventoEmpresarial(Scanner sc) {
-        int tipoReservacion = 1;
-        do {
-            System.out.print("""
-                +--------------------------------------------------------------+
-                | El evento empresarial cuenta con los siguientes servicios    |
-                +--------------------------------------------------------------+
-                | 1. Conferencia                                               |
-                | 2. Junta                                                     |
-                | 3. Taller                                                    |
-                | 4. Seminario                                                 |
-                | 5. Salir                                                     |
-                +--------------------------------------------------------------+
-                """);
-            System.out.print("Elige el servicio (1 - 5): ");
-            try {
-                tipoReservacion = sc.nextInt();
-                sc.nextLine();
 
-                switch (tipoReservacion) {
-                    case 1:
-                        System.out.println("Conferencia empresarial en mantenimiento");
-                        montaje_conferencia(sc, true);//Aplicar como boleano by:jose.
-                        break;
-                    case 2:
-                        System.out.println("Junta empresarial en mantenimiento");
-                        break;
-                    case 3:
-                        System.out.println("Taller empresarial en mantenimiento");
-                        break;
-                    case 4:
-                        System.out.println("Seminario empresarial en mantenimiento");
-                        break;
-                    case 5:
-                        System.out.println("Saliendo del evento empresarial...");
-                        break;
-                    default:
-                        System.out.println("Opción no válida. Intenta nuevamente.");
-                        break;
-                }
-            } catch (InputMismatchException d) {
-                System.out.println();
-                System.out.println("❌ Error, debes ingresar un número entre 1 y 5.");
-                sc.nextLine();
-            }
-        } while (tipoReservacion != 5);
-    }
     /*                                          1 .Conferencia, parte de Jose (yo).                                          */
     public static void montaje_conferencia(Scanner sc, boolean esEmpresarial){
         int opcions;
@@ -323,10 +276,24 @@ public class pruebas {
          525  // Iluminacion focal
         };
         if(esEmpresarial==false){
+            int opcion;
             System.out.println("Precio estandar en equipamiento para eventos sociales.");
-            System.out.println("Slecciona con numeros:\n0.Sillas\n1.Escenario");
-            System.out.println(Arrays.toString(equipamiento));
+            do{
+                System.out.println("""
+                    Slecciona con numeros:\n0.Sillas\n1.Escenario,\n2.Microfono.\n3.Proyector y pantalla.\n4.Sistema de sonido.\n5.Podio.\n6.Pizarra y rotafolios.
+                    \n7.Iluminacion focal\n8.Para salir.
+                    """);
+                sc.nextLine();
+                opcion=sc.nextInt();
 
+                for (int i = 0; i < 8; i++) {
+                    int cantidad=sc.nextInt();
+                    for (int b=0; b<=cantidad; b++){
+                    equipamiento[b]*=cantidad;
+                    System.out.println(b+":"+equipamiento[b]);
+                }
+            }
+        }while(opcion!=8);
         }
 
         else if(esEmpresarial) {
