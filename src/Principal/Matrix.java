@@ -307,9 +307,6 @@ public class Matrix {
             }
             }while(opcions!=3);
         }
-    public static void cantidad_jose(){
-
-    }
 
     public static void equipamiento_conferencial(Scanner sc, boolean esEmpresarial){
 
@@ -325,7 +322,20 @@ public class Matrix {
         };
         if(esEmpresarial==false){
             System.out.println("Precio estandar en equipamiento para eventos sociales.");
-            System.out.println("Slecciona con numeros:\n0.Sillas\n1.Escenario");
+            System.out.println("""
+                Slecciona con numeros:\n0.Sillas\n1.Escenario,\n2.Microfono.\n3.Proyector y pantalla.\n4.Sistema de sonido.\n5.Podio.\n6.Pizarra y rotafolios.
+                \n7.Iluminacion focal.
+            """);
+            sc.nextLine();
+
+            for (int i = 0; i < 8; i++) {
+                int cantidad=sc.nextInt();
+                for (int b=0; b<=cantidad; b++){
+                    equipamiento[b]*=cantidad;
+                    System.out.println(b+":"+equipamiento[b]);
+                }
+            }
+
             System.out.println(Arrays.toString(equipamiento));
 
         }
