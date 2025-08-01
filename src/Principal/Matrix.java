@@ -182,7 +182,7 @@ public class Matrix {
                         break;
                     case 4:
                         System.out.println("Iniciando configuración de banquete...");
-                        eventoBanquete(sc, false); // ← NUEVA FUNCIÓN BANQUETE
+                    eventoBanquete(sc, true, diasUsuario);
                         break;
                     case 5:
                         montajeSalonSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
@@ -309,19 +309,16 @@ public class Matrix {
             System.out.println(Arrays.toString(servicios));
         }
     }
-
-    /*                                          ISAAC                                          */
+ /*                                          ISAAC                                          */
     // EN ESTA FUNCION LLAMO A LAS DEMAS FUNCIONES Y LES ASIGNO VARIABLES.
     public static void eventoRecepcion(Scanner sc, boolean esEmpresarial, String nombreUsuario, Long telefonoUsuario, String correoUsuario, int personasUsuario, int diasUsuario) {
-        sc.nextLine();
-
         int totalEquipamiento = equipamientoRecepcion(esEmpresarial, diasUsuario);
         int totalServicios = serviciosRecepcion(esEmpresarial, diasUsuario);
         int total = totalEquipamiento + totalServicios;
 
         System.out.println(" Total por el evento Recepción (" + diasUsuario + " días): $" + total);
     }
-// ARRAY PARA NOMBRES DEL EQUIPAMIENTO 
+    // ARRAY PARA NOMBRES DEL EQUIPAMIENTO 
     public static int equipamientoRecepcion(boolean esEmpresarial, int dias) {
         String[] nombres = {
                 "Mesas altas tipo cóctel", "Barra de bebidas", "Sistema de sonido ambiental",
@@ -329,13 +326,13 @@ public class Matrix {
         };
         //ARRAYS DE PRECIOS DEL EQUIPAMIENTO 
         int[] precios = {300, 800, 400, 250, 500, 600};
-// SI EL EVENTO ES EMPRESARAL EL FOR HACE UN AUMENTO DEL 20% A CADA COSTO
+        // SI EL EVENTO ES EMPRESARAL EL FOR HACE UN AUMENTO DEL 20% A CADA COSTO
         if (esEmpresarial) {
             for (int i = 0; i < precios.length; i++) {
-                precios[i] *= 1.2;
+                precios[i] = (int)(precios[i] * 2);
             }
         }
-// HACE EL CALCULO DE LOS COSTOS POR LOS DIAS RENTADOS 
+        // HACE EL CALCULO DE LOS COSTOS POR LOS DIAS RENTADOS 
         System.out.println(" Equipamiento para Recepción:");
         int subtotal = 0;
         for (int i = 0; i < precios.length; i++) {
@@ -345,21 +342,21 @@ public class Matrix {
         }
         return subtotal;
     }
-// ARRAYS QUE GUARDA LOS NOMBRES DE LOS SERVICIOS DE RECEPCION
+    // ARRAYS QUE GUARDA LOS NOMBRES DE LOS SERVICIOS DE RECEPCION
     public static int serviciosRecepcion(boolean esEmpresarial, int dias) {
         String[] nombres = {
                 "Servicio de catering", "DJ o música en vivo", "Fotografía y video",
                 "Guardarropa", "Valet parking", "Seguridad", "Meseros y anfitriones"
-        }; 
+        };
         // ESTE ARRAY GUARDA LOS PRECIOS DE CADA SERVICIO 
         int[] precios = {1200, 1500, 1000, 300, 400, 350, 500};
-// SI EL EVENTO ES EMPRESARIAL EL FOR AUMENTA EL COSTO DE LOS SERVICIOS 
+        // SI EL EVENTO ES EMPRESARIAL EL FOR AUMENTA EL COSTO DE LOS SERVICIOS 
         if (esEmpresarial) {
             for (int i = 0; i < precios.length; i++) {
-                precios[i] *= 1.2;
+                precios[i] = (int)(precios[i] * 2);
             }
         }
-// ARRAYS SUMA DE COSTOS POR LOS DIAS.
+        // ARRAYS SUMA DE COSTOS POR LOS DIAS.
         System.out.println(" Servicios para Recepción:");
         int subtotal = 0;
         for (int i = 0; i < precios.length; i++) {
@@ -369,32 +366,28 @@ public class Matrix {
         }
         return subtotal;
     }
- // FUNCION DE BANQUETE 
-    public static void eventoBanquete(Scanner sc, boolean esEmpresarial) {
-        System.out.print("¿Cuántos días desea rentar el evento de Banquete?: ");
-        int dias = sc.nextInt();
-        sc.nextLine();
-// FUNCION PRINCIPAL QUE LLAMA A LAS OTRAS MINI FUNCIONES 
-        int totalEquipamiento = equipamientoBanquete(esEmpresarial, dias);
-        int totalServicios = serviciosBanquete(esEmpresarial, dias);
+    // FUNCION DE BANQUETE 
+    public static void eventoBanquete(Scanner sc, boolean esEmpresarial, int diasUsuario) {
+        int totalEquipamiento = equipamientoBanquete(esEmpresarial, diasUsuario);
+        int totalServicios = serviciosBanquete(esEmpresarial, diasUsuario);
         int total = totalEquipamiento + totalServicios;
 
-        System.out.println(" Total por el evento Banquete (" + dias + " días): $" + total);
+        System.out.println(" Total por el evento Banquete (" + diasUsuario + " días): $" + total);
     }
-//ARRAYS PARA GUARDAR LOS NOMBRE DE LOS EQUIPAMENTOS DE BANQUETE 
+    //ARRAYS PARA GUARDAR LOS NOMBRE DE LOS EQUIPAMENTOS DE BANQUETE 
     public static int equipamientoBanquete(boolean esEmpresarial, int dias) {
         String[] nombres = {
                 "Mesas redondas o rectangulares", "Sillas con fundas", "Mantelería y vajilla formal",
                 "Centros de mesa", "Iluminación ambiental", "Tarima para discursos"
         };
         int[] precios = {700, 400, 650, 300, 500, 350};
-// SI ES EMPRESARIAL LE AUMENTA 20% AL COSTO 
+        // SI ES EMPRESARIAL LE AUMENTA 20% AL COSTO 
         if (esEmpresarial) {
             for (int i = 0; i < precios.length; i++) {
-                precios[i] *= 1.2;
+                precios[i] = (int)(precios[i] * 2);
             }
         }
-// RECORRE CADA UNO PARA SUMARLOS Y GUARDAR EL PRECIO EN SUBTOTAL
+        // RECORRE CADA UNO PARA SUMARLOS Y GUARDAR EL PRECIO EN SUBTOTAL
         System.out.println(" Equipamiento para Banquete:");
         int subtotal = 0;
         for (int i = 0; i < precios.length; i++) {
@@ -404,19 +397,19 @@ public class Matrix {
         }
         return subtotal;
     }
-// SERVICIOS DE BANQUETE, ARRAY CON  NOMBRES.
+    // SERVICIOS DE BANQUETE, ARRAY CON  NOMBRES.
     public static int serviciosBanquete(boolean esEmpresarial, int dias) {
         String[] nombres = {
                 "Menú completo", "Cocineros y meseros", "Música en vivo o DJ",
                 "Pastel formal", "Fotografía profesional", "Brindis y discursos", "Estación de bebidas" };
         int[] precios = {2500, 1800, 1500, 500, 1000, 600, 400};
-// AUMENTA 20% AL SER EMPRESARIAL 
+        // AUMENTA 20% AL SER EMPRESARIAL 
         if (esEmpresarial) {
             for (int i = 0; i < precios.length; i++) {
-                precios[i] *= 1.2;
+                precios[i] = (int)(precios[i] * 2);
             }
         }
-        // ESTA SUMANDO LOS PRECIOS PARA GUARDARLO EN SUBTOTAL
+        //SUMA LOS PRECIOS MULTIPLICADOS POR LOS DIAS 
         System.out.println(" Servicios para Banquete:");
         int subtotal = 0;
         for (int i = 0; i < precios.length; i++) {
@@ -426,7 +419,8 @@ public class Matrix {
         }
         return subtotal;
     }
-// AQUI TERMINA ISAAC
+
+    
 
     // AQUI EMPIEZA LO DE JUAN 
     /*                                          Juan                                          */
