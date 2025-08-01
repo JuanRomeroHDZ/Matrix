@@ -6,7 +6,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Matrix {
+public class pruebas {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             int registro = 1;//Se inicializa porque si no da error en el do-while
@@ -32,7 +32,7 @@ public class Matrix {
                 System.out.print("""
                 +---------------------------------------------------------------------+
                 |                       Bienvenido a Matrix                           |
-                |---------------------------------------------------------------------|
+                +---------------------------------------------------------------------+
                 | Ofrecemos servicios para eventos sociales y empresariales.          |
                 | Estos son algunos de nuestros servicios disponibles:                |
                 |                                                                     |
@@ -42,7 +42,7 @@ public class Matrix {
                 |   > Renta de salones                                                |
                 |   > ¡Y muchos más!                                                  |
                 |                                                                     |
-                |---------------------------------------------------------------------|
+                +---------------------------------------------------------------------+
                 | ¿Desea hacer su registro?                                           |
                 |   1. Sí                                                             |
                 |   2. No                                                             |
@@ -87,7 +87,7 @@ public class Matrix {
             System.out.print("| Ingrese su correo electrónico: ");
             String correoUsuario = sc.nextLine();
 
-            System.out.print("| Cantidad de persona a asistir al evento: ");
+            System.out.print("| Cantidad de personas a asistir al evento: ");
             int personasUsuario = sc.nextInt();
 
             if(personasUsuario <= 0){
@@ -113,7 +113,7 @@ public class Matrix {
             System.out.print("""
                 +----------------------------------------+
                 | Qué tipo de evento deseas contratar?   |
-                |----------------------------------------|
+                +----------------------------------------+
                 | 1. Social                              |
                 | 2. Empresarial                         |
                 | 3. Ninguno                             |
@@ -140,7 +140,6 @@ public class Matrix {
                         System.out.println("\n❌ Error: Ingresa un número entre (1 - 3).\n");
                 }
             } catch (InputMismatchException b) {
-                System.out.println();
                 System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales.\n");
                 sc.nextLine(); // Limpia el buffer, importante mantenerlo
             }
@@ -153,7 +152,7 @@ public class Matrix {
             System.out.print("""
                 +----------------------------------------------------------------+
                 | El evento cuenta con los siguientes tipos de reservaciones     |
-                |----------------------------------------------------------------|
+                +----------------------------------------------------------------+
                 | 1. Conferencia                                                 |
                 | 2. Teatro                                                      |
                 | 3. Recepción                                                   |
@@ -207,15 +206,15 @@ public class Matrix {
         int tipoReservacion = 1;
         do {
             System.out.print("""
-                |--------------------------------------------------------------|
-                | El evento empresarial cuenta con los siguientes servicios     |
-                |--------------------------------------------------------------|
+                +--------------------------------------------------------------+
+                | El evento empresarial cuenta con los siguientes servicios    |
+                +--------------------------------------------------------------+
                 | 1. Conferencia                                               |
                 | 2. Junta                                                     |
                 | 3. Taller                                                    |
                 | 4. Seminario                                                 |
                 | 5. Salir                                                     |
-                |--------------------------------------------------------------|
+                +--------------------------------------------------------------+
                 """);
             System.out.print("Elige el servicio (1 - 5): ");
             try {
@@ -257,32 +256,32 @@ public class Matrix {
         do{
 
             System.out.print("""
-            +-------------------------------------------------------------------------------------------+
-            |                          Bienvenido/a a la renta de la conferencia                        |
-            +-------------------------------------------------------------------------------------------+
-            | 1.Equipamientos:                                                                          |
-            |     Mesas y sillas                                                                        |
-            |     Escenario.                                                                            |
-            |     Microfonos.                                                                           |
-            |     Proyector y pantalla                                                                  |
-            |     Sistema de sonido.                                                                    |
-            |     Podio.                                                                                |
-            |     Pizarra y rotafolios.                                                                 |
-            |     Iluminación.                                                                          |
-            |                                                                                           |
-            | 2.Servicios:                                                                              |
-            |     Registro de asistentes.                                                               |
-            |     Traducción simultanea.                                                                |
-            |     Transmisión en vivo o grabacion.                                                      |
-            |     Café o coffe break.                                                                   |
-            |     Personal técnico.                                                                     |
-            |     Material                                                                              |
-            |     Wi-Fi                                                                                 |
-            |                                                                                  |
-            | 3.Para salir.                                                                                 |
-            +-------------------------------------------------------------------------------------------+
+            +---------------------------------------------------------------------------------------------+
+            |                           Bienvenido/a a la renta de la conferencia                         |
+            +---------------------------------------------------------------------------------------------+
+            | 1. Equipamientos:                                                                           |
+            |     > Mesas y sillas                                                                        |
+            |     > Escenario.                                                                            |
+            |     > Microfonos.                                                                           |
+            |     > Proyector y pantalla                                                                  |
+            |     > Sistema de sonido.                                                                    |
+            |     > Podio.                                                                                |
+            |     > Pizarra y rotafolios.                                                                 |
+            |     > Iluminación.                                                                          |
+            |                                                                                             |
+            | 2. Servicios:                                                                               |
+            |     > Registro de asistentes.                                                               |
+            |     > Traducción simultanea.                                                                |
+            |     > Transmisión en vivo o grabacion.                                                      |
+            |     > Café o coffe break.                                                                   |
+            |     > Personal técnico.                                                                     |
+            |     > Material                                                                              |
+            |     > Wi-Fi                                                                                 |
+            |                                                                                             |
+            | 3. Para salir.                                                                              |
+            +---------------------------------------------------------------------------------------------+
             """);
-            System.out.println("Selecciona con un numero:");
+            System.out.print("Elige el servicio (1 - 3): ");
             opcions=sc.nextInt();
             sc.nextLine();
             try{
@@ -307,6 +306,9 @@ public class Matrix {
             }
             }while(opcions!=3);
         }
+    public static void cantidad_jose(){
+
+    }
 
     public static void equipamiento_conferencial(Scanner sc, boolean esEmpresarial){
 
@@ -322,20 +324,7 @@ public class Matrix {
         };
         if(esEmpresarial==false){
             System.out.println("Precio estandar en equipamiento para eventos sociales.");
-            System.out.println("""
-                Slecciona con numeros:\n0.Sillas\n1.Escenario,\n2.Microfono.\n3.Proyector y pantalla.\n4.Sistema de sonido.\n5.Podio.\n6.Pizarra y rotafolios.
-                \n7.Iluminacion focal.
-            """);
-            sc.nextLine();
-
-            for (int i = 0; i < 8; i++) {
-                int cantidad=sc.nextInt();
-                for (int b=0; b<=cantidad; b++){
-                    equipamiento[b]*=cantidad;
-                    System.out.println(b+":"+equipamiento[b]);
-                }
-            }
-
+            System.out.println("Slecciona con numeros:\n0.Sillas\n1.Escenario");
             System.out.println(Arrays.toString(equipamiento));
 
         }
@@ -496,17 +485,19 @@ public class Matrix {
         +-------------------------------------------------------------------------------------------+
         |                          Bienvenido/a a la renta del salón                                |
         +-------------------------------------------------------------------------------------------+
-        | Equipamientos:                                                                            |
-        |    > Mesas y sillas                                                                       |
-        |    > Sistema de climatización                                                             |
-        |    > Pantallas o proyectores                                                              |
-        |    > Iluminación regulable                                                                |
+        | Equipamientos:                 | Precio c/u  | Descripción                                |
+        |    > Mesas                     | $50.00      | Mesas plegables de 6 plazas                |
+        |    > Sillas                    | $10.00      | Sillas cómodas para eventos                |
+        |    > Aires acondicionados      | $80.00      | Control de temperatura                     |
+        |    > Pantallas                 | $30.00      | Pantallas LED de 50 pulgadas               |
+        |    > Proyectores               | $40.00      | Proyectores HD                             |
+        |    > Focos reflectantes        | $20.00      | Iluminación profesional                    |
         |                                                                                           |
-        | Servicios:                                                                                |
-        |    > Personal de limpieza                                                                 |
-        |    > Soporte técnico                                                                      |
-        |    > Wi-Fi                                                                                |
-        |    > Servicio de comida                                                                   |
+        | Servicios:                     | Precio      |Descripción                                 |
+        |    > Personal de limpieza      | $100.00     | Limpieza post-evento                       |
+        |    > Soporte técnico           | $70.00      | Asistencia durante el evento               |
+        |    > Wi-Fi                     | $25.00      | Conexión de alta velocidad                 |
+        |    > Servicio de comida        | $150.00     | Buffet o menú personalizado                |
         +-------------------------------------------------------------------------------------------+
         """);
         equipamientoSalonSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
@@ -516,12 +507,12 @@ public class Matrix {
         double[] totalEquipamiento = new double[6];
         double sumatotalEquipamiento = 0;
         int[] preciosEquipamiento = {
-                700,    // Precio Mesas
-                400,    // Precio Sillas
-                650,    // Precio Aires acondicionados
-                300,    // Precio Pantallas
-                500,    // Precio Proyectores
-                350,    // Precio Reflectores
+                50,    // Precio Mesas
+                10,    // Precio Sillas
+                80,    // Precio Aires acondicionados
+                30,    // Precio Pantallas
+                40,    // Precio Proyectores
+                20,    // Precio Reflectores
         };
         String[] equipamiento = new String[]{
                 "Mesas",
@@ -544,19 +535,20 @@ public class Matrix {
             }
 
 ///* Muestra en pantalla: | Equipamiento | Cantidad | Precio c/u |
-            System.out.println("+------------------------------------------------------------------------------------+");
+            
+            System.out.println("\n+------------------------------------------------------------------------------------+");
             System.out.printf("| %-20s | %-5s | %-10s | %-35s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + diasUsuario + ") día(s)");
             for (int i = 0; i < 6; i++) {
                 System.out.printf("\n| %-20s | %-8s | $%-9s | %-35s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], totalEquipamiento[i] );
 
             }
+            
             System.out.println();
             System.out.printf("| %-20s | %-8s | %-10s | %-35s |\n",equipamiento[6], "", "", sumatotalEquipamiento);
             System.out.println("+------------------------------------------------------------------------------------+\n");
-            ///*/
+
         } catch (InputMismatchException e) {
-            System.out.println(); // Salto de linea para mejor apariencia
-            System.out.println("❌ Error: No se permiten letras ni caracteres especiales.");
+            System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales.");
             sc.nextLine();
         }
     }
