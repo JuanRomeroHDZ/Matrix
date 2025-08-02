@@ -173,11 +173,11 @@ public class Matrix {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println("Iniciando configuración de conferencia...");
-                        montaje_conferencia(sc,tipoEvento );//Aplicar como boleano by: Jose
+                        montaje_conferencia(sc,tipoEvento,diasUsuario );//Aplicar como boleano by: Jose
                         break;
                     case 2:
                         System.out.println("Iniciando configuración de teatro..");
-                        montaje_teatro(sc,tipoEvento);
+                        montaje_teatro(sc,tipoEvento, diasUsuario);
                         break;
                     case 3:
                         System.out.println("Iniciando configuración de recepción...");
@@ -208,7 +208,7 @@ public class Matrix {
 
 
     /*                                          1 .Conferencia, parte de Jose (yo).                                          */
-    public static void montaje_conferencia(Scanner sc, int tipoEvento){
+    public static void montaje_conferencia(Scanner sc, int tipoEvento, int diasUsuario){
         int opcions;
         System.out.println(); // Salto de linea para mejor apariencia
         do{
@@ -233,10 +233,10 @@ public class Matrix {
             try{
                 switch (opcions) {
                     case 1:
-                        equipamiento_conferencial(sc, tipoEvento);
+                        equipamiento_conferencial(sc, tipoEvento,diasUsuario);
                         break;
                     case 2:
-                        servicio_conferencial(sc,tipoEvento);
+                        servicio_conferencial(sc,tipoEvento,diasUsuario);
                         break;
                     case 3:
                         System.out.println("Saliendo");
@@ -253,17 +253,8 @@ public class Matrix {
         }while(opcions!=3);
     }
 
-    public static void equipamiento_conferencial(Scanner sc, int tipoEvento){
-        int[] P_equipamiento = new int[]{
-                60,  // Sillas
-                200, // Escenario
-                120,  // Micrófono
-                65, // Proyector y pantalla
-                150,  // Sistema de sonido
-                140,  // Podio
-                80,  // Pizarra y rotafolios
-                125  // Iluminacion focal
-        };
+    public static void equipamiento_conferencial(Scanner sc, int tipoEvento,int diasUsuario){
+        int[] P_equipamiento = new int[]{60,200,120,65,150,140,80,125};
         String[] equipamiento_text = new String[]{
                 "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
                 "Total:"
@@ -271,51 +262,54 @@ public class Matrix {
         int [] cantidad=new int[8], cantidad_f=new int[8];
 
         for(int i=0;i<8;i++){
+            System.out.println("La cantidad de "+equipamiento_text[i]+":");
             cantidad[i]=sc.nextInt();
-            cantidad_f[i]=cantidad[i]*P_equipamiento[i];
-            System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
+            cantidad_f[i]=cantidad[i]*P_equipamiento[i]*diasUsuario;
+            //System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
         }
         if(tipoEvento==2){
             System.out.println("Se agregara un cargo del doble por ser empresarial.");
             for(int i=0;i<8;i++){
                 cantidad_f[i]*=2;
-                System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
+                //System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
             }
-
         }
+        int total=Arrays.stream(cantidad_f).sum();
+        System.out.println(total);
     }
-    public static void servicio_conferencial(Scanner sc, int tipoEvento){
-        int[] servicios = new int[]{100,250,175,60,250,120,40};
-        String[] servicios_text = new String[]{
-                "Registro de Asistentes","Traduccion","Transmisión o grabacion","Café o coffe bar.","Personal","Material","Wi-fi"
-        };
-        int [] cantidad=new int[7], cantidad_f=new int[7];
+    public static void servicio_conferencial(Scanner sc, int tipoEvento, int diasUsuario){
+        int[] servicios = new int[]{100,250,175,60,250,120,40}, cantidad=new int[7], cantidad_f=new int[7];
+        String[] servicios_text = new String[]{"Registro de Asistentes","Traduccion","Transmisión o grabacion","Café o coffe bar.","Personal","Material","Wi-fi"};
+        
         for(int i=0;i<7;i++){
+            System.out.println("Cantidad de "+servicios_text[i]+":");
             cantidad[i]=sc.nextInt();
-            cantidad_f[i]=cantidad[i]*servicios[i];
-            System.out.println(servicios_text[i]+":"+cantidad_f[i]);
+            cantidad_f[i]=cantidad[i]*servicios[i]*diasUsuario;
+            //System.out.println(servicios_text[i]+":"+cantidad_f[i]);
         }
         if(tipoEvento==2){
             System.out.println("Se agregara un cargo del doble por ser empresarial.");
             for(int i=0;i<8;i++){
                 cantidad_f[i]*=2;
-                System.out.println(servicios_text[i]+":"+cantidad_f[i]);
+                //System.out.println(servicios_text[i]+":"+cantidad_f[i]);
             }
         }
+        int total=Arrays.stream(cantidad_f).sum();
+        System.out.println(total);
     }
     /*                                                           2.Parte del teatro                                                                                                */
-    public static void montaje_teatro(Scanner sc, int tipo_Evento){
+    public static void montaje_teatro(Scanner sc, int tipo_Evento, int diasUsuario){
         int opcion;
         do{
             System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
             +---------------------------------------------------------------------------------------------+\n| 1. Equipamientos:                           Precios:                                        |
-            |     > Escenario con telón                   200$                                            |\n|     > Butacas fijas o móviles               120$                                            |
-            |     > Iluminación teatral                    70$                                            |\n|     > Sistema de sonido envolvente          135$                                            |
-            |     > Consola de audio/luces                150$                                            |\n|     > Camerinos o vestidores                240$                                            |
+            |     > Escenarios con telón                  200$                                            |\n|     > Butacas fijas o móviles               120$                                            |
+            |     > Iluminaciónes teatral                  70$                                            |\n|     > Sistemas de sonido envolvente         135$                                            |
+            |     > Consolas de audio/luces               150$                                            |\n|     > Camerinos o vestidores                240$                                            |
             |     > Decoración y escenografía             300$                                            |
             |                                                                                             |\n| 2. Servicios:                                                                               |
-            |     > Venta de boletos                       80$                                            |\n|     > Personal de taquilla y acomodadores.  350$                                            |
+            |     > Vendedores de boletos                  80$                                            |\n|     > Personal de taquilla y acomodadores.  350$                                            |
             |     > Seguridad y control de acceso         405$                                            |\n|     > Servicios de cafetería o snacks        90$                                            |
             |     > Publicidad y promoción                250$                                            |\n|     > Servicios de limpieza                 140$                                            |
             |     > Asistencia técnica en luces/sonido    190$                                            |\n|                                                                                             |
@@ -326,10 +320,10 @@ public class Matrix {
             try{
                 switch (opcion){
                     case 1:
-                        equipamiento_teatro(sc, tipo_Evento);
+                        equipamiento_teatro(sc, tipo_Evento, diasUsuario);
                         break;
                     case 2:
-                        servicios_teatro(sc, tipo_Evento);
+                        servicios_teatro(sc, tipo_Evento, diasUsuario);
                         break;
                     case 3:
                         System.out.println("Saliendo");
@@ -341,7 +335,7 @@ public class Matrix {
             }
         }while(opcion!=3);
     }
-    public static void equipamiento_teatro(Scanner sc, int tipo_Evento){
+    public static void equipamiento_teatro(Scanner sc, int tipo_Evento, int diasUsuario){
         int[] equipamiento_precios=new int[]{200,120,70,135,150,240,300},cantidad=new int[7], precio_f=new int[7];
         String[] equipamiento_text=new String[]{"Escenarios","Butacas","Iluminaciónes","Sistemas de sonido","Consolas","Camerinos","Decoraciónes"};
 
@@ -349,7 +343,7 @@ public class Matrix {
             System.out.println("Cantidad de "+equipamiento_text[i]+":");
             cantidad[i]=sc.nextInt();
             sc.nextLine();
-            precio_f[i]=cantidad[i]*equipamiento_precios[i];
+            precio_f[i]=cantidad[i]*equipamiento_precios[i]*diasUsuario;
             System.out.println(precio_f[i]);
         }
         if(tipo_Evento==2){
@@ -358,8 +352,10 @@ public class Matrix {
                 precio_f[i]*=2;
             }
         }
+        int total=Arrays.stream(precio_f).sum();
+        System.out.println(total);
     }
-    public static void servicios_teatro(Scanner sc, int tipo_Evento){
+    public static void servicios_teatro(Scanner sc, int tipo_Evento, int diasUsuario){
         int[] servicio_precios=new int[]{80,350,405,90,250,140,190},cantidad=new int[7], precio_f=new int[7];
         String[] servico_texto=new String[]{"Vendedores","Personal","Seguridad","Servicios de comida","Publicidad","Servicios de limpieza","Técnicos"};
 
@@ -367,7 +363,7 @@ public class Matrix {
             System.out.println("Cantidad de "+servico_texto[i]+":");
             cantidad[i]=sc.nextInt();
             sc.nextLine();
-            precio_f[i]=cantidad[i]*servicio_precios[i];
+            precio_f[i]=cantidad[i]*servicio_precios[i]*diasUsuario;
             System.out.println(precio_f[i]);
         }
         if(tipo_Evento==2){
@@ -376,6 +372,8 @@ public class Matrix {
                 precio_f[i]*=2;
             }
         }
+        int total=Arrays.stream(precio_f).sum();
+        System.out.println(total);
 
     }
     /*                                          ISAAC                                          */
