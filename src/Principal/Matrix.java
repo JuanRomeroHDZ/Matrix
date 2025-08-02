@@ -485,6 +485,29 @@ public class Matrix {
     //ARRAYS PARA GUARDAR LOS NOMBRE DE LOS EQUIPAMENTOS DE BANQUETE
     public static int equipamientoBanquete(Scanner sc,Object[]resumen_datos,int tipo_Evento) {
         int dias=(int)resumen_datos[4];
+        System.out.print("""
+    +--------------------------------------------------------------------------------------------------+
+    |                            Bienvenido/a a la renta del salón                                     |
+    +--------------------------------------------------------------------------------------------------+
+    | Equipamientos:                       | Precio c/u  | Descripción                                 |
+    |    > Mesas redondas o rectangulares  | $700.00     | Mesas para eventos elegantes                |
+    |    > Sillas con fundas               | $400.00     | Sillas decoradas con fundas                  |
+    |    > Mantelería y vajilla formal     | $650.00     | Manteles y vajilla para eventos formales    |
+    |    > Centros de mesa                 | $300.00     | Decoración central para mesas                 |
+    |    > Iluminación ambiental           | $500.00     | Luces para crear ambiente cálido              |
+    |    > Tarima para discursos           | $350.00     | Plataforma para presentaciones                |
+    |                                                                                                  |
+    | Servicios:                         | Precio c/u  | Descripción                                   |
+    |    > Menú completo                  | $2500.00    | Comida y bebida completa para invitados       |
+    |    > Cocineros y meseros           | $1800.00    | Personal para cocina y atención                 |
+    |    > Música en vivo o DJ            | $1500.00    | Entretenimiento musical profesional            |
+    |    > Pastel formal                 | $500.00     | Pastel especial para eventos                    |
+    |    > Fotografía profesional         | $1000.00    | Registro fotográfico del evento                  |
+    |    > Brindis y discursos           | $600.00     | Organización de brindis y presentaciones        |
+    |    > Estación de bebidas           | $400.00     | Barra de bebidas especializadas                  |
+    +--------------------------------------------------------------------------------------------------+
+    """);
+
         String[] nombres = {
                 "Mesas redondas o rectangulares", "Sillas con fundas", "Mantelería y vajilla formal",
                 "Centros de mesa", "Iluminación ambiental", "Tarima para discursos"
@@ -499,8 +522,12 @@ public class Matrix {
         // RECORRE CADA UNO PARA SUMARLOS Y GUARDAR EL PRECIO EN SUBTOTAL
         System.out.println(" Equipamiento para Banquete:");
         int subtotal = 0;
+        int [] cantidades = new int[precios.length];
+        System.out.println("Cuantos desea agregar?");
         for (int i = 0; i < precios.length; i++) {
-            int precioTotal = precios[i] * dias;
+            System.out.println( nombres [i]);
+            cantidades [i]= sc.nextInt();
+            int precioTotal = precios[i] * cantidades [i] * dias;
             subtotal += precioTotal;
             System.out.println(" - " + nombres[i] + ": $" + precioTotal);
         }
@@ -518,17 +545,23 @@ public class Matrix {
             for (int i = 0; i < precios.length; i++) {
                 precios[i] = (int)(precios[i] * 2);
             }
-        }
+        } 
         //SUMA LOS PRECIOS MULTIPLICADOS POR LOS DIAS
         System.out.println(" Servicios para Banquete:");
         int subtotal = 0;
+        int [] cantidades = new int [precios.length];
+        System.out.println("Cuantos deseas Agregar?");
         for (int i = 0; i < precios.length; i++) {
-            int precioTotal = precios[i] * dias;
+            System.out.println(nombres[i]);
+            cantidades [i]= sc.nextInt();
+            int precioTotal = precios[i] * cantidades[i] * dias;
             subtotal += precioTotal;
             System.out.println(" - " + nombres[i] + ": $" + precioTotal);
+         }
+                 return subtotal;
         }
-        return subtotal;
-    }
+        
+    
 
 
 
