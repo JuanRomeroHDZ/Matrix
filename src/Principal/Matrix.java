@@ -176,7 +176,8 @@ public class Matrix {
                         montaje_conferencia(sc,tipoEvento );//Aplicar como boleano by: Jose
                         break;
                     case 2:
-                        System.out.println("Teatro en mantenimiento");
+                        System.out.println("Iniciando configuración de teatro..");
+                        montaje_teatro(sc,tipoEvento);
                         break;
                     case 3:
                         System.out.println("Iniciando configuración de recepción...");
@@ -284,14 +285,7 @@ public class Matrix {
         }
     }
     public static void servicio_conferencial(Scanner sc, int tipoEvento){
-        int[] servicios = new int[]{
-                100,
-                250,
-                175,
-                60,
-                250,
-                120,
-                40};
+        int[] servicios = new int[]{100,250,175,60,250,120,40};
         String[] servicios_text = new String[]{
                 "Registro de Asistentes","Traduccion","Transmisión o grabacion","Café o coffe bar.","Personal","Material","Wi-fi"
         };
@@ -348,9 +342,40 @@ public class Matrix {
         }while(opcion!=3);
     }
     public static void equipamiento_teatro(Scanner sc, int tipo_Evento){
+        int[] equipamiento_precios=new int[]{200,120,70,135,150,240,300},cantidad=new int[7], precio_f=new int[7];
+        String[] equipamiento_text=new String[]{"Escenarios","Butacas","Iluminaciónes","Sistemas de sonido","Consolas","Camerinos","Decoraciónes"};
 
+        for(int i=0;i<7;i++){
+            System.out.println("Cantidad de "+equipamiento_text[i]+":");
+            cantidad[i]=sc.nextInt();
+            sc.nextLine();
+            precio_f[i]=cantidad[i]*equipamiento_precios[i];
+            System.out.println(precio_f[i]);
+        }
+        if(tipo_Evento==2){
+            System.out.println("Cargo doble para evento empresarial");
+            for(int i=0;i<7;i++){
+                precio_f[i]*=2;
+            }
+        }
     }
     public static void servicios_teatro(Scanner sc, int tipo_Evento){
+        int[] servicio_precios=new int[]{80,350,405,90,250,140,190},cantidad=new int[7], precio_f=new int[7];
+        String[] servico_texto=new String[]{"Vendedores","Personal","Seguridad","Servicios de comida","Publicidad","Servicios de limpieza","Técnicos"};
+
+        for(int i=0;i<7;i++){
+            System.out.println("Cantidad de "+servico_texto[i]+":");
+            cantidad[i]=sc.nextInt();
+            sc.nextLine();
+            precio_f[i]=cantidad[i]*servicio_precios[i];
+            System.out.println(precio_f[i]);
+        }
+        if(tipo_Evento==2){
+            System.out.println("Cargo doble para evento empresarial");
+            for(int i=0;i<7;i++){
+                precio_f[i]*=2;
+            }
+        }
 
     }
     /*                                          ISAAC                                          */
