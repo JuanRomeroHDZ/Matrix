@@ -129,14 +129,7 @@ public class Matrix {
 
                 if(tipoEvento>=1 && tipoEvento<=2){
                     System.out.println();
-                    if (tipoEvento==1){
-                        social=true;
-                    }
-                    else{
-                        empresarial= true;
-                        
-                    }
-                    eventoSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario, social, empresarial);
+                    eventoSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario, tipoEvento);
 
 
                 }
@@ -154,7 +147,7 @@ public class Matrix {
         } while (tipoEvento != 3);
     }
 
-    public static void eventoSocial(Scanner sc, String nombreUsuario, Long telefonoUsuario, String correoUsuario, int personasUsuario, int diasUsuario, boolean social, boolean empresarial) {
+    public static void eventoSocial(Scanner sc, String nombreUsuario, Long telefonoUsuario, String correoUsuario, int personasUsuario, int diasUsuario, int tipoEvento) {
         int tipoReservacion = 1;
         do {
             System.out.print("""
@@ -178,7 +171,7 @@ public class Matrix {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println("Iniciando configuración de conferencia...");
-                        montaje_conferencia(sc,social,empresarial );//Aplicar como boleano by: Jose
+                        montaje_conferencia(sc,tipoEvento );//Aplicar como boleano by: Jose
                         break;
                     case 2:
                         System.out.println("Teatro en mantenimiento");
@@ -212,7 +205,7 @@ public class Matrix {
 
 
     /*                                          1 .Conferencia, parte de Jose (yo).                                          */
-    public static void montaje_conferencia(Scanner sc, boolean essocial, boolean esEmpresarial){
+    public static void montaje_conferencia(Scanner sc, int tipoEvento){
         int opcions;
         System.out.println(); // Salto de linea para mejor apariencia
         do{
@@ -249,10 +242,10 @@ public class Matrix {
             try{
                 switch (opcions) {
                     case 1:
-                    equipamiento_conferencial(sc, essocial, esEmpresarial);
+                    equipamiento_conferencial(sc, tipoEvento);
                         break;
                     case 2:
-                        servicio_conferencial(sc,essocial, esEmpresarial);
+                        servicio_conferencial(sc,tipoEvento);
                         break;
                     case 3:
                         System.out.println("Saliendo");
@@ -268,12 +261,8 @@ public class Matrix {
             }
             }while(opcions!=3);
         }
-    public static void cantidad_jose(){
 
-    }
-
-    public static void equipamiento_conferencial(Scanner sc, boolean essocial,boolean esEmpresarial){
-
+    public static void equipamiento_conferencial(Scanner sc, int tipoEvento){
         int[] P_equipamiento = new int[]{
         60,  // Sillas
         200, // Escenario
@@ -284,29 +273,32 @@ public class Matrix {
         80,  // Pizarra y rotafolios
         125  // Iluminacion focal
         };
-        String[] equipamiento = new String[]{
+        String[] equipamiento_text = new String[]{
                 "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
                 "Total:"
         };
-        if(esEmpresarial==false){
-            int opcion;
-            System.out.println("Precio estandar en equipamiento para eventos sociales.");
-            do{
-                System.out.println("""
-                    Slecciona con numeros:\n0.Sillas\n1.Escenario,\n2.Microfono.\n3.Proyector y pantalla.\n4.Sistema de sonido.\n5.Podio.\n6.Pizarra y rotafolios.
-                    \n7.Iluminacion focal\n8.Para salir.
-                    """);
-                sc.nextLine();
-                opcion=sc.nextInt();
+        int [] cantidad=new int[8], cantidad_f=new int[8];
+        
 
-
-        }while(opcion!=8);
+        for(int i=0;i<8;i++){
+            cantidad[i]=sc.nextInt();
+            cantidad_f[i]=cantidad[i]*P_equipamiento[i];
+            System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
         }
+        if(tipoEvento==2){
+            System.out.println("Se agregara un cargo del doble por ser empresarial.");
+            for(int i=0;i<8;i++){
+                cantidad_f[i]*=2;
+                System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
+            }
+        
+        }
+
     }
 
         
 
-    public static void servicio_conferencial(Scanner sc, boolean essocial, boolean esEmpresarial){
+    public static void servicio_conferencial(Scanner sc, int tipoEvento){
         int[] servicios = new int[]{
         100,
         250,
@@ -315,21 +307,14 @@ public class Matrix {
         250,
         120,
         40};
-        if(esEmpresarial==false){
-            System.out.println("En servicios, precio estandar para eventos sociales.");
-            System.out.println(Arrays.toString(servicios));
-
+        String[] equipamiento_text = new String[]{
+                "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
+                "Total:"
+        };
+        if(tipoEvento==2){
+            
         }
 
-
-        else if (esEmpresarial) {
-            System.out.println("En servicios se aplicará el 10% extra para eventos empresariales.");
-            for (int i = 0; i < servicios.length; i++) {
-                servicios[i] = (int)(servicios[i] *  1.1);
-
-            }
-            System.out.println(Arrays.toString(servicios));
-        }
     }
  /*                                          ISAAC                                          */
     // EN ESTA FUNCION LLAMO A LAS DEMAS FUNCIONES Y LES ASIGNO VARIABLES.
