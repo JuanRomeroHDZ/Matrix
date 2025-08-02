@@ -119,7 +119,7 @@ public class Matrix {
                 | 3. Ninguno                             |
                 +----------------------------------------+
                 """);
-                
+
             try {
 
                 System.out.print("Ingresa una opción (1 - 3): ");
@@ -182,10 +182,10 @@ public class Matrix {
                         break;
                     case 4:
                         System.out.println("Iniciando configuración de banquete...");
-                    eventoBanquete(sc, true, diasUsuario);
+                        eventoBanquete(sc, true, diasUsuario);
                         break;
                     case 5:
-                        montajeSalonSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
+                        montajeSalon(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
                         break;
                     case 6:
                         System.out.println("Disposición en forma de U en mantenimiento");
@@ -242,7 +242,7 @@ public class Matrix {
             try{
                 switch (opcions) {
                     case 1:
-                    equipamiento_conferencial(sc, tipoEvento);
+                        equipamiento_conferencial(sc, tipoEvento);
                         break;
                     case 2:
                         servicio_conferencial(sc,tipoEvento);
@@ -259,26 +259,26 @@ public class Matrix {
                 System.out.println("❌ Error, debes ingresar un números 1 y 3 .");
                 sc.nextLine();
             }
-            }while(opcions!=3);
-        }
+        }while(opcions!=3);
+    }
 
     public static void equipamiento_conferencial(Scanner sc, int tipoEvento){
         int[] P_equipamiento = new int[]{
-        60,  // Sillas
-        200, // Escenario
-        120,  // Micrófono
-        65, // Proyector y pantalla
-        150,  // Sistema de sonido
-        140,  // Podio
-        80,  // Pizarra y rotafolios
-        125  // Iluminacion focal
+                60,  // Sillas
+                200, // Escenario
+                120,  // Micrófono
+                65, // Proyector y pantalla
+                150,  // Sistema de sonido
+                140,  // Podio
+                80,  // Pizarra y rotafolios
+                125  // Iluminacion focal
         };
         String[] equipamiento_text = new String[]{
                 "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
                 "Total:"
         };
         int [] cantidad=new int[8], cantidad_f=new int[8];
-        
+
 
         for(int i=0;i<8;i++){
             cantidad[i]=sc.nextInt();
@@ -291,32 +291,32 @@ public class Matrix {
                 cantidad_f[i]*=2;
                 System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
             }
-        
+
         }
 
     }
 
-        
+
 
     public static void servicio_conferencial(Scanner sc, int tipoEvento){
         int[] servicios = new int[]{
-        100,
-        250,
-        175,
-        60,
-        250,
-        120,
-        40};
+                100,
+                250,
+                175,
+                60,
+                250,
+                120,
+                40};
         String[] equipamiento_text = new String[]{
                 "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
                 "Total:"
         };
         if(tipoEvento==2){
-            
+
         }
 
     }
- /*                                          ISAAC                                          */
+    /*                                          ISAAC                                          */
     // EN ESTA FUNCION LLAMO A LAS DEMAS FUNCIONES Y LES ASIGNO VARIABLES.
     public static void eventoRecepcion(Scanner sc, boolean esEmpresarial, String nombreUsuario, Long telefonoUsuario, String correoUsuario, int personasUsuario, int diasUsuario) {
         int totalEquipamiento = equipamientoRecepcion(esEmpresarial, diasUsuario);
@@ -325,13 +325,13 @@ public class Matrix {
 
         System.out.println(" Total por el evento Recepción (" + diasUsuario + " días): $" + total);
     }
-    // ARRAY PARA NOMBRES DEL EQUIPAMIENTO 
+    // ARRAY PARA NOMBRES DEL EQUIPAMIENTO
     public static int equipamientoRecepcion(boolean esEmpresarial, int dias) {
         String[] nombres = {
                 "Mesas altas tipo cóctel", "Barra de bebidas", "Sistema de sonido ambiental",
                 "Área de bienvenida", "Iluminación decorativa", "Decoración floral"
         };
-        //ARRAYS DE PRECIOS DEL EQUIPAMIENTO 
+        //ARRAYS DE PRECIOS DEL EQUIPAMIENTO
         int[] precios = {300, 800, 400, 250, 500, 600};
         // SI EL EVENTO ES EMPRESARAL EL FOR HACE UN AUMENTO DEL 20% A CADA COSTO
         if (esEmpresarial) {
@@ -339,7 +339,7 @@ public class Matrix {
                 precios[i] = (int)(precios[i] * 2);
             }
         }
-        // HACE EL CALCULO DE LOS COSTOS POR LOS DIAS RENTADOS 
+        // HACE EL CALCULO DE LOS COSTOS POR LOS DIAS RENTADOS
         System.out.println(" Equipamiento para Recepción:");
         int subtotal = 0;
         for (int i = 0; i < precios.length; i++) {
@@ -355,9 +355,9 @@ public class Matrix {
                 "Servicio de catering", "DJ o música en vivo", "Fotografía y video",
                 "Guardarropa", "Valet parking", "Seguridad", "Meseros y anfitriones"
         };
-        // ESTE ARRAY GUARDA LOS PRECIOS DE CADA SERVICIO 
+        // ESTE ARRAY GUARDA LOS PRECIOS DE CADA SERVICIO
         int[] precios = {1200, 1500, 1000, 300, 400, 350, 500};
-        // SI EL EVENTO ES EMPRESARIAL EL FOR AUMENTA EL COSTO DE LOS SERVICIOS 
+        // SI EL EVENTO ES EMPRESARIAL EL FOR AUMENTA EL COSTO DE LOS SERVICIOS
         if (esEmpresarial) {
             for (int i = 0; i < precios.length; i++) {
                 precios[i] = (int)(precios[i] * 2);
@@ -373,7 +373,7 @@ public class Matrix {
         }
         return subtotal;
     }
-    // FUNCION DE BANQUETE 
+    // FUNCION DE BANQUETE
     public static void eventoBanquete(Scanner sc, boolean esEmpresarial, int diasUsuario) {
         int totalEquipamiento = equipamientoBanquete(esEmpresarial, diasUsuario);
         int totalServicios = serviciosBanquete(esEmpresarial, diasUsuario);
@@ -381,14 +381,14 @@ public class Matrix {
 
         System.out.println(" Total por el evento Banquete (" + diasUsuario + " días): $" + total);
     }
-    //ARRAYS PARA GUARDAR LOS NOMBRE DE LOS EQUIPAMENTOS DE BANQUETE 
+    //ARRAYS PARA GUARDAR LOS NOMBRE DE LOS EQUIPAMENTOS DE BANQUETE
     public static int equipamientoBanquete(boolean esEmpresarial, int dias) {
         String[] nombres = {
                 "Mesas redondas o rectangulares", "Sillas con fundas", "Mantelería y vajilla formal",
                 "Centros de mesa", "Iluminación ambiental", "Tarima para discursos"
         };
         int[] precios = {700, 400, 650, 300, 500, 350};
-        // SI ES EMPRESARIAL LE AUMENTA 20% AL COSTO 
+        // SI ES EMPRESARIAL LE AUMENTA 20% AL COSTO
         if (esEmpresarial) {
             for (int i = 0; i < precios.length; i++) {
                 precios[i] = (int)(precios[i] * 2);
@@ -410,13 +410,13 @@ public class Matrix {
                 "Menú completo", "Cocineros y meseros", "Música en vivo o DJ",
                 "Pastel formal", "Fotografía profesional", "Brindis y discursos", "Estación de bebidas" };
         int[] precios = {2500, 1800, 1500, 500, 1000, 600, 400};
-        // AUMENTA 20% AL SER EMPRESARIAL 
+        // AUMENTA 20% AL SER EMPRESARIAL
         if (esEmpresarial) {
             for (int i = 0; i < precios.length; i++) {
                 precios[i] = (int)(precios[i] * 2);
             }
         }
-        //SUMA LOS PRECIOS MULTIPLICADOS POR LOS DIAS 
+        //SUMA LOS PRECIOS MULTIPLICADOS POR LOS DIAS
         System.out.println(" Servicios para Banquete:");
         int subtotal = 0;
         for (int i = 0; i < precios.length; i++) {
@@ -427,45 +427,62 @@ public class Matrix {
         return subtotal;
     }
 
-    
 
-    // AQUI EMPIEZA LO DE JUAN 
+
+    // AQUI EMPIEZA LO DE JUAN
     /*                                          Juan                                          */
-    public static void montajeSalonSocial(Scanner sc,String nombreUsuario,Long telefonoUsuario,String correoUsuario,int personasUsuario,int diasUsuario){
+    public static void montajeSalon(
+            Scanner sc,
+            String nombreUsuario,
+            Long telefonoUsuario,
+            String correoUsuario,
+            int personasUsuario,
+            int diasUsuario
+    ){
         System.out.println(); // Salto de linea para mejor apariencia
         System.out.print("""
-        +-------------------------------------------------------------------------------------------+
-        |                          Bienvenido/a a la renta del salón                                |
-        +-------------------------------------------------------------------------------------------+
-        | Equipamientos:                 | Precio c/u  | Descripción                                |
-        |    > Mesas                     | $50.00      | Mesas plegables de 6 plazas                |
-        |    > Sillas                    | $10.00      | Sillas cómodas para eventos                |
-        |    > Aires acondicionados      | $80.00      | Control de temperatura                     |
-        |    > Pantallas                 | $30.00      | Pantallas LED de 50 pulgadas               |
-        |    > Proyectores               | $40.00      | Proyectores HD                             |
-        |    > Focos reflectantes        | $20.00      | Iluminación profesional                    |
-        |                                                                                           |
-        | Servicios:                     | Precio      |Descripción                                 |
-        |    > Personal de limpieza      | $100.00     | Limpieza post-evento                       |
-        |    > Soporte técnico           | $70.00      | Asistencia durante el evento               |
-        |    > Wi-Fi                     | $25.00      | Conexión de alta velocidad                 |
-        |    > Servicio de comida        | $150.00     | Buffet o menú personalizado                |
-        +-------------------------------------------------------------------------------------------+
+        +----------------------------------------------------------------------------------------------+
+        |                          Bienvenido/a a la renta del salón                                   |
+        +----------------------------------------------------------------------------------------------+
+        | Equipamientos:                    | Precio c/u  | Descripción                                |
+        |    > Mesas                        | $50.00      | Mesas plegables de 6 plazas                |
+        |    > Sillas                       | $10.00      | Sillas cómodas para eventos                |
+        |    > Aires acondicionados         | $80.00      | Control de temperatura                     |
+        |    > Pantallas                    | $30.00      | Pantallas LED de 50 pulgadas               |
+        |    > Proyectores                  | $40.00      | Proyectores HD                             |
+        |    > Focos reflectantes           | $20.00      | Iluminación profesional                    |
+        |                                                                                              |
+        | Servicios:                        | Precio c/u  | Descripción                                |
+        |    > Personal de limpieza         | $100.00     | Limpieza post-evento                       |
+        |    > Personal de Soporte técnico  | $70.00      | Asistencia durante el evento               |
+        |    > Personal de cocina           | $25.00      | Conexión de alta velocidad                 |
+        |    > Personal de decoración       | $150.00     | Arreglos personalizados                    |
+        +----------------------------------------------------------------------------------------------+
         """);
-        equipamientoSalonSocial(sc, nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario);
+        equipamientoServiciosSalon(
+                sc,
+                nombreUsuario,
+                telefonoUsuario,
+                correoUsuario,
+                personasUsuario,
+                diasUsuario
+        ); // Llama a la funcion equipamiento y manda los datos necesarios
     }
-    public static void equipamientoSalonSocial(Scanner sc,String nombreUsuario,Long telefonoUsuario,String correoUsuario,int personasUsuario,int diasUsuario){
+    public static void equipamientoServiciosSalon(
+            Scanner sc,
+            String nombreUsuario,
+            Long telefonoUsuario,
+            String correoUsuario,
+            int personasUsuario,
+            int diasUsuario
+    ){
 
-        double[] totalEquipamiento = new double[6];
+        double[] totalEquipamiento = new double[6]; // Equipamiento -1 (Se resta -1 para poder acomodar el Total:)
         double sumatotalEquipamiento = 0;
-        int[] preciosEquipamiento = {
-                50,    // Precio Mesas
-                10,    // Precio Sillas
-                80,    // Precio Aires acondicionados
-                30,    // Precio Pantallas
-                40,    // Precio Proyectores
-                20,    // Precio Reflectores
-        };
+
+        double[] totalServicio = new double[4];    // Servicio - 1 (Se resta -1 para poder acomodar el Total:)
+        double sumatotalServicio = 0;
+
         String[] equipamiento = new String[]{
                 "Mesas",
                 "Sillas",
@@ -476,32 +493,165 @@ public class Matrix {
                 "Total:"
         };
 
+        double[] preciosEquipamiento = {
+                50,    // Precio Mesas
+                10,    // Precio Sillas
+                80,    // Precio Aires acondicionados
+                30,    // Precio Pantallas
+                40,    // Precio Proyectores
+                20,    // Precio Reflectores
+        };
 
-        int[] cantidadEquipamiento = new int[6];
+        String[] servicio = new String[]{
+                "Personal de limpieza",
+                "Personal de soporte técnico",
+                "Personal de cocina",
+                "Personal de decoración",
+                "Total:",
+        };
+
+        double[] preciosServicio = {
+                100,   // Precio Personal de Limpieza
+                70,    // Precio Personal de Soporte Técnico
+                25,    // Precio Personal de Cocina
+                150,   // Precio Personal de Decoración
+        };
+
+
+        int[] cantidadEquipamiento = new int[6];    // Cantidad de equipamiento -> Ingresado por el usuario
+        int[] cantidadServicio = new int[4];        // Cantidad de personal     -> Ingresado por el usuario
+
         try {
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < equipamiento.length - 1; i++) {
                 System.out.print("Cantidad de "  + equipamiento[i] + ": ");
                 cantidadEquipamiento[i] = sc.nextInt();
                 totalEquipamiento[i] = (cantidadEquipamiento[i] * diasUsuario * preciosEquipamiento[i]);
                 sumatotalEquipamiento += totalEquipamiento[i];
             }
-
-///* Muestra en pantalla: | Equipamiento | Cantidad | Precio c/u |
-            
-            System.out.println("\n+------------------------------------------------------------------------------------+");
-            System.out.printf("| %-20s | %-5s | %-10s | %-35s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + diasUsuario + ") día(s)");
-            for (int i = 0; i < 6; i++) {
-                System.out.printf("\n| %-20s | %-8s | $%-9s | %-35s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], totalEquipamiento[i] );
-
+            System.out.println(); // Salto de linea para preguntar sobre el personal
+            for (int i = 0; i < servicio.length - 1; i++) {
+                System.out.print("Cantidad de "  + servicio[i] + ": ");
+                cantidadServicio[i] = sc.nextInt();
+                totalServicio[i] = (cantidadServicio[i] * diasUsuario * preciosServicio[i]);
+                sumatotalServicio += totalServicio[i];
             }
-            
-            System.out.println();
-            System.out.printf("| %-20s | %-8s | %-10s | %-35s |\n",equipamiento[6], "", "", sumatotalEquipamiento);
-            System.out.println("+------------------------------------------------------------------------------------+\n");
-
         } catch (InputMismatchException e) {
             System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales.");
             sc.nextLine();
         }
+
+        decFinal(sc,
+                diasUsuario,
+
+                equipamiento,
+                cantidadEquipamiento,
+                preciosEquipamiento,
+                totalEquipamiento,
+                sumatotalEquipamiento,
+
+                servicio,
+                cantidadServicio,
+                preciosServicio,
+                totalServicio,
+                sumatotalServicio
+        );
+    }
+
+    public static void decFinal(
+            Scanner sc,
+            int diasUsuario,
+
+            String[] equipamiento,
+            int[] cantidadEquipamiento,
+            double[] preciosEquipamiento,
+            double[] totalEquipamiento,
+            double sumatotalEquipamiento,
+
+            String[] servicio,
+            int[] cantidadServicio,
+            double[] preciosServicio,
+            double[] totalServicio,
+            double sumatotalServicio
+    ) {
+        int pasoFinal = 0;
+        do {
+            try {
+                System.out.print("""
+                    +--------------------------+
+                    | 1. Pagar                 |
+                    | 2. Consultar información |
+                    | 3. Modificar             |
+                    | 4. Salir                 |
+                    +--------------------------+
+                    Qué desea hacer? (1 - 4):""" + " ");
+                pasoFinal = sc.nextInt();
+
+                switch (pasoFinal) {
+                    case 1:
+                        System.out.println("Realizando pago...");
+                        break;
+                    case 2:
+                        informacion(sc, diasUsuario, equipamiento, cantidadEquipamiento, preciosEquipamiento, totalEquipamiento, sumatotalEquipamiento, servicio, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio);
+                        System.out.println("Consultando información...");
+                        break;
+                    case 3:
+                        System.out.println("Modificando datos...");
+                        break;
+                    case 4:
+                        System.out.println("Saliendo...");
+                        break;
+                    default:
+                        System.out.println("\n❌ Error: Debes ingresar un número entre 1 y 4\n");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales\n");
+                sc.nextLine(); // Limpia el buffer
+            }
+
+        } while (pasoFinal != 4);
+    }
+
+    public static void pago(Scanner sc, int personasUsuario){
+
+    }
+    public static void informacion(
+            Scanner sc,
+            int diasUsuario,
+
+            String[] equipamiento,
+            int[] cantidadEquipamiento,
+            double[] preciosEquipamiento,
+            double[] totalEquipamiento,
+            double sumatotalEquipamiento,
+
+            String[] servicio,
+            int[] cantidadServicio,
+            double[] preciosServicio,
+            double[] totalServicio,
+            double sumatotalServicio
+    ){
+        ///* Muestra en pantalla: | Equipamiento | Cantidad | Precio c/u |
+
+        System.out.println("\n+------------------------------------------------------------------------------------------------------------------------+");
+        System.out.printf("| %-27s | %-5s | %-10s | %-34s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + diasUsuario + ") día(s) x Tamaño evento x Tipo evento");
+        for (int i = 0; i < equipamiento.length - 1; i++) {
+            System.out.printf("\n| %-27s | %-8s | $%-9s | $%-63s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], totalEquipamiento[i] );
+        }
+        System.out.println();
+        System.out.printf("| %-27s | %-8s | %-10s | $%-63s |\n",equipamiento[6], "", "", sumatotalEquipamiento);
+        ///* Fin equipamiento
+
+        System.out.println("|                                                                                                                        |");
+
+        ///* Muestra en pantalla: | Servicio | Cantidad | Precio c/u
+        System.out.printf("| %-27s | %-5s | %-10s | %-34s |", "Servicio", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + diasUsuario + ") día(s) x Tamaño evento x Tipo evento");
+        for (int i = 0; i < servicio.length - 1; i++) {
+            System.out.printf("\n| %-27s | %-8s | $%-9s | $%-63s |", servicio[i], cantidadServicio[i], preciosServicio[i], totalServicio[i] );
+        }
+        System.out.println();
+        System.out.printf("| %-27s | %-8s | %-10s | $%-63s |\n",servicio[4], "", "", sumatotalServicio);
+        System.out.println("+------------------------------------------------------------------------------------------------------------------------+\n");
+        /// * Fin Servicio
     }
 }
