@@ -395,6 +395,29 @@ public class Matrix {
     // ARRAY PARA NOMBRES DEL EQUIPAMIENTO
     public static int equipamientoRecepcion(Scanner sc,Object[]resumen_datos,int tipo_Evento) {
         int dias=(int)resumen_datos[4];
+        System.out.print("""
+    +--------------------------------------------------------------------------------------------------+
+    |                            Bienvenido/a a la renta del salón                                     |
+    +--------------------------------------------------------------------------------------------------+
+    | Equipamientos:                       | Precio c/u  | Descripción                                 |
+    |    > Mesas altas tipo cóctel         | $300.00     | Mesas para eventos tipo cóctel              |
+    |    > Barra de bebidas                | $800.00     | Mueble para servicio de bebidas             |
+    |    > Sistema de sonido ambiental     | $400.00     | Audio de ambientación                       |
+    |    > Área de bienvenida              | $250.00     | Espacio decorado para recepción             |
+    |    > Iluminación decorativa          | $500.00     | Ambientación especial                       |
+    |    > Decoración floral               | $600.00     | Arreglos florales                           |
+    |                                                                                                  |
+    | Servicios:                           | Precio c/u  | Descripción                                 |
+    |    > Servicio de catering            | $1200.00    | Alimentos y bebidas para el evento          |
+    |    > DJ o música en vivo             | $1500.00    | Música en vivo o DJ                         |
+    |    > Fotografía y video              | $1000.00    | Captura y grabación del evento              |
+    |    > Guardarropa                     | $300.00     | Servicio para guardar pertenencias          |
+    |    > Valet parking                   | $400.00     | Servicio de Estacionamiento                 |
+    |    > Seguridad                       | $350.00     | Personal profesional de seguridad           |
+    |    > Meseros y anfitriones           | $500.00     | Atención  a los invitados                   |
+    +--------------------------------------------------------------------------------------------------+
+    """);
+
         String[] nombres = {
                 "Mesas altas tipo cóctel", "Barra de bebidas", "Sistema de sonido ambiental",
                 "Área de bienvenida", "Iluminación decorativa", "Decoración floral"
@@ -410,8 +433,12 @@ public class Matrix {
         // HACE EL CALCULO DE LOS COSTOS POR LOS DIAS RENTADOS
         System.out.println(" Equipamiento para Recepción:");
         int subtotal = 0;
+     int [] cantidades = new int [precios.length];
+     System.out.println("Cuanto deseas Agregar?");
         for (int i = 0; i < precios.length; i++) {
-            int precioTotal = precios[i] * dias;
+            System.out.println(nombres [i]);
+            cantidades[i]= sc.nextInt();
+            int precioTotal = precios[i] * cantidades [i]* dias;
             subtotal += precioTotal;
             System.out.println(" - " + nombres[i] + ": $" + precioTotal);
         }
@@ -435,8 +462,12 @@ public class Matrix {
         // ARRAYS SUMA DE COSTOS POR LOS DIAS.
         System.out.println(" Servicios para Recepción:");
         int subtotal = 0;
+     int [] cantidades = new int [precios.length];
+     System.out.println("Cuanto deseas Agregar?");
         for (int i = 0; i < precios.length; i++) {
-            int precioTotal = precios[i] * dias;
+         System.out.println(nombres [i]);
+            cantidades[i]= sc.nextInt();
+            int precioTotal = precios[i] * cantidades [i] * dias;
             subtotal += precioTotal;
             System.out.println(" - " + nombres[i] + ": $" + precioTotal);
         }
