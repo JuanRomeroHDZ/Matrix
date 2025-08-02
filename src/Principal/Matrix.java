@@ -2,6 +2,8 @@
 Leer el README.md
 */
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
@@ -211,30 +213,18 @@ public class Matrix {
         do{
 
             System.out.print("""
-            +---------------------------------------------------------------------------------------------+
-            |                           Bienvenido/a a la renta de la conferencia                         |
-            +---------------------------------------------------------------------------------------------+
-            | 1. Equipamientos:                           Precios:                                        |
-            |     > Mesas y sillas                        60$                                             |
-            |     > Escenario.                            200$                                            |
-            |     > Microfonos.                           120$                                            |
-            |     > Proyector y pantalla                  65$                                             |
-            |     > Sistema de sonido.                    150$                                            |
-            |     > Podio.                                140$                                            |
-            |     > Pizarra y rotafolios.                 80$                                             |
-            |     > Iluminación.                          165$                                            |
-            |                                                                                             |
-            | 2. Servicios:                                                                               |
-            |     > Registro de asistentes.               100$                                            |
-            |     > Traducción simultanea.                250$                                            |
-            |     > Transmisión en vivo o grabacion.      175$                                            |
-            |     > Café o coffe break.                   60$                                             |
-            |     > Personal técnico.                     250$                                            |
-            |     > Material                              120$                                            |
-            |     > Wi-Fi                                 40$                                             |
-            |                                                                                             |
-            | 3. Para salir.                                                                              |
-            +---------------------------------------------------------------------------------------------+
+            +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
+            +---------------------------------------------------------------------------------------------+\n| 1. Equipamientos:                           Precios:                                        |
+            |     > Mesas y sillas                        60$                                             |\n|     > Escenario.                            200$                                            |
+            |     > Microfonos.                           120$                                            |\n|     > Proyector y pantalla                  65$                                             |
+            |     > Sistema de sonido.                    150$                                            |\n|     > Podio.                                140$                                            |
+            |     > Pizarra y rotafolios.                 80$                                             |\n|     > Iluminación.                          165$                                            |
+            |                                                                                             |\n| 2. Servicios:                                                                               |
+            |     > Registro de asistentes.               100$                                            |\n|     > Traducción simultanea.                250$                                            |
+            |     > Transmisión en vivo o grabacion.      175$                                            |\n|     > Café o coffe break.                   60$                                             |
+            |     > Personal técnico.                     250$                                            |\n|     > Material                              120$                                            |
+            |     > Wi-Fi                                 40$                                             |\n|                                                                                             |
+            | 3. Para salir.                                                                              |\n+---------------------------------------------------------------------------------------------+
             """);
             System.out.print("Elige el servicio (1 - 3): ");
             opcions=sc.nextInt();
@@ -279,7 +269,6 @@ public class Matrix {
         };
         int [] cantidad=new int[8], cantidad_f=new int[8];
 
-
         for(int i=0;i<8;i++){
             cantidad[i]=sc.nextInt();
             cantidad_f[i]=cantidad[i]*P_equipamiento[i];
@@ -293,11 +282,7 @@ public class Matrix {
             }
 
         }
-
     }
-
-
-
     public static void servicio_conferencial(Scanner sc, int tipoEvento){
         int[] servicios = new int[]{
                 100,
@@ -307,13 +292,65 @@ public class Matrix {
                 250,
                 120,
                 40};
-        String[] equipamiento_text = new String[]{
-                "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
-                "Total:"
+        String[] servicios_text = new String[]{
+                "Registro de Asistentes","Traduccion","Transmisión o grabacion","Café o coffe bar.","Personal","Material","Wi-fi"
         };
-        if(tipoEvento==2){
-
+        int [] cantidad=new int[7], cantidad_f=new int[7];
+        for(int i=0;i<7;i++){
+            cantidad[i]=sc.nextInt();
+            cantidad_f[i]=cantidad[i]*servicios[i];
+            System.out.println(servicios_text[i]+":"+cantidad_f[i]);
         }
+        if(tipoEvento==2){
+            System.out.println("Se agregara un cargo del doble por ser empresarial.");
+            for(int i=0;i<8;i++){
+                cantidad_f[i]*=2;
+                System.out.println(servicios_text[i]+":"+cantidad_f[i]);
+            }
+        }
+    }
+    /*                                                           2.Parte del teatro                                                                                                */
+    public static void montaje_teatro(Scanner sc, int tipo_Evento){
+        int opcion;
+        do{
+            System.out.print("""
+            +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
+            +---------------------------------------------------------------------------------------------+\n| 1. Equipamientos:                           Precios:                                        |
+            |     > Escenario con telón                   200$                                            |\n|     > Butacas fijas o móviles               120$                                            |
+            |     > Iluminación teatral                    70$                                            |\n|     > Sistema de sonido envolvente          135$                                            |
+            |     > Consola de audio/luces                150$                                            |\n|     > Camerinos o vestidores                240$                                            |
+            |     > Decoración y escenografía             300$                                            |
+            |                                                                                             |\n| 2. Servicios:                                                                               |
+            |     > Venta de boletos                       80$                                            |\n|     > Personal de taquilla y acomodadores.  350$                                            |
+            |     > Seguridad y control de acceso         405$                                            |\n|     > Servicios de cafetería o snacks        90$                                            |
+            |     > Publicidad y promoción                250$                                            |\n|     > Servicios de limpieza                 140$                                            |
+            |     > Asistencia técnica en luces/sonido    190$                                            |\n|                                                                                             |
+            | 3. Para salir.                                                                              |\n+---------------------------------------------------------------------------------------------+
+            """);
+            opcion=sc.nextInt();
+            sc.nextLine();
+            try{
+                switch (opcion){
+                    case 1:
+                        equipamiento_teatro(sc, tipo_Evento);
+                        break;
+                    case 2:
+                        servicios_teatro(sc, tipo_Evento);
+                        break;
+                    case 3:
+                        System.out.println("Saliendo");
+                        break;
+                }
+            }catch(InputMismatchException a){
+                System.out.println();
+                System.out.println("Solo puedes usar numeros del 1 al 3.");
+            }
+        }while(opcion!=3);
+    }
+    public static void equipamiento_teatro(Scanner sc, int tipo_Evento){
+
+    }
+    public static void servicios_teatro(Scanner sc, int tipo_Evento){
 
     }
     /*                                          ISAAC                                          */
@@ -540,7 +577,12 @@ public class Matrix {
             sc.nextLine();
         }
 
-        decFinal(sc,
+        decFinal(
+                sc,
+                nombreUsuario,
+                telefonoUsuario,
+                correoUsuario,
+                personasUsuario,
                 diasUsuario,
 
                 equipamiento,
@@ -559,6 +601,10 @@ public class Matrix {
 
     public static void decFinal(
             Scanner sc,
+            String nombreUsuario,
+            Long telefonoUsuario,
+            String correoUsuario,
+            int personasUsuario,
             int diasUsuario,
 
             String[] equipamiento,
@@ -573,6 +619,7 @@ public class Matrix {
             double[] totalServicio,
             double sumatotalServicio
     ) {
+        System.out.println();
         int pasoFinal = 0;
         do {
             try {
@@ -591,7 +638,25 @@ public class Matrix {
                         System.out.println("Realizando pago...");
                         break;
                     case 2:
-                        informacion(sc, diasUsuario, equipamiento, cantidadEquipamiento, preciosEquipamiento, totalEquipamiento, sumatotalEquipamiento, servicio, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio);
+                        informacion(
+                                sc,
+                                nombreUsuario,
+                                telefonoUsuario,
+                                correoUsuario,
+                                personasUsuario,
+                                diasUsuario,
+
+                                equipamiento,
+                                cantidadEquipamiento,
+                                preciosEquipamiento,
+                                totalEquipamiento,
+                                sumatotalEquipamiento,
+
+                                servicio,
+                                cantidadServicio,
+                                preciosServicio,
+                                totalServicio,
+                                sumatotalServicio);
                         System.out.println("Consultando información...");
                         break;
                     case 3:
@@ -617,6 +682,10 @@ public class Matrix {
     }
     public static void informacion(
             Scanner sc,
+            String nombreUsuario,
+            Long telefonoUsuario,
+            String correoUsuario,
+            int personasUsuario,
             int diasUsuario,
 
             String[] equipamiento,
@@ -632,8 +701,13 @@ public class Matrix {
             double sumatotalServicio
     ){
         ///* Muestra en pantalla: | Equipamiento | Cantidad | Precio c/u |
-
-        System.out.println("\n+------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("\n+--------------------------------------------------------+");
+        System.out.printf("| Nombre: %-46s |\n", nombreUsuario);
+        System.out.printf("| Número de telefono: %-34s |\n", telefonoUsuario);
+        System.out.printf("| Correo: %-46s |\n", correoUsuario);
+        System.out.printf("| Cantidad de personas que asistiran: %-18s |\n", personasUsuario);
+        System.out.printf("| Días de renta: %-39s |\n", diasUsuario);
+        System.out.println("+--------------------------------------------------------+---------------------------------------------------------------+");
         System.out.printf("| %-27s | %-5s | %-10s | %-34s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + diasUsuario + ") día(s) x Tamaño evento x Tipo evento");
         for (int i = 0; i < equipamiento.length - 1; i++) {
             System.out.printf("\n| %-27s | %-8s | $%-9s | $%-63s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], totalEquipamiento[i] );
@@ -651,7 +725,10 @@ public class Matrix {
         }
         System.out.println();
         System.out.printf("| %-27s | %-8s | %-10s | $%-63s |\n",servicio[4], "", "", sumatotalServicio);
-        System.out.println("+------------------------------------------------------------------------------------------------------------------------+\n");
+        System.out.println("+------------------------------------------------------------------------------------------------------------------------+");
         /// * Fin Servicio
+        sc.nextLine(); // Limpia el buffer
+        System.out.print("Presiona enter para volver: ");
+        sc.nextLine();
     }
 }
