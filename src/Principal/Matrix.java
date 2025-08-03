@@ -93,11 +93,12 @@ public class Matrix {
                 sc.nextLine(); // Limpia buffer
                 System.out.println(); // Salto de linea para mejor apariencia
             }else{
+                int tipo_Evento=1;
                 System.out.print("| Cantidad de días que reservará el evento: ");
                 int diasUsuario = sc.nextInt();
                 System.out.println("+---------------------------------------------------------------------------------------");
                 System.out.println();
-                Object[] resumen_datos=new Object[]{nombreUsuario,telefonoUsuario,correoUsuario,personasUsuario,diasUsuario};
+                Object[] resumen_datos=new Object[]{nombreUsuario,telefonoUsuario,correoUsuario,personasUsuario,diasUsuario,tipo_Evento};
                 opciones(sc, resumen_datos);
                 break;
             }
@@ -106,7 +107,7 @@ public class Matrix {
     }
 
     public static void opciones(Scanner sc, Object[] resumen_datos){
-        int tipoEvento = 1;
+        int tipoEvento=0;
         do {
             System.out.print("""
                 +----------------------------------------+
@@ -122,11 +123,12 @@ public class Matrix {
 
                 System.out.print("Ingresa una opción (1 - 3): ");
                 tipoEvento = sc.nextInt();
+                resumen_datos[5]=tipoEvento;
                 sc.nextLine();
 
                 if(tipoEvento>=1 && tipoEvento<=2){
                     System.out.println();
-                    eventoSocial(sc, resumen_datos, tipoEvento);
+                    eventoSocial(sc, resumen_datos);
                     return;
                 }
                 else if(tipoEvento==3){
@@ -143,7 +145,7 @@ public class Matrix {
         } while (tipoEvento != 3);
     }
 
-    public static void eventoSocial(Scanner sc, Object[] resumen_datos, int tipo_Evento) {
+    public static void eventoSocial(Scanner sc, Object[] resumen_datos) {
         int tipoReservacion = 1;
         do {
             System.out.print("""
@@ -167,22 +169,22 @@ public class Matrix {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println("Iniciando configuración de conferencia...");
-                        montaje_conferencia(sc,resumen_datos,tipo_Evento );//Aplicar como boleano by: Jose
+                        montaje_conferencia(sc,resumen_datos);//Aplicar como boleano by: Jose
                         break;
                     case 2:
                         System.out.println("Iniciando configuración de teatro..");
-                        montaje_teatro(sc,resumen_datos,tipo_Evento);
+                        montaje_teatro(sc,resumen_datos);
                         break;
                     case 3:
                         System.out.println("Iniciando configuración de recepción...");
-                        eventoRecepcion(sc, resumen_datos,tipo_Evento); // ← NUEVA FUNCIÓN RECEPCIÓN
+                        eventoRecepcion(sc, resumen_datos); // ← NUEVA FUNCIÓN RECEPCIÓN
                         break;
                     case 4:
                         System.out.println("Iniciando configuración de banquete...");
-                        eventoBanquete(sc, resumen_datos,tipo_Evento);
+                        eventoBanquete(sc, resumen_datos);
                         break;
                     case 5:
-                        montajeSalon(sc, resumen_datos, tipo_Evento);
+                        montajeSalon(sc, resumen_datos);
                         return;
                     case 6:
                         System.out.println("Disposición en forma de U en mantenimiento");
@@ -202,7 +204,7 @@ public class Matrix {
 
 
     /*                                          1 .Conferencia, parte de Jose (yo).                                          */
-    public static void montaje_conferencia(Scanner sc, Object[] resumen_datos,int tipo_Evento){
+    public static void montaje_conferencia(Scanner sc, Object[] resumen_datos){
         int opcions;
         System.out.println(); // Salto de linea para mejor apariencia
         do{
@@ -213,7 +215,7 @@ public class Matrix {
             |     > Mesas y sillas                        60$                                             |\n|     > Escenario.                            200$                                            |
             |     > Microfonos.                           120$                                            |\n|     > Proyector y pantalla                  65$                                             |
             |     > Sistema de sonido.                    150$                                            |\n|     > Podio.                                140$                                            |
-            |     > Pizarra y rotafolios.                 80$                                             |\n|     > Iluminación.                          165$                                            |
+            |     > Pizarra y rotafolios.                 80$                                             |\n|     > Iluminación.                          125$                                            |
             |                                                                                             |\n| 2. Servicios:                                                                               |
             |     > Registro de asistentes.               100$                                            |\n|     > Traducción simultanea.                250$                                            |
             |     > Transmisión en vivo o grabacion.      175$                                            |\n|     > Café o coffe break.                   60$                                             |
@@ -227,10 +229,10 @@ public class Matrix {
             try{
                 switch (opcions) {
                     case 1:
-                        equipamiento_conferencial(sc, resumen_datos,tipo_Evento);
+                        equipamiento_conferencial(sc, resumen_datos);
                         break;
                     case 2:
-                        servicio_conferencial(sc,resumen_datos,tipo_Evento);
+                        servicio_conferencial(sc,resumen_datos);
                         break;
                     case 3:
                         System.out.println("Saliendo");
@@ -247,10 +249,9 @@ public class Matrix {
         }while(opcions!=3);
     }
 
-    public static void equipamiento_conferencial(Scanner sc, Object[] resumen_datos,int tipo_Evento){
+    public static void equipamiento_conferencial(Scanner sc, Object[] resumen_datos){
         int diasUsuarios=(int)resumen_datos[4]; //Convertor
         int[] P_equipamiento = new int[]{60,200,120,65,150,140,80,125};
-        decFinal(sc, resumen_datos, tipo_Evento, null, P_equipamiento, null, null, tipo_Evento, null, P_equipamiento, null, null, diasUsuarios);
         String[] equipamiento_text = new String[]{
                 "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
                 "Total:"
@@ -263,17 +264,10 @@ public class Matrix {
             cantidad_f[i]=cantidad[i]*P_equipamiento[i]*diasUsuarios;
             //System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
         }
-        if(tipo_Evento==2){
-            System.out.println("Se agregara un cargo del doble por ser empresarial.");
-            for(int i=0;i<8;i++){
-                cantidad_f[i]*=2;
-                //System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
-            }
-        }
         int total=Arrays.stream(cantidad_f).sum();
         System.out.println(total);
     }
-    public static void servicio_conferencial(Scanner sc, Object[] resumen_datos,int tipo_Evento){
+    public static void servicio_conferencial(Scanner sc, Object[] resumen_datos){
         int diasUsuario=(int)resumen_datos[4];
         int[] servicios = new int[]{100,250,175,60,250,120,40}, cantidad=new int[7], cantidad_f=new int[7];
         String[] servicios_text = new String[]{"Registro de Asistentes","Traduccion","Transmisión o grabacion","Café o coffe bar.","Personal","Material","Wi-fi"};
@@ -284,18 +278,11 @@ public class Matrix {
             cantidad_f[i]=cantidad[i]*servicios[i]*diasUsuario;
             //System.out.println(servicios_text[i]+":"+cantidad_f[i]);
         }
-        if(tipo_Evento==2){
-            System.out.println("Se agregara un cargo del doble por ser empresarial.");
-            for(int i=0;i<8;i++){
-                cantidad_f[i]*=2;
-                //System.out.println(servicios_text[i]+":"+cantidad_f[i]);
-            }
-        }
         int total=Arrays.stream(cantidad_f).sum();
         System.out.println(total);
     }
     /*                                                           2.Parte del teatro                                                                                                */
-    public static void montaje_teatro(Scanner sc,Object[]resumen_datos, int tipo_Evento){
+    public static void montaje_teatro(Scanner sc,Object[]resumen_datos){
         int opcion;
         do{
             System.out.print("""
@@ -317,10 +304,10 @@ public class Matrix {
             try{
                 switch (opcion){
                     case 1:
-                        equipamiento_teatro(sc,resumen_datos, tipo_Evento);
+                        equipamiento_teatro(sc,resumen_datos);
                         break;
                     case 2:
-                        servicios_teatro(sc,resumen_datos, tipo_Evento);
+                        servicios_teatro(sc,resumen_datos);
                         break;
                     case 3:
                         System.out.println("Saliendo");
@@ -332,7 +319,7 @@ public class Matrix {
             }
         }while(opcion!=3);
     }
-    public static void equipamiento_teatro(Scanner sc,Object[] resumen_datos, int tipo_Evento){
+    public static void equipamiento_teatro(Scanner sc,Object[] resumen_datos){
         int diasUsuario=(int)resumen_datos[4];
         int[] equipamiento_precios=new int[]{200,120,70,135,150,240,300},cantidad=new int[7], precio_f=new int[7];
         String[] equipamiento_text=new String[]{"Escenarios","Butacas","Iluminaciónes","Sistemas de sonido","Consolas","Camerinos","Decoraciónes"};
@@ -344,16 +331,10 @@ public class Matrix {
             precio_f[i]=cantidad[i]*equipamiento_precios[i]*diasUsuario;
             System.out.println(precio_f[i]);
         }
-        if(tipo_Evento==2){
-            System.out.println("Cargo doble para evento empresarial");
-            for(int i=0;i<7;i++){
-                precio_f[i]*=2;
-            }
-        }
         int total=Arrays.stream(precio_f).sum();
         System.out.println(total);
     }
-    public static void servicios_teatro(Scanner sc,Object[]resumen_datos, int tipo_Evento){
+    public static void servicios_teatro(Scanner sc,Object[]resumen_datos){
         int diasUsuario=(int)resumen_datos[4];
         int[] servicio_precios=new int[]{80,350,405,90,250,140,190},cantidad=new int[7], precio_f=new int[7];
         String[] servico_texto=new String[]{"Vendedores","Personal","Seguridad","Servicios de comida","Publicidad","Servicios de limpieza","Técnicos"};
@@ -365,29 +346,23 @@ public class Matrix {
             precio_f[i]=cantidad[i]*servicio_precios[i]*diasUsuario;
             System.out.println(precio_f[i]);
         }
-        if(tipo_Evento==2){
-            System.out.println("Cargo doble para evento empresarial");
-            for(int i=0;i<7;i++){
-                precio_f[i]*=2;
-            }
-        }
         int total=Arrays.stream(precio_f).sum();
         System.out.println(total);
 
     }
     /*                                          ISAAC                                          */
     // EN ESTA FUNCION LLAMO A LAS DEMAS FUNCIONES Y LES ASIGNO VARIABLES.
-    public static void eventoRecepcion(Scanner sc, Object[] resumen_datos,int tipo_Evento) {
+    public static void eventoRecepcion(Scanner sc, Object[] resumen_datos) {
         int diasUsuario=(int)resumen_datos[4];//Casting good Isaac8)
-        int totalEquipamiento = equipamientoRecepcion(sc, resumen_datos,tipo_Evento);
-        int totalServicios = serviciosRecepcion(sc,resumen_datos,tipo_Evento);
+        int totalEquipamiento = equipamientoRecepcion(sc, resumen_datos);
+        int totalServicios = serviciosRecepcion(sc,resumen_datos);
         int total = totalEquipamiento + totalServicios;
 
         System.out.println(" Total por el evento Recepción (" + diasUsuario + " días): $" + total);
-        decFinal(sc, resumen_datos, tipo_Evento, null, null, null, null, totalEquipamiento, null, null, null, null, totalServicios);
+        decFinal(sc, resumen_datos,  null, null, null, null, totalEquipamiento, null, null, null, null, totalServicios);
     }
     // ARRAY PARA NOMBRES DEL EQUIPAMIENTO
-    public static int equipamientoRecepcion(Scanner sc,Object[]resumen_datos,int tipo_Evento) {
+    public static int equipamientoRecepcion(Scanner sc,Object[]resumen_datos) {
         int dias=(int)resumen_datos[4];
         System.out.print("""
     +--------------------------------------------------------------------------------------------------+
@@ -419,7 +394,7 @@ public class Matrix {
         //ARRAYS DE PRECIOS DEL EQUIPAMIENTO
         int[] precios = {300, 800, 400, 250, 500, 600};
         // SI EL EVENTO ES EMPRESARAL EL FOR HACE UN AUMENTO DEL 20% A CADA COSTO
-        if (tipo_Evento==2) {
+        if ((int)resumen_datos[5]==2) {
             for (int i = 0; i < precios.length; i++) {
                 precios[i] = (int)(precios[i] * 2);
             }
@@ -439,7 +414,7 @@ public class Matrix {
         return subtotal;
     }
     // ARRAYS QUE GUARDA LOS NOMBRES DE LOS SERVICIOS DE RECEPCION
-    public static int serviciosRecepcion(Scanner sc, Object[] resumen_datos,int tipo_Evento) {
+    public static int serviciosRecepcion(Scanner sc, Object[] resumen_datos) {
         int dias=(int)resumen_datos[4];
         String[] nombres = {
                 "Servicio de catering", "DJ o música en vivo", "Fotografía y video",
@@ -448,7 +423,7 @@ public class Matrix {
         // ESTE ARRAY GUARDA LOS PRECIOS DE CADA SERVICIO
         int[] precios = {1200, 1500, 1000, 300, 400, 350, 500};
         // SI EL EVENTO ES EMPRESARIAL EL FOR AUMENTA EL COSTO DE LOS SERVICIOS
-        if (tipo_Evento==2) {
+        if ((int)resumen_datos[5]==2) {
             for (int i = 0; i < precios.length; i++) {
                 precios[i] = (int)(precios[i] * 2);
             }
@@ -468,17 +443,17 @@ public class Matrix {
         return subtotal;
     }
     // FUNCION DE BANQUETE
-    public static void eventoBanquete(Scanner sc, Object[]resumen_datos,int tipo_Evento) {
+    public static void eventoBanquete(Scanner sc, Object[]resumen_datos) {
         int diasUsuario=(int)resumen_datos[4];
-        int totalEquipamiento = equipamientoBanquete(sc,resumen_datos,tipo_Evento);
-        int totalServicios = serviciosBanquete(sc,resumen_datos,tipo_Evento);
+        int totalEquipamiento = equipamientoBanquete(sc,resumen_datos);
+        int totalServicios = serviciosBanquete(sc,resumen_datos);
         int total = totalEquipamiento + totalServicios;
 
         System.out.println(" Total por el evento Banquete (" + diasUsuario + " días): $" + total);
-        decFinal(sc, resumen_datos, tipo_Evento, null, null, null, null, totalEquipamiento, null, null, null, null, totalServicios);
+        decFinal(sc, resumen_datos, null, null, null, null, totalEquipamiento, null, null, null, null, totalServicios);
     }
     //ARRAYS PARA GUARDAR LOS NOMBRE DE LOS EQUIPAMENTOS DE BANQUETE
-    public static int equipamientoBanquete(Scanner sc,Object[]resumen_datos,int tipo_Evento) {
+    public static int equipamientoBanquete(Scanner sc,Object[]resumen_datos) {
         int dias=(int)resumen_datos[4];
         System.out.print("""
     +--------------------------------------------------------------------------------------------------+
@@ -509,7 +484,7 @@ public class Matrix {
         };
         int[] precios = {700, 400, 650, 300, 500, 350};
         // SI ES EMPRESARIAL LE AUMENTA 20% AL COSTO
-        if (tipo_Evento==2) {
+        if ((int)resumen_datos[5]==2) {
             for (int i = 0; i < precios.length; i++) {
                 precios[i] = (int)(precios[i] * 2);
             }
@@ -529,14 +504,14 @@ public class Matrix {
         return subtotal;
     }
     // SERVICIOS DE BANQUETE, ARRAY CON  NOMBRES.
-    public static int serviciosBanquete(Scanner sc, Object[]resumen_datos,int tipo_Evento) {
+    public static int serviciosBanquete(Scanner sc, Object[]resumen_datos) {
         int dias=(int)resumen_datos[4];
         String[] nombres = {
                 "Menú completo", "Cocineros y meseros", "Música en vivo o DJ",
                 "Pastel formal", "Fotografía profesional", "Brindis y discursos", "Estación de bebidas" };
         int[] precios = {2500, 1800, 1500, 500, 1000, 600, 400};
         // AUMENTA 20% AL SER EMPRESARIAL
-        if (tipo_Evento==2) {
+        if ((int)resumen_datos[5]==2) {
             for (int i = 0; i < precios.length; i++) {
                 precios[i] = (int)(precios[i] * 2);
             }
@@ -566,8 +541,7 @@ public class Matrix {
     /*                                          Juan                                          */
     public static void montajeSalon(
             Scanner sc,
-            Object[]resumen_datos,
-            int tipo_Evento
+            Object[]resumen_datos
     ){
 
 
@@ -591,14 +565,13 @@ public class Matrix {
         |    > Personal de decoración       | $150.00     | Arreglos personalizados                    |
         +----------------------------------------------------------------------------------------------+
         """);
-        equipamientoServiciosSalon(sc,resumen_datos,tipo_Evento); // Llama a la funcion equipamiento y manda los datos necesarios
+        equipamientoServiciosSalon(sc,resumen_datos); // Llama a la funcion equipamiento y manda los datos necesarios
         return;
     }
 
     public static void equipamientoServiciosSalon(
             Scanner sc,
-            Object[]resumen_datos,
-            int tipo_Evento
+            Object[]resumen_datos
     ){
         int diasUsuario=(int)resumen_datos[4];
 
@@ -667,7 +640,6 @@ public class Matrix {
         decFinal(
                 sc,
                 resumen_datos,
-                tipo_Evento,
 
                 equipamiento,
                 cantidadEquipamiento,
@@ -686,7 +658,6 @@ public class Matrix {
     public static void decFinal(
             Scanner sc,
             Object[]resumen_datos,
-            int tipo_Evento,
 
             String[] equipamiento,
             int[] cantidadEquipamiento,
@@ -718,7 +689,6 @@ public class Matrix {
                     case 1:
                         pago(sc,
                                 resumen_datos,
-                                tipo_Evento,
                                 equipamiento,
                                 cantidadEquipamiento,
                                 preciosEquipamiento,
@@ -734,7 +704,6 @@ public class Matrix {
                         informacion(
                                 sc,
                                 resumen_datos,
-                                tipo_Evento,
 
                                 equipamiento,
                                 cantidadEquipamiento,
@@ -751,8 +720,7 @@ public class Matrix {
                     case 3:
                         montajeSalon(
                                 sc,
-                                resumen_datos,
-                                tipo_Evento);
+                                resumen_datos);
                         return;
                     case 4:
                         System.out.println("Saliendo...");
@@ -772,7 +740,6 @@ public class Matrix {
     public static void pago(
             Scanner sc,
             Object[]resumen_datos,
-            int tipo_Evento,
 
             String[] equipamiento,
             int[] cantidadEquipamiento,
@@ -792,7 +759,7 @@ public class Matrix {
             try {
                 System.out.println(); // Salto para mejor apariencia
                 // Evento social
-                if(tipo_Evento == 1){
+                if((int)resumen_datos[5] == 1){
                     // Tamaño Pequeño, Tipo Social -> (sumatotalEquipamiento + sumatotalServicio) * 1 (ó dejar asi sin modificar)
                     if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50){
                         double montoPagar = (sumatotalEquipamiento + sumatotalServicio);
@@ -816,7 +783,6 @@ public class Matrix {
                             decFinal(
                                     sc,
                                     resumen_datos,
-                                    tipo_Evento,
                                     equipamiento,
                                     cantidadEquipamiento,
                                     preciosEquipamiento,
@@ -890,7 +856,7 @@ public class Matrix {
                     }
                 }
 
-                if(tipo_Evento == 2){
+                if((int)resumen_datos[5] == 2){
                     // Tamaño Pequeño, Tipo Empresarial -> (sumatotalEquipamiento + sumatotalServicio) * 1 (ó dejar asi sin modificar)
                     if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50){
                         double montoPagar = ((sumatotalEquipamiento + sumatotalServicio) * 2);
@@ -985,7 +951,6 @@ public class Matrix {
     public static void informacion(
             Scanner sc,
             Object[]resumen_datos,
-            int tipo_Evento,
 
             String[] equipamiento,
             int[] cantidadEquipamiento,
@@ -1000,7 +965,7 @@ public class Matrix {
             double sumatotalServicio
     ){
         // Evento Social
-        if(tipo_Evento == 1){
+        if((int)resumen_datos[5] == 1){
             // Tamaño Pequeño, Tipo Social -> Todo x 1 (ó sin multiplicar)
             if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50){
                 System.out.printf(
@@ -1150,7 +1115,7 @@ public class Matrix {
         }
 
         // Evento Empresarial
-        else if(tipo_Evento == 2){
+        else if((int)resumen_datos[5] == 2){
             // Tamaño Pequeño, Tipo Empresarial -> Todo x 2
             if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50){
                 System.out.printf(
