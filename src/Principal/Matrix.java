@@ -127,7 +127,7 @@ public class Matrix {
                 if(tipoEvento>=1 && tipoEvento<=2){
                     System.out.println();
                     eventoSocial(sc, resumen_datos, tipoEvento);
-                    break;
+                    return;
                 }
                 else if(tipoEvento==3){
                     System.out.println("\n👋 Adiós!\nNo has elegido ningún evento.");
@@ -183,7 +183,7 @@ public class Matrix {
                         break;
                     case 5:
                         montajeSalon(sc, resumen_datos, tipo_Evento);
-                        break;
+                        return;
                     case 6:
                         System.out.println("Disposición en forma de U en mantenimiento");
                         break;
@@ -562,6 +562,8 @@ public class Matrix {
     // AQUI EMPIEZA LO DE JUAN
     /*                                          Juan                                          */
     public static void montajeSalon(Scanner sc, Object[]resumen_datos,int tipo_Evento){
+
+
         System.out.println(); // Salto de linea para mejor apariencia
         System.out.print("""
         +----------------------------------------------------------------------------------------------+
@@ -583,7 +585,9 @@ public class Matrix {
         +----------------------------------------------------------------------------------------------+
         """);
         equipamientoServiciosSalon(sc,resumen_datos,tipo_Evento); // Llama a la funcion equipamiento y manda los datos necesarios
+        return;
     }
+
     public static void equipamientoServiciosSalon(Scanner sc, Object[]resumen_datos,int tipo_Evento){
         int diasUsuario=(int)resumen_datos[4];
 
@@ -714,7 +718,7 @@ public class Matrix {
                                 preciosServicio,
                                 totalServicio,
                                 sumatotalServicio);
-                        break;
+                        return;
                     case 2:
                         informacion(
                                 sc,
@@ -793,8 +797,8 @@ public class Matrix {
                             System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
                             break;
                         }else if(pagoRealizado > montoPagar){
-                            System.out.println("Su cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
+                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
+                            System.out.println("💵 Muchas gracias por su compra, vuelva pronto!\n");
                             break;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: $" + (montoPagar - pagoRealizado));
@@ -820,8 +824,8 @@ public class Matrix {
                             System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
                             break;
                         }else if(pagoRealizado > montoPagar){
-                            System.out.println("Su cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
+                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
+                            System.out.println("Muchas gracias por su compra, vuelva pronto!");
                             break;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
@@ -847,14 +851,13 @@ public class Matrix {
                             System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
                             break;
                         }else if(pagoRealizado > montoPagar){
-                            System.out.println("Su cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
+                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
+                            System.out.println("Muchas gracias por su compra, vuelva pronto!");
                             break;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
 
                         }else{
-                            System.out.println("Qué va aquí?");
                             sc.next();
                         }
                     }
