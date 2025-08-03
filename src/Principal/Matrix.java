@@ -266,6 +266,7 @@ public class Matrix {
         }
         int total=Arrays.stream(cantidad_f).sum();
         System.out.println(total);
+        Object[] datos_equipamiento=new Object[]{equipamiento_text,cantidad,P_equipamiento,cantidad_f,total};
     }
     public static void servicio_conferencial(Scanner sc, Object[] resumen_datos){
         int diasUsuario=(int)resumen_datos[4];
@@ -280,6 +281,9 @@ public class Matrix {
         }
         int total=Arrays.stream(cantidad_f).sum();
         System.out.println(total);
+        Object[] datos_servicio=new Object[]{servicios_text,cantidad,servicios,cantidad_f,total};
+
+        //decFinal(sc, resumen_datos, servicios_text, cantidad, null, null, total, servicios_text, cantidad_f, null, null, total);
     }
     /*                                                           2.Parte del teatro                                                                                                */
     public static void montaje_teatro(Scanner sc,Object[]resumen_datos){
@@ -333,6 +337,7 @@ public class Matrix {
         }
         int total=Arrays.stream(precio_f).sum();
         System.out.println(total);
+        Object[] datos_equipamiento=new Object[]{equipamiento_text,cantidad,equipamiento_precios,precio_f,total};
     }
     public static void servicios_teatro(Scanner sc,Object[]resumen_datos){
         int diasUsuario=(int)resumen_datos[4];
@@ -348,7 +353,7 @@ public class Matrix {
         }
         int total=Arrays.stream(precio_f).sum();
         System.out.println(total);
-
+        Object[] datos_equipamiento=new Object[]{servico_texto,cantidad,servicio_precios,precio_f,total};
     }
     /*                                          ISAAC                                          */
     // EN ESTA FUNCION LLAMO A LAS DEMAS FUNCIONES Y LES ASIGNO VARIABLES.
