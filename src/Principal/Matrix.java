@@ -1,9 +1,3 @@
-/*
-Leer el README.md
-*/
-
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
@@ -544,7 +538,7 @@ public class Matrix {
             for (int i = 0; i < precios.length; i++) {
                 precios[i] = (int)(precios[i] * 2);
             }
-        } 
+        }
         //SUMA LOS PRECIOS MULTIPLICADOS POR LOS DIAS
         System.out.println(" Servicios para Banquete:");
         int subtotal = 0;
@@ -556,11 +550,11 @@ public class Matrix {
             int precioTotal = precios[i] * cantidades[i] * dias;
             subtotal += precioTotal;
             System.out.println(" - " + nombres[i] + ": $" + precioTotal);
-         }
-                 return subtotal;
         }
-        
-    
+        return subtotal;
+    }
+
+
 
 
 
