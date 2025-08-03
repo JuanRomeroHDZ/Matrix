@@ -750,7 +750,7 @@ public class Matrix {
                                 sc,
                                 resumen_datos,
                                 tipo_Evento);
-                        break;
+                        return;
                     case 4:
                         System.out.println("Saliendo...");
                         break;
@@ -803,13 +803,29 @@ public class Matrix {
 
                         if(pagoRealizado == montoPagar){
                             System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
-                            break;
+                            return;
                         }else if(pagoRealizado > montoPagar){
                             System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
                             System.out.println("💵 Muchas gracias por su compra, vuelva pronto!\n");
-                            break;
+                            return;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: $" + (montoPagar - pagoRealizado));
+                            decFinal(
+                                    sc,
+                                    resumen_datos,
+                                    tipo_Evento,
+                                    equipamiento,
+                                    cantidadEquipamiento,
+                                    preciosEquipamiento,
+                                    totalEquipamiento,
+                                    sumatotalEquipamiento,
+                                    servicio,
+                                    cantidadServicio,
+                                    preciosServicio,
+                                    totalServicio,
+                                    sumatotalServicio);
+                            return;
+
                         }else{
                             System.out.println("Qué va aquí?");
                             sc.next();
