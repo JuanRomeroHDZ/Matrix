@@ -250,6 +250,7 @@ public class Matrix {
     public static void equipamiento_conferencial(Scanner sc, Object[] resumen_datos,int tipo_Evento){
         int diasUsuarios=(int)resumen_datos[4]; //Convertor
         int[] P_equipamiento = new int[]{60,200,120,65,150,140,80,125};
+        decFinal(sc, resumen_datos, tipo_Evento, null, P_equipamiento, null, null, tipo_Evento, null, P_equipamiento, null, null, diasUsuarios);
         String[] equipamiento_text = new String[]{
                 "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
                 "Total:"
@@ -383,6 +384,7 @@ public class Matrix {
         int total = totalEquipamiento + totalServicios;
 
         System.out.println(" Total por el evento Recepción (" + diasUsuario + " días): $" + total);
+        decFinal(sc, resumen_datos, tipo_Evento, null, null, null, null, totalEquipamiento, null, null, null, null, totalServicios);
     }
     // ARRAY PARA NOMBRES DEL EQUIPAMIENTO
     public static int equipamientoRecepcion(Scanner sc,Object[]resumen_datos,int tipo_Evento) {
@@ -473,6 +475,7 @@ public class Matrix {
         int total = totalEquipamiento + totalServicios;
 
         System.out.println(" Total por el evento Banquete (" + diasUsuario + " días): $" + total);
+        decFinal(sc, resumen_datos, tipo_Evento, null, null, null, null, totalEquipamiento, null, null, null, null, totalServicios);
     }
     //ARRAYS PARA GUARDAR LOS NOMBRE DE LOS EQUIPAMENTOS DE BANQUETE
     public static int equipamientoBanquete(Scanner sc,Object[]resumen_datos,int tipo_Evento) {
