@@ -77,7 +77,7 @@ public class Matrix {
             String nombreUsuario = sc.nextLine();
 
             System.out.print("| Ingrese su número de telefono: ");
-            Long telefonoUsuario = sc.nextLong();
+            long telefonoUsuario = sc.nextLong();
             sc.nextLine();
 
             System.out.print("| Ingrese su correo electrónico: ");
@@ -128,7 +128,6 @@ public class Matrix {
                     System.out.println();
                     eventoSocial(sc, resumen_datos, tipoEvento);
                     break;
-
                 }
                 else if(tipoEvento==3){
                     System.out.println("\n👋 Adiós!\nNo has elegido ningún evento.");
@@ -183,7 +182,7 @@ public class Matrix {
                         eventoBanquete(sc, resumen_datos,tipo_Evento);
                         break;
                     case 5:
-                        montajeSalon(sc, resumen_datos,tipo_Evento);
+                        montajeSalon(sc, resumen_datos, tipo_Evento);
                         break;
                     case 6:
                         System.out.println("Disposición en forma de U en mantenimiento");
@@ -650,7 +649,6 @@ public class Matrix {
             System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales.");
             sc.nextLine();
         }
-
         decFinal(
                 sc,
                 resumen_datos,
@@ -774,7 +772,7 @@ public class Matrix {
             double sumatotalServicio
 
     ){
-        double pagoRealizado = 1;
+        double pagoRealizado;
         do {
             try {
                 System.out.println(); // Salto para mejor apariencia
@@ -799,8 +797,7 @@ public class Matrix {
                             System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
                             break;
                         }else if(pagoRealizado < montoPagar){
-                            System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            continue;
+                            System.out.println("\n💥 Dinero insuficiente, le hace falta: $" + (montoPagar - pagoRealizado));
                         }else{
                             System.out.println("Qué va aquí?");
                             sc.next();
@@ -828,7 +825,7 @@ public class Matrix {
                             break;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            continue;
+
                         }else{
                             System.out.println("Qué va aquí?");
                             sc.next();
@@ -855,7 +852,7 @@ public class Matrix {
                             break;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            continue;
+
                         }else{
                             System.out.println("Qué va aquí?");
                             sc.next();
@@ -868,7 +865,7 @@ public class Matrix {
                 System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales");
                 sc.next();
             }
-        } while (pagoRealizado != 2);
+        } while (true);
 
 
 
