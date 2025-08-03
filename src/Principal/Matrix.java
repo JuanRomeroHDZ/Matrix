@@ -561,7 +561,11 @@ public class Matrix {
 
     // AQUI EMPIEZA LO DE JUAN
     /*                                          Juan                                          */
-    public static void montajeSalon(Scanner sc, Object[]resumen_datos,int tipo_Evento){
+    public static void montajeSalon(
+            Scanner sc,
+            Object[]resumen_datos,
+            int tipo_Evento
+    ){
 
 
         System.out.println(); // Salto de linea para mejor apariencia
@@ -588,7 +592,11 @@ public class Matrix {
         return;
     }
 
-    public static void equipamientoServiciosSalon(Scanner sc, Object[]resumen_datos,int tipo_Evento){
+    public static void equipamientoServiciosSalon(
+            Scanner sc,
+            Object[]resumen_datos,
+            int tipo_Evento
+    ){
         int diasUsuario=(int)resumen_datos[4];
 
         double[] totalEquipamiento = new double[6]; // Equipamiento -1 (Se resta -1 para poder acomodar el Total:)
