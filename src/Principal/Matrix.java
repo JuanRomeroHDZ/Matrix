@@ -256,21 +256,34 @@ public class Matrix {
     public static void Union_Conferencia(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){  //Union de datos beta jejeje
             Object[] a=(Object[])datos_equipamiento;
             Object[] b=(Object[])datos_servicio;
-            Object[] suma=new Object[a.length+b.length];
-            System.arraycopy(a, 0, suma, 0, a.length);
+            String[] equipamientoStrings=(String[])datos_equipamiento[0], servicioStrings=(String[])datos_servicio[0];
+            int [] cantidad_equipamiento=(int[])datos_equipamiento[1], cantidadServicio=(int[])datos_servicio[1];
+            double[] preciosEquipamiento=(double[])datos_equipamiento[2],totalEquipamiento=(double[])datos_equipamiento[3],
+            preciosServicio=(double[])datos_servicio[2], totalServicio=(double[])datos_servicio[3];
+
+            double sumatotalEquipamiento=(double)datos_equipamiento[4], sumatotalServicio=(double) datos_servicio[4];
+
+            System.out.println(sumatotalServicio);
+            /*Object[] suma=new Object[a.length+b.length];
+            System.arraycopy(a, 0, suma, 0, a.length);              Si quisira unirlos sumarlos
             System.arraycopy(b, 0, suma, a.length, b.length);
-            System.out.println(Arrays.deepToString(suma));
+            System.out.println(Arrays.deepToString(suma));*/
+
+            
+
+            decFinal(sc, resumen_datos, equipamientoStrings, cantidad_equipamiento, preciosEquipamiento, totalEquipamiento,
+            sumatotalEquipamiento, servicioStrings, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio);
 
     }
 
     public static Object[] equipamiento_conferencial(Scanner sc, Object[] resumen_datos){
         int diasUsuarios=(int)resumen_datos[4]; //Convertor
-        int[] P_equipamiento = new int[]{60,200,120,65,150,140,80,125};
+        double[] P_equipamiento = new double[]{60,200,120,65,150,140,80,125}, cantidad_f=new double[8];;
         String[] equipamiento_text = new String[]{
                 "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
-                "Total:"
+                
         };
-        int [] cantidad=new int[8], cantidad_f=new int[8];
+        int [] cantidad=new int[8];
 
         for(int i=0;i<8;i++){
             System.out.println("La cantidad de "+equipamiento_text[i]+":");
@@ -278,14 +291,15 @@ public class Matrix {
             cantidad_f[i]=cantidad[i]*P_equipamiento[i]*diasUsuarios;
             //System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
         }
-        int total=Arrays.stream(cantidad_f).sum();
+        double total=Arrays.stream(cantidad_f).sum();
         System.out.println(total);
         Object[] datos_equipamiento=new Object[]{equipamiento_text,cantidad,P_equipamiento,cantidad_f,total};
         return datos_equipamiento;
     }
     public static Object[] servicio_conferencial(Scanner sc, Object[] resumen_datos){
         int diasUsuario=(int)resumen_datos[4];
-        int[] servicios = new int[]{100,250,175,60,250,120,40}, cantidad=new int[7], cantidad_f=new int[7];
+        double[] servicios = new double[]{100,250,175,60,250,120,40}, cantidad_f=new double[7];
+        int[] cantidad=new int[7];
         String[] servicios_text = new String[]{"Registro de Asistentes","Traduccion","Transmisión o grabacion","Café o coffe bar.","Personal","Material","Wi-fi"};
 
         for(int i=0;i<7;i++){
@@ -294,7 +308,7 @@ public class Matrix {
             cantidad_f[i]=cantidad[i]*servicios[i]*diasUsuario;
             //System.out.println(servicios_text[i]+":"+cantidad_f[i]);
         }
-        int total=Arrays.stream(cantidad_f).sum();
+        double total=Arrays.stream(cantidad_f).sum();
         System.out.println(total);
         Object[] datos_servicio=new Object[]{servicios_text,cantidad,servicios,cantidad_f,total};
         return datos_servicio;
