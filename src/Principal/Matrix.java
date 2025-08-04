@@ -198,9 +198,11 @@ public class Matrix {
             }
         } while (tipoReservacion != 7);
     }
-    /*                                          1 .Conferencia, parte de Jose (yo).                                          */
+     /*                                          1 .Conferencia, parte de Jose (yo).                                          */
     public static void montaje_conferencia(Scanner sc, Object[] resumen_datos){
         int opcions;
+        Object[] datos_equipamiento=null, datos_servicio=null;
+        
         System.out.println(); // Salto de linea para mejor apariencia
         do{
 
@@ -224,10 +226,12 @@ public class Matrix {
             try{
                 switch (opcions) {
                     case 1:
-                        equipamiento_conferencial(sc, resumen_datos);
+                        datos_equipamiento=equipamiento_conferencial(sc, resumen_datos);
+                        //System.out.println(Arrays.deepToString(datos_equipamiento));
                         break;
                     case 2:
-                        servicio_conferencial(sc,resumen_datos);
+                        datos_servicio=servicio_conferencial(sc,resumen_datos);
+                        //System.out.println(Arrays.deepToString(datos_servicio));
                         break;
                     case 3:
                         System.out.println("Saliendo");
@@ -236,15 +240,30 @@ public class Matrix {
                         System.out.println("Opción no válida. Intenta nuevamente.");
                         break;
                 }
-            }catch (InputMismatchException a) {
+                if(datos_equipamiento!=null && datos_servicio!=null){
+                    Union_Conferencia(sc,resumen_datos,datos_equipamiento,datos_servicio);
+                    datos_equipamiento = null;
+                    datos_servicio = null;
+
+                }
+            }catch (InputMismatchException e) {
                 System.out.println();
                 System.out.println("❌ Error, debes ingresar un números 1 y 3 .");
                 sc.nextLine();
             }
         }while(opcions!=3);
     }
+    public static void Union_Conferencia(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){  //Union de datos beta jejeje
+            Object[] a=(Object[])datos_equipamiento;
+            Object[] b=(Object[])datos_servicio;
+            Object[] suma=new Object[a.length+b.length];
+            System.arraycopy(a, 0, suma, 0, a.length);
+            System.arraycopy(b, 0, suma, a.length, b.length);
+            System.out.println(Arrays.deepToString(suma));
 
-    public static void equipamiento_conferencial(Scanner sc, Object[] resumen_datos){
+    }
+
+    public static Object[] equipamiento_conferencial(Scanner sc, Object[] resumen_datos){
         int diasUsuarios=(int)resumen_datos[4]; //Convertor
         int[] P_equipamiento = new int[]{60,200,120,65,150,140,80,125};
         String[] equipamiento_text = new String[]{
@@ -262,8 +281,9 @@ public class Matrix {
         int total=Arrays.stream(cantidad_f).sum();
         System.out.println(total);
         Object[] datos_equipamiento=new Object[]{equipamiento_text,cantidad,P_equipamiento,cantidad_f,total};
+        return datos_equipamiento;
     }
-    public static void servicio_conferencial(Scanner sc, Object[] resumen_datos){
+    public static Object[] servicio_conferencial(Scanner sc, Object[] resumen_datos){
         int diasUsuario=(int)resumen_datos[4];
         int[] servicios = new int[]{100,250,175,60,250,120,40}, cantidad=new int[7], cantidad_f=new int[7];
         String[] servicios_text = new String[]{"Registro de Asistentes","Traduccion","Transmisión o grabacion","Café o coffe bar.","Personal","Material","Wi-fi"};
@@ -277,8 +297,10 @@ public class Matrix {
         int total=Arrays.stream(cantidad_f).sum();
         System.out.println(total);
         Object[] datos_servicio=new Object[]{servicios_text,cantidad,servicios,cantidad_f,total};
-
-        //decFinal(sc, resumen_datos, servicios_text, cantidad, null, null, total, servicios_text, cantidad_f, null, null, total);
+        return datos_servicio;
+        /*-decFinal(sc, resumen_datos, servicios_text, cantidad, null, null, total, servicios_text, cantidad_f, null, null, total);
+        String [] text=(String[]) datos_servicio[0];
+        System.out.println(text[0]); */
     }
     /*                                                           2.Parte del teatro                                                                                                */
     public static void montaje_teatro(Scanner sc,Object[]resumen_datos){
