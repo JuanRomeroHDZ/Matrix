@@ -399,15 +399,13 @@ public class Matrix {
     // EN ESTA FUNCION LLAMO A LAS DEMAS FUNCIONES Y LES ASIGNO VARIABLES.
     public static void eventoRecepcion(Scanner sc, Object[] resumen_datos) {
         int diasUsuario=(int)resumen_datos[4];//Casting good Isaac8)
-        int totalEquipamiento = equipamientoRecepcion(sc, resumen_datos);
-        int totalServicios = serviciosRecepcion(sc,resumen_datos);
-        int total = totalEquipamiento + totalServicios;
-
-        System.out.println(" Total por el evento Recepción (" + diasUsuario + " días): $" + total);
-        decFinal(sc, resumen_datos,  null, null, null, null, totalEquipamiento, null, null, null, null, totalServicios);
+        Object[] resumen_equipamiento = equipamientoRecepcion(sc, resumen_datos);
+        Object[] resumen_servicios = serviciosRecepcion(sc,resumen_datos);
+        Union_General(sc,resumen_datos,resumen_equipamiento,resumen_servicios);
+        
     }
     // ARRAY PARA NOMBRES DEL EQUIPAMIENTO
-    public static int equipamientoRecepcion(Scanner sc,Object[]resumen_datos) {
+    public static Object[] equipamientoRecepcion(Scanner sc,Object[]resumen_datos) {
         int dias=(int)resumen_datos[4];
         System.out.print("""
     +--------------------------------------------------------------------------------------------------+
@@ -432,12 +430,13 @@ public class Matrix {
     +--------------------------------------------------------------------------------------------------+
     """);
 
-        String[] nombres = {
+        String[] nombres = new String[] {
                 "Mesas altas tipo cóctel", "Barra de bebidas", "Sistema de sonido ambiental",
                 "Área de bienvenida", "Iluminación decorativa", "Decoración floral"
         };
         //ARRAYS DE PRECIOS DEL EQUIPAMIENTO
-        int[] precios = {300, 800, 400, 250, 500, 600};
+        double[] precios = new double[]{300, 800, 400, 250, 500, 600};
+        double[] precioTotal=new double[precios.length];
         // SI EL EVENTO ES EMPRESARAL EL FOR HACE UN AUMENTO DEL 20% A CADA COSTO
         if ((int)resumen_datos[5]==2) {
             for (int i = 0; i < precios.length; i++) {
@@ -446,27 +445,29 @@ public class Matrix {
         }
         // HACE EL CALCULO DE LOS COSTOS POR LOS DIAS RENTADOS
         System.out.println(" Equipamiento para Recepción:");
-        int subtotal = 0;
+        double subtotal = 0;
         int [] cantidades = new int [precios.length];
         System.out.println("Cuanto deseas Agregar?");
         for (int i = 0; i < precios.length; i++) {
             System.out.println(nombres [i]);
             cantidades[i]= sc.nextInt();
-            int precioTotal = precios[i] * cantidades [i]* dias;
-            subtotal += precioTotal;
-            System.out.println(" - " + nombres[i] + ": $" + precioTotal);
+            precioTotal[i] = precios[i] * cantidades [i]* dias;
+            subtotal += precioTotal[i];
+            System.out.println(" - " + nombres[i] + ": $" + precioTotal[i]);
         }
-        return subtotal;
+        Object[]resumen_equipo=new Object[]{nombres,cantidades,precios,precioTotal,subtotal};
+        return resumen_equipo;
     }
     // ARRAYS QUE GUARDA LOS NOMBRES DE LOS SERVICIOS DE RECEPCION
-    public static int serviciosRecepcion(Scanner sc, Object[] resumen_datos) {
+    public static Object[] serviciosRecepcion(Scanner sc, Object[] resumen_datos) {
         int dias=(int)resumen_datos[4];
-        String[] nombres = {
+        String[] nombres = new String[]{
                 "Servicio de catering", "DJ o música en vivo", "Fotografía y video",
                 "Guardarropa", "Valet parking", "Seguridad", "Meseros y anfitriones"
         };
         // ESTE ARRAY GUARDA LOS PRECIOS DE CADA SERVICIO
-        int[] precios = {1200, 1500, 1000, 300, 400, 350, 500};
+        double[] precios = new double[]{1200, 1500, 1000, 300, 400, 350, 500};
+        double[] precioTotal=new double[precios.length];
         // SI EL EVENTO ES EMPRESARIAL EL FOR AUMENTA EL COSTO DE LOS SERVICIOS
         if ((int)resumen_datos[5]==2) {
             for (int i = 0; i < precios.length; i++) {
@@ -475,17 +476,18 @@ public class Matrix {
         }
         // ARRAYS SUMA DE COSTOS POR LOS DIAS.
         System.out.println(" Servicios para Recepción:");
-        int subtotal = 0;
+        double subtotal = 0;
         int [] cantidades = new int [precios.length];
         System.out.println("Cuanto deseas Agregar?");
         for (int i = 0; i < precios.length; i++) {
             System.out.println(nombres [i]);
             cantidades[i]= sc.nextInt();
-            int precioTotal = precios[i] * cantidades [i] * dias;
-            subtotal += precioTotal;
-            System.out.println(" - " + nombres[i] + ": $" + precioTotal);
+            precioTotal [i]= precios[i] * cantidades [i] * dias;
+            subtotal += precioTotal[i];
+            System.out.println(" - " + nombres[i] + ": $" + precioTotal[i]);
         }
-        return subtotal;
+        Object[] resumen_servicio=new Object[]{nombres,cantidades,precios,precioTotal,subtotal};
+        return resumen_servicio;
     }
     // FUNCION DE BANQUETE
     public static void eventoBanquete(Scanner sc, Object[]resumen_datos) {
@@ -546,6 +548,7 @@ public class Matrix {
             subtotal += precioTotal;
             System.out.println(" - " + nombres[i] + ": $" + precioTotal);
         }
+        Object[]resumen_equipo=new Object[]{};
         return subtotal;
     }
     // SERVICIOS DE BANQUETE, ARRAY CON  NOMBRES.
