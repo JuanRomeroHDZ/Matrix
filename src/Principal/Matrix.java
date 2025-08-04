@@ -199,6 +199,27 @@ public class Matrix {
         } while (tipoReservacion != 7);
     }
      /*                                          1 .Conferencia, parte de Jose (yo).                                          */
+    public static void Union_General(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){  //Union de datos beta jejeje
+            Object[] a=(Object[])datos_equipamiento;
+            Object[] b=(Object[])datos_servicio;
+            String[] equipamientoStrings=(String[])datos_equipamiento[0], servicioStrings=(String[])datos_servicio[0];
+            int [] cantidad_equipamiento=(int[])datos_equipamiento[1], cantidadServicio=(int[])datos_servicio[1];
+            double[] preciosEquipamiento=(double[])datos_equipamiento[2],totalEquipamiento=(double[])datos_equipamiento[3],
+            preciosServicio=(double[])datos_servicio[2], totalServicio=(double[])datos_servicio[3];
+
+            double sumatotalEquipamiento=(double)datos_equipamiento[4], sumatotalServicio=(double) datos_servicio[4];
+
+            System.out.println(sumatotalServicio);
+            /*Object[] suma=new Object[a.length+b.length];
+            System.arraycopy(a, 0, suma, 0, a.length);              Si quisira unirlos sumarlos
+            System.arraycopy(b, 0, suma, a.length, b.length);
+            System.out.println(Arrays.deepToString(suma));*/
+
+            decFinal(sc, resumen_datos, equipamientoStrings, cantidad_equipamiento, preciosEquipamiento, totalEquipamiento,
+            sumatotalEquipamiento, servicioStrings, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio);
+
+    }
+
     public static void montaje_conferencia(Scanner sc, Object[] resumen_datos){
         int opcions;
         Object[] datos_equipamiento=null, datos_servicio=null;
@@ -241,7 +262,7 @@ public class Matrix {
                         break;
                 }
                 if(datos_equipamiento!=null && datos_servicio!=null){
-                    Union_Conferencia(sc,resumen_datos,datos_equipamiento,datos_servicio);
+                    Union_General(sc,resumen_datos,datos_equipamiento,datos_servicio);
                     datos_equipamiento = null;
                     datos_servicio = null;
 
@@ -253,29 +274,7 @@ public class Matrix {
             }
         }while(opcions!=3);
     }
-    public static void Union_Conferencia(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){  //Union de datos beta jejeje
-            Object[] a=(Object[])datos_equipamiento;
-            Object[] b=(Object[])datos_servicio;
-            String[] equipamientoStrings=(String[])datos_equipamiento[0], servicioStrings=(String[])datos_servicio[0];
-            int [] cantidad_equipamiento=(int[])datos_equipamiento[1], cantidadServicio=(int[])datos_servicio[1];
-            double[] preciosEquipamiento=(double[])datos_equipamiento[2],totalEquipamiento=(double[])datos_equipamiento[3],
-            preciosServicio=(double[])datos_servicio[2], totalServicio=(double[])datos_servicio[3];
-
-            double sumatotalEquipamiento=(double)datos_equipamiento[4], sumatotalServicio=(double) datos_servicio[4];
-
-            System.out.println(sumatotalServicio);
-            /*Object[] suma=new Object[a.length+b.length];
-            System.arraycopy(a, 0, suma, 0, a.length);              Si quisira unirlos sumarlos
-            System.arraycopy(b, 0, suma, a.length, b.length);
-            System.out.println(Arrays.deepToString(suma));*/
-
-            
-
-            decFinal(sc, resumen_datos, equipamientoStrings, cantidad_equipamiento, preciosEquipamiento, totalEquipamiento,
-            sumatotalEquipamiento, servicioStrings, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio);
-
-    }
-
+    
     public static Object[] equipamiento_conferencial(Scanner sc, Object[] resumen_datos){
         int diasUsuarios=(int)resumen_datos[4]; //Convertor
         double[] P_equipamiento = new double[]{60,200,120,65,150,140,80,125}, cantidad_f=new double[8];;
@@ -319,6 +318,7 @@ public class Matrix {
     /*                                                           2.Parte del teatro                                                                                                */
     public static void montaje_teatro(Scanner sc,Object[]resumen_datos){
         int opcion;
+        Object[] datos_equipamiento=null, datos_servicio=null;
         do{
             System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
@@ -339,14 +339,19 @@ public class Matrix {
             try{
                 switch (opcion){
                     case 1:
-                        equipamiento_teatro(sc,resumen_datos);
+                        datos_equipamiento=equipamiento_teatro(sc,resumen_datos);
                         break;
                     case 2:
-                        servicios_teatro(sc,resumen_datos);
+                        datos_servicio=servicios_teatro(sc,resumen_datos);
                         break;
                     case 3:
                         System.out.println("Saliendo");
                         break;
+                }
+                if(datos_equipamiento!=null && datos_servicio!=null){
+                    Union_General(sc,resumen_datos,datos_equipamiento,datos_servicio);
+                    datos_equipamiento = null;
+                    datos_servicio = null;
                 }
             }catch(InputMismatchException a){
                 System.out.println();
@@ -354,9 +359,10 @@ public class Matrix {
             }
         }while(opcion!=3);
     }
-    public static void equipamiento_teatro(Scanner sc,Object[] resumen_datos){
+    public static Object[] equipamiento_teatro(Scanner sc,Object[] resumen_datos){
         int diasUsuario=(int)resumen_datos[4];
-        int[] equipamiento_precios=new int[]{200,120,70,135,150,240,300},cantidad=new int[7], precio_f=new int[7];
+        double[] equipamiento_precios=new double[]{200,120,70,135,150,240,300}, precio_f=new double[7];
+        int[] cantidad=new int[7];
         String[] equipamiento_text=new String[]{"Escenarios","Butacas","Iluminaciónes","Sistemas de sonido","Consolas","Camerinos","Decoraciónes"};
 
         for(int i=0;i<7;i++){
@@ -366,13 +372,15 @@ public class Matrix {
             precio_f[i]=cantidad[i]*equipamiento_precios[i]*diasUsuario;
             System.out.println(precio_f[i]);
         }
-        int total=Arrays.stream(precio_f).sum();
+        double total=Arrays.stream(precio_f).sum();
         System.out.println(total);
         Object[] datos_equipamiento=new Object[]{equipamiento_text,cantidad,equipamiento_precios,precio_f,total};
+        return datos_equipamiento;
     }
-    public static void servicios_teatro(Scanner sc,Object[]resumen_datos){
+    public static Object[] servicios_teatro(Scanner sc,Object[]resumen_datos){
         int diasUsuario=(int)resumen_datos[4];
-        int[] servicio_precios=new int[]{80,350,405,90,250,140,190},cantidad=new int[7], precio_f=new int[7];
+        double[] servicio_precios=new double[]{80,350,405,90,250,140,190}, precio_f=new double[7];
+        int[] cantidad=new int[7];
         String[] servico_texto=new String[]{"Vendedores","Personal","Seguridad","Servicios de comida","Publicidad","Servicios de limpieza","Técnicos"};
 
         for(int i=0;i<7;i++){
@@ -382,9 +390,10 @@ public class Matrix {
             precio_f[i]=cantidad[i]*servicio_precios[i]*diasUsuario;
             System.out.println(precio_f[i]);
         }
-        int total=Arrays.stream(precio_f).sum();
+        double total=Arrays.stream(precio_f).sum();
         System.out.println(total);
-        Object[] datos_equipamiento=new Object[]{servico_texto,cantidad,servicio_precios,precio_f,total};
+        Object[] datos_servicio=new Object[]{servico_texto,cantidad,servicio_precios,precio_f,total};
+        return datos_servicio;
     }
     /*                                          ISAAC                                          */
     // EN ESTA FUNCION LLAMO A LAS DEMAS FUNCIONES Y LES ASIGNO VARIABLES.
