@@ -1321,8 +1321,6 @@ public class Matrix {
             Scanner sc,
             Object[]resumen_datos
     ){
-
-
         System.out.println(); // Salto de linea para mejor apariencia
         System.out.println("""
                 +--------------------------------------------------------------------------------------------------+
