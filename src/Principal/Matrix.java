@@ -432,7 +432,7 @@ public class Matrix {
 
         String[] nombres = new String[] {
                 "Mesas altas tipo cóctel", "Barra de bebidas", "Sistema de sonido ambiental",
-                "Área de bienvenida", "Iluminación decorativa", "Decoración floral"
+                "Área de bienvenida", "Iluminación decorativa", "Decoración floral","Total:"
         };
         //ARRAYS DE PRECIOS DEL EQUIPAMIENTO
         double[] precios = new double[]{300, 800, 400, 250, 500, 600};
@@ -463,7 +463,7 @@ public class Matrix {
         int dias=(int)resumen_datos[4];
         String[] nombres = new String[]{
                 "Servicio de catering", "DJ o música en vivo", "Fotografía y video",
-                "Guardarropa", "Valet parking", "Seguridad", "Meseros y anfitriones"
+                "Guardarropa", "Valet parking", "Seguridad", "Meseros y anfitriones","Total:"
         };
         // ESTE ARRAY GUARDA LOS PRECIOS DE CADA SERVICIO
         double[] precios = new double[]{1200, 1500, 1000, 300, 400, 350, 500};
@@ -525,7 +525,7 @@ public class Matrix {
 
         String[] nombres =new String[] {
                 "Mesas redondas o rectangulares", "Sillas con fundas", "Mantelería y vajilla formal",
-                "Centros de mesa", "Iluminación ambiental", "Tarima para discursos"
+                "Centros de mesa", "Iluminación ambiental", "Tarima para discursos","Total:"
         };
         double[] precios =new double[] {700, 400, 650, 300, 500, 350}, precioTotal=new double[precios.length];
         // SI ES EMPRESARIAL LE AUMENTA 20% AL COSTO
@@ -555,7 +555,7 @@ public class Matrix {
         int dias=(int)resumen_datos[4];
         String[] nombres =new String[] {
                 "Menú completo", "Cocineros y meseros", "Música en vivo o DJ",
-                "Pastel formal", "Fotografía profesional", "Brindis y discursos", "Estación de bebidas" };
+                "Pastel formal", "Fotografía profesional", "Brindis y discursos", "Estación de bebidas","Total:" };
         double[] precios = new double[] {2500, 1800, 1500, 500, 1000, 600, 400}, precioTotal=new double[precios.length];
         // AUMENTA 20% AL SER EMPRESARIAL
         if ((int)resumen_datos[5]==2) {
