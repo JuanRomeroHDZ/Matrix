@@ -219,7 +219,7 @@ public class Matrix {
             sumatotalEquipamiento, servicioStrings, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio);
 
     }
-
+      /*                                          1 .Conferencia, parte de Jose (yo).                                          */
     public static void montaje_conferencia(Scanner sc, Object[] resumen_datos){
         int opcions;
         Object[] datos_equipamiento=null, datos_servicio=null;
@@ -276,45 +276,57 @@ public class Matrix {
     }
     
     public static Object[] equipamiento_conferencial(Scanner sc, Object[] resumen_datos){
+        Object[] datos_equipamiento=new Object[]{null};
         int diasUsuarios=(int)resumen_datos[4]; //Convertor
         double[] P_equipamiento = new double[]{60,200,120,65,150,140,80,125}, cantidad_f=new double[8];;
         String[] equipamiento_text = new String[]{
                 "Mesas y Sillas","Escenario","Microfonos","Proyector y pantalla","Sistemas de sonido","Podio","Pizarra y rotafolios","iluminacion",
-                
+                "Total:"
         };
         int [] cantidad=new int[8];
-
-        for(int i=0;i<8;i++){
-            System.out.println("La cantidad de "+equipamiento_text[i]+":");
-            cantidad[i]=sc.nextInt();
-            cantidad_f[i]=cantidad[i]*P_equipamiento[i]*diasUsuarios;
-            //System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
-        }
-        double total=Arrays.stream(cantidad_f).sum();
-        System.out.println(total);
-        Object[] datos_equipamiento=new Object[]{equipamiento_text,cantidad,P_equipamiento,cantidad_f,total};
-        return datos_equipamiento;
+        try{
+            for(int i=0;i<(equipamiento_text.length-1);i++){
+                System.out.println("La cantidad de "+equipamiento_text[i]+":");
+                cantidad[i]=sc.nextInt();
+                cantidad_f[i]=cantidad[i]*P_equipamiento[i]*diasUsuarios;
+                //System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
+            }
+            double total=Arrays.stream(cantidad_f).sum();
+            System.out.println(total);
+            datos_equipamiento=new Object[]{equipamiento_text,cantidad,P_equipamiento,cantidad_f,total};
+            return datos_equipamiento;
+        } catch (InputMismatchException e){
+        System.out.println();
+        System.out.println("Solo numeros enteros.");
+        sc.nextLine();
+    }
+    return datos_equipamiento;
     }
     public static Object[] servicio_conferencial(Scanner sc, Object[] resumen_datos){
+        Object[] datos_servicio=new Object[]{null};
         int diasUsuario=(int)resumen_datos[4];
         double[] servicios = new double[]{100,250,175,60,250,120,40}, cantidad_f=new double[7];
         int[] cantidad=new int[7];
-        String[] servicios_text = new String[]{"Registro de Asistentes","Traduccion","Transmisión o grabacion","Café o coffe bar.","Personal","Material","Wi-fi"};
-
-        for(int i=0;i<7;i++){
-            System.out.println("Cantidad de "+servicios_text[i]+":");
-            cantidad[i]=sc.nextInt();
-            cantidad_f[i]=cantidad[i]*servicios[i]*diasUsuario;
-            //System.out.println(servicios_text[i]+":"+cantidad_f[i]);
+        String[] servicios_text = new String[]{"Registro de Asistentes","Traduccion","Transmisión o grabacion","Café o coffe bar.","Personal","Material","Wi-fi",
+        "Total:"};
+        try{
+            for(int i=0;i<(servicios_text.length-1);i++){
+                System.out.println("Cantidad de "+servicios_text[i]+":");
+                cantidad[i]=sc.nextInt();
+                cantidad_f[i]=cantidad[i]*servicios[i]*diasUsuario;
+                //System.out.println(servicios_text[i]+":"+cantidad_f[i]);
         }
-        double total=Arrays.stream(cantidad_f).sum();
-        System.out.println(total);
-        Object[] datos_servicio=new Object[]{servicios_text,cantidad,servicios,cantidad_f,total};
-        return datos_servicio;
-        /*-decFinal(sc, resumen_datos, servicios_text, cantidad, null, null, total, servicios_text, cantidad_f, null, null, total);
-        String [] text=(String[]) datos_servicio[0];
-        System.out.println(text[0]); */
+            double total=Arrays.stream(cantidad_f).sum();
+            System.out.println(total);
+            datos_servicio=new Object[]{servicios_text,cantidad,servicios,cantidad_f,total};
+            return datos_servicio;
+    }catch(InputMismatchException w){
+        System.out.println();
+        System.out.println("Solo numeros enteros.");
+        sc.nextLine();
     }
+    return datos_servicio;
+}
     /*                                                           2.Parte del teatro                                                                                                */
     public static void montaje_teatro(Scanner sc,Object[]resumen_datos){
         int opcion;
@@ -360,41 +372,58 @@ public class Matrix {
         }while(opcion!=3);
     }
     public static Object[] equipamiento_teatro(Scanner sc,Object[] resumen_datos){
+        Object[] datos_equipamiento=new Object[]{null};
         int diasUsuario=(int)resumen_datos[4];
         double[] equipamiento_precios=new double[]{200,120,70,135,150,240,300}, precio_f=new double[7];
         int[] cantidad=new int[7];
-        String[] equipamiento_text=new String[]{"Escenarios","Butacas","Iluminaciónes","Sistemas de sonido","Consolas","Camerinos","Decoraciónes"};
-
-        for(int i=0;i<7;i++){
-            System.out.println("Cantidad de "+equipamiento_text[i]+":");
-            cantidad[i]=sc.nextInt();
-            sc.nextLine();
-            precio_f[i]=cantidad[i]*equipamiento_precios[i]*diasUsuario;
-            System.out.println(precio_f[i]);
+        String[] equipamiento_text=new String[]{"Escenarios","Butacas","Iluminaciónes","Sistemas de sonido","Consolas","Camerinos","Decoraciónes",
+        "Total:"};
+        try{
+            for(int i=0;i<(equipamiento_text.length-1);i++){
+                System.out.println("Cantidad de "+equipamiento_text[i]+":");
+                cantidad[i]=sc.nextInt();
+                sc.nextLine();
+                precio_f[i]=cantidad[i]*equipamiento_precios[i]*diasUsuario;
+                System.out.println(precio_f[i]);
         }
-        double total=Arrays.stream(precio_f).sum();
-        System.out.println(total);
-        Object[] datos_equipamiento=new Object[]{equipamiento_text,cantidad,equipamiento_precios,precio_f,total};
-        return datos_equipamiento;
+            double total=Arrays.stream(precio_f).sum();
+            System.out.println(total);
+            datos_equipamiento=new Object[]{equipamiento_text,cantidad,equipamiento_precios,precio_f,total};
+            return datos_equipamiento;
+    }catch(InputMismatchException a){
+        System.out.println();
+        System.out.println("Solo numeros enteros.");
+        sc.nextLine();
     }
+    return datos_equipamiento;
+}
     public static Object[] servicios_teatro(Scanner sc,Object[]resumen_datos){
+        Object[] datos_servicio=new Object[]{null};
         int diasUsuario=(int)resumen_datos[4];
         double[] servicio_precios=new double[]{80,350,405,90,250,140,190}, precio_f=new double[7];
         int[] cantidad=new int[7];
-        String[] servico_texto=new String[]{"Vendedores","Personal","Seguridad","Servicios de comida","Publicidad","Servicios de limpieza","Técnicos"};
+        String[] servico_texto=new String[]{"Vendedores","Personal","Seguridad","Servicios de comida","Publicidad","Servicios de limpieza","Técnicos",
+        "Total:"};
 
-        for(int i=0;i<7;i++){
-            System.out.println("Cantidad de "+servico_texto[i]+":");
-            cantidad[i]=sc.nextInt();
-            sc.nextLine();
-            precio_f[i]=cantidad[i]*servicio_precios[i]*diasUsuario;
-            System.out.println(precio_f[i]);
+        try{
+            for(int i=0;i<(servico_texto.length-1);i++){
+                System.out.println("Cantidad de "+servico_texto[i]+":");
+                cantidad[i]=sc.nextInt();
+                sc.nextLine();
+                precio_f[i]=cantidad[i]*servicio_precios[i]*diasUsuario;
+                System.out.println(precio_f[i]);
         }
-        double total=Arrays.stream(precio_f).sum();
-        System.out.println(total);
-        Object[] datos_servicio=new Object[]{servico_texto,cantidad,servicio_precios,precio_f,total};
-        return datos_servicio;
+            double total=Arrays.stream(precio_f).sum();
+            System.out.println(total);
+            datos_servicio=new Object[]{servico_texto,cantidad,servicio_precios,precio_f,total};
+            return datos_servicio;
+    }catch(InputMismatchException a){
+        System.out.println();
+        System.out.println("Solo numeros enteros.");
+        sc.nextLine();
     }
+    return datos_servicio;
+}
     /*                                          ISAAC                                          */
     // EN ESTA FUNCION LLAMO A LAS DEMAS FUNCIONES Y LES ASIGNO VARIABLES.
     public static void eventoRecepcion(Scanner sc, Object[] resumen_datos) {
