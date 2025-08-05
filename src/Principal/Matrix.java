@@ -686,7 +686,7 @@ public class Matrix {
             Object[]resumen_datos
     ){
         System.out.println(); // Salto de linea para mejor apariencia
-        System.out.println("""
+        System.out.print("""
                 +--------------------------------------------------------------------------------------------------+
                 |                             Bienvenido/a a la Disposición en forma de U                          |
                 +--------------------------------------------------------------------------------------------------+
