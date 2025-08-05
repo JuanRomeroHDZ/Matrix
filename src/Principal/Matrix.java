@@ -502,14 +502,14 @@ public class Matrix {
         int dias=(int)resumen_datos[4];
         System.out.print("""
     +--------------------------------------------------------------------------------------------------+
-    |                            Bienvenido/a a la renta del salón                                     |
+    |                            Bienvenido/a a evento Banquete                                        |
     +--------------------------------------------------------------------------------------------------+
     | Equipamientos:                       | Precio c/u  | Descripción                                 |
     |    > Mesas redondas o rectangulares  | $700.00     | Mesas para eventos elegantes                |
-    |    > Sillas con fundas               | $400.00     | Sillas decoradas con fundas                  |
+    |    > Sillas con fundas               | $400.00     | Sillas decoradas con fundas                 |
     |    > Mantelería y vajilla formal     | $650.00     | Manteles y vajilla para eventos formales    |
-    |    > Centros de mesa                 | $300.00     | Decoración central para mesas                 |
-    |    > Iluminación ambiental           | $500.00     | Luces para crear ambiente cálido              |
+    |    > Centros de mesa                 | $300.00     | Decoración central para mesas               |
+    |    > Iluminación ambiental           | $500.00     | Luces para crear ambiente cálido            |
     |    > Tarima para discursos           | $350.00     | Plataforma para presentaciones                |
     |                                                                                                  |
     | Servicios:                         | Precio c/u  | Descripción                                   |
@@ -538,14 +538,13 @@ public class Matrix {
         System.out.println(" Equipamiento para Banquete:");
         double subtotal = 0;
         int [] cantidades = new int[precios.length];
-        System.out.println("Cuantos desea agregar?");
         for (int i = 0; i < precios.length; i++) {
-            System.out.println( nombres [i]);
+            System.out.println( nombres [i] + ":");
             cantidades [i]= sc.nextInt();
             precioTotal[i] = precios[i] * cantidades [i] * dias;
             subtotal += precioTotal[i];
-            System.out.println(" - " + nombres[i] + ": $" + precioTotal[i]);
         }
+        System.out.println("Subtotal: $" + subtotal);
         Object[]resumen_equipo=new Object[]{nombres,cantidades,precios,precioTotal,subtotal};
         
         return resumen_equipo;
@@ -567,14 +566,14 @@ public class Matrix {
         System.out.println(" Servicios para Banquete:");
         double subtotal = 0;
         int [] cantidades = new int [precios.length];
-        System.out.println("Cuantos deseas Agregar?");
         for (int i = 0; i < precios.length; i++) {
-            System.out.println(nombres[i]);
+        System.out.print("Cantidad de "  + nombres [i] + ": ");
             cantidades [i]= sc.nextInt();
             precioTotal[i] = precios[i] * cantidades[i] * dias;
             subtotal += precioTotal[i];
-            System.out.println(" - " + nombres[i] + ": $" + precioTotal[i]);
         }
+                System.out.println("Subtotal: $" + subtotal);
+
         Object[] resumen_servicios=new Object[]{nombres,cantidades,precios,precioTotal,subtotal};
         return resumen_servicios;
     }
