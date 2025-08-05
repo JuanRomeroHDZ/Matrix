@@ -671,26 +671,14 @@ public class Matrix {
                 totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * preciosServicio[i]);
                 sumatotalServicio += totalServicio[i];
             }
+            Object[] resumen_equipo=new Object[]{equipamiento,cantidadEquipamiento,preciosEquipamiento,totalEquipamiento,sumatotalEquipamiento};
+            Object[] resumen_servicios=new Object[]{servicio,cantidadServicio,preciosServicio,totalServicio,sumatotalServicio};
+            Union_General(sc, resumen_datos, resumen_equipo, resumen_servicios);
+
         } catch (InputMismatchException e) {
             System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales.");
             sc.nextLine();
         }
-        decFinal(
-                sc,
-                resumen_datos,
-
-                equipamiento,
-                cantidadEquipamiento,
-                preciosEquipamiento,
-                totalEquipamiento,
-                sumatotalEquipamiento,
-
-                servicio,
-                cantidadServicio,
-                preciosServicio,
-                totalServicio,
-                sumatotalServicio
-        );
     }
         /* #6 */
     public static void montajeU(
