@@ -90,7 +90,7 @@ public class a {
                     System.out.println(); // Salto de línea para mejor apariencia
                 }
                 else{
-                    int tipo_Evento=1;
+                    int tipo_Evento= 2;
                     String titulo = "";
                     System.out.print("| \u2600\uFE0F Cantidad de días que reservará el evento: ");
                     int diasUsuario = sc.nextInt();
@@ -110,7 +110,6 @@ public class a {
     }
     // ->
     public static void opciones(Scanner sc, Object[] resumen_datos){
-        int tipoEvento = 0;
         do {
             System.out.print("""
                 +----------------------------------------+
@@ -122,14 +121,14 @@ public class a {
                 +----------------------------------------+
                 \uD83D\uDCCD Decisión (1 - 3):""" + " ");
             try {
-                tipoEvento = sc.nextInt();
+                resumen_datos[5] = sc.nextInt();
                 sc.nextLine();
-                if(tipoEvento>=1 && tipoEvento<=2){
+                if((int) resumen_datos[5] >= 1 && (int) resumen_datos[5] <= 2){
                     System.out.println();
                     eventoSocial(sc, resumen_datos);
                     return;
                 }
-                else if(tipoEvento == 3){
+                else if((int) resumen_datos[5] == 3){
                     System.out.println(); // Apariencia
                     main(null);
                     break;
@@ -141,7 +140,7 @@ public class a {
                 System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales\n");
                 sc.nextLine(); // Limpia el buffer, importante mantenerlo
             }
-        } while (tipoEvento != 3);
+        } while ((int) resumen_datos[5] != 3);
     }
     // ->
     public static void eventoSocial(Scanner sc, Object[] resumen_datos) {
