@@ -2,13 +2,12 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Matrix {
+public class a {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            int registro = 1;//Se inicializa porque si no da error en el do-while
-
+            int registro = 1;// Se inicializa porque si no da error en el do-while
             System.out.print("""
-            +-------------------------------------------------------------+
+            ---------------------------------------------------------------
             |             Universidad Tecnológica de Tijuana              |
             |                                                             |
             |                           Matrix                            |
@@ -17,14 +16,12 @@ public class Matrix {
             |               Montaño López Ángel Isaac                     |
             |               Romero Hernández Juan José                    |
             |                                                             |
-            +-------------------------------------------------------------+
+            ---------------------------------------------------------------
             """);
-
             System.out.print("Bienvenido/a, pulsa enter para continuar: ");
             sc.nextLine();
-
             do {
-                System.out.println();
+                System.out.println(); // -> Apariencia
                 System.out.print("""
                 +---------------------------------------------------------------------+
                 |                       Bienvenido a Matrix                           |
@@ -43,69 +40,81 @@ public class Matrix {
                 |   1. Sí                                                             |
                 |   2. No                                                             |
                 +---------------------------------------------------------------------+
-                Decisión (Ingrese un número entre 1 y 2):""" + " ");
-
+                Decisión (1 - 2):""" + " ");
                 try {
                     registro = sc.nextInt();
-
                     switch (registro) {
                         case 1:
-                            System.out.println();
-                            sc.nextLine();
+                            System.out.println(); // -> Apariencia
+                            sc.nextLine(); // -> Buffer
                             datosUsuarios(sc);
                             break;
                         case 2:
-                            System.out.println();
-                            System.out.println("👋 Vuelva pronto.");
+                            System.out.println(); // -> Apariencia
+                            System.out.println("\uD83E\uDD1AVUELVA PRONTO\u270B"); // -> Será el único que saldrá del programa
                             break;
                         default:
-                            System.out.println("\n❌ Error: Ingresa un número entre (1 - 2).");
+                            System.out.println("\n\u274CError: Ingresa un número entre (1 - 2).");
                             sc.nextLine();
                     }
-                } catch (InputMismatchException a) {
-                    System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales.");
+                }
+                catch (InputMismatchException a) {
+                    System.out.println("\n\u274CError: No se permiten letras ni caracteres especiales.");
                     sc.nextLine();
                 }
             } while (registro != 2);
         }
     }
+    // ->
     public static void datosUsuarios(Scanner sc){
+        System.out.println("+---------------------------------------------------------------------------------------");
         do {
-            System.out.println("+---------------------------------------------------------------------------------------");
-            System.out.print("| Ingrese su nombre completo (Empezando por apellidos): ");
-            String nombreUsuario = sc.nextLine();
+                
+            try {
+                
+                
+                System.out.print("| Ingrese su nombre completo (Empezando por apellidos): ");
+                String nombreUsuario = sc.nextLine();
 
-            System.out.print("| Ingrese su número de telefono: ");
-            long telefonoUsuario = sc.nextLong();
-            sc.nextLine();
+                System.out.print("| \uD83D\uDCF2 Ingrese su número de teléfono: ");
+                long telefonoUsuario = sc.nextLong();
+                sc.nextLine();
 
-            System.out.print("| Ingrese su correo electrónico: ");
-            String correoUsuario = sc.nextLine();
+                System.out.print("| \uD83D\uDCE7 Ingrese su correo electrónico: ");
+                String correoUsuario = sc.nextLine();
 
-            System.out.print("| Cantidad de personas a asistir al evento: ");
-            int personasUsuario = sc.nextInt();
+                System.out.print("| \uD83D\uDC65 Cantidad de personas a asistir al evento: ");
+                int personasUsuario = sc.nextInt();
 
-
-            if(personasUsuario <= 0){
-                System.out.println(); // Salto de linea para mejor apariencia
-                System.out.println("❌ Error: Cantidad inválida");
-                sc.nextLine(); // Limpia buffer
-                System.out.println(); // Salto de linea para mejor apariencia
-            }else{
-                int tipo_Evento=1;
-                System.out.print("| Cantidad de días que reservará el evento: ");
-                int diasUsuario = sc.nextInt();
-                System.out.println("+---------------------------------------------------------------------------------------");
-                System.out.println();
-                Object[] resumen_datos=new Object[]{nombreUsuario,telefonoUsuario,correoUsuario,personasUsuario,diasUsuario,tipo_Evento};
-                opciones(sc, resumen_datos);
-                break;
+                if(personasUsuario <= 0){
+                    System.out.println(); // Salto de línea para mejor apariencia
+                    System.out.println("❌ Error: Cantidad inválida");
+                    sc.nextLine(); // Limpia buffer
+                    System.out.println(); // Salto de línea para mejor apariencia
+                }
+                else{
+                    int tipo_Evento=1;
+                    System.out.print("| \u2600\uFE0F Cantidad de días que reservará el evento: ");
+                    int diasUsuario = sc.nextInt();
+                    System.out.println("+---------------------------------------------------------------------------------------");
+                    System.out.println();
+                    Object[] resumen_datos=new Object[]{nombreUsuario,telefonoUsuario,correoUsuario,personasUsuario,diasUsuario,tipo_Evento};
+                    opciones(sc, resumen_datos);
+                    break;
+                }
+                
+            } catch (InputMismatchException e) {
+                sc.nextLine();
+                System.out.println(); // -> Apariencia
+                System.out.println("Error, ingrese su número de telefono sin espacios");
+                // TODO: handle exception
             }
+            
         } while (true);
-
     }
+    // ->
     public static void opciones(Scanner sc, Object[] resumen_datos){
-        int tipoEvento=0;
+        int tipoEvento = 0;
         do {
             System.out.print("""
                 +----------------------------------------+
@@ -113,15 +122,13 @@ public class Matrix {
                 +----------------------------------------+
                 | 1. Social                              |
                 | 2. Empresarial                         |
-                | 3. Ninguno                             |
+                | 3. Salir                               |
                 +----------------------------------------+
                 """);
-
             try {
-
                 System.out.print("Ingresa una opción (1 - 3): ");
                 tipoEvento = sc.nextInt();
-                resumen_datos[5]=tipoEvento;
+                resumen_datos[5] = tipoEvento;
                 sc.nextLine();
 
                 if(tipoEvento>=1 && tipoEvento<=2){
@@ -129,8 +136,9 @@ public class Matrix {
                     eventoSocial(sc, resumen_datos);
                     return;
                 }
-                else if(tipoEvento==3){
-                    System.out.println("\n👋 Adiós!\nNo has elegido ningún evento.");
+                else if(tipoEvento == 3){
+                    System.out.println(); // Apariencia
+                    main(null); //
                     break;
                 }
                 else{
@@ -198,36 +206,14 @@ public class Matrix {
             }
         } while (tipoReservacion != 7);
     }
-     /*                                          1 .Conferencia, parte de Jose (yo).                                          */
-    public static void Union_General(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){  //Union de datos para tranfromarlo en a terminos de juan
-            Object[] a=(Object[])datos_equipamiento;
-            Object[] b=(Object[])datos_servicio;
-            String[] equipamientoStrings=(String[])datos_equipamiento[0], servicioStrings=(String[])datos_servicio[0];
-            int [] cantidad_equipamiento=(int[])datos_equipamiento[1], cantidadServicio=(int[])datos_servicio[1];
-            double[] preciosEquipamiento=(double[])datos_equipamiento[2],totalEquipamiento=(double[])datos_equipamiento[3],
-            preciosServicio=(double[])datos_servicio[2], totalServicio=(double[])datos_servicio[3];
 
-            double sumatotalEquipamiento=(double)datos_equipamiento[4], sumatotalServicio=(double) datos_servicio[4];
-
-            System.out.println(sumatotalServicio);
-            /*Object[] suma=new Object[a.length+b.length];
-            System.arraycopy(a, 0, suma, 0, a.length);              Si quisira unirlos sumarlos
-            System.arraycopy(b, 0, suma, a.length, b.length);
-            System.out.println(Arrays.deepToString(suma));*/
-
-            decFinal(sc, resumen_datos, equipamientoStrings, cantidad_equipamiento, preciosEquipamiento, totalEquipamiento,
-            sumatotalEquipamiento, servicioStrings, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio);
-
-    }
-      /*                                          1 .Conferencia, parte de Jose (yo).                                          */
+    /*                                          1 .Conferencia, parte de Jose (yo).                                          */
     public static void montaje_conferencia(Scanner sc, Object[] resumen_datos){
-        int opcions;
         Object[] datos_equipamiento=null, datos_servicio=null;
-        
-        System.out.println(); // Salto de linea para mejor apariencia
-        do{
 
-            System.out.print("""
+        System.out.println(); // Salto de linea para mejor apariencia
+
+        System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
             +---------------------------------------------------------------------------------------------+\n| 1. Equipamientos:                           Precios:                                        |
             |     > Mesas y sillas                        60$                                             |\n|     > Escenario.                            200$                                            |
@@ -241,40 +227,15 @@ public class Matrix {
             |     > Wi-Fi                                 40$                                             |\n|                                                                                             |
             | 3. Para salir.                                                                              |\n+---------------------------------------------------------------------------------------------+
             """);
-            System.out.print("Elige el servicio (1 - 3): ");
-            opcions=sc.nextInt();
-            sc.nextLine();
-            try{
-                switch (opcions) {
-                    case 1:
-                        datos_equipamiento=equipamiento_conferencial(sc, resumen_datos);
-                        //System.out.println(Arrays.deepToString(datos_equipamiento));
-                        break;
-                    case 2:
-                        datos_servicio=servicio_conferencial(sc,resumen_datos);
-                        //System.out.println(Arrays.deepToString(datos_servicio));
-                        break;
-                    case 3:
-                        System.out.println("Saliendo");
-                        break;
-                    default:
-                        System.out.println("Opción no válida. Intenta nuevamente.");
-                        break;
-                }
-                if(datos_equipamiento!=null && datos_servicio!=null){
-                    Union_General(sc,resumen_datos,datos_equipamiento,datos_servicio);
-                    datos_equipamiento = null;
-                    datos_servicio = null;
-
-                }
-            }catch (InputMismatchException e) {
-                System.out.println();
-                System.out.println("❌ Error, debes ingresar un números 1 y 3 .");
-                sc.nextLine();
-            }
-        }while(opcions!=3);
+        System.out.print("Elige el servicio (1 - 3): ");
+        sc.nextLine();
+        datos_equipamiento=equipamiento_conferencial(sc, resumen_datos);
+        //System.out.println(Arrays.deepToString(datos_equipamiento));
+        datos_servicio=servicio_conferencial(sc,resumen_datos);
+        //System.out.println(Arrays.deepToString(datos_servicio));
+        Union_General(sc,resumen_datos,datos_equipamiento,datos_servicio);
     }
-    
+
     public static Object[] equipamiento_conferencial(Scanner sc, Object[] resumen_datos){
         Object[] datos_equipamiento=new Object[]{null};
         int diasUsuarios=(int)resumen_datos[4]; //Convertor
@@ -286,7 +247,7 @@ public class Matrix {
         int [] cantidad=new int[8];
         try{
             for(int i=0;i<(equipamiento_text.length-1);i++){
-                System.out.println("La cantidad de "+equipamiento_text[i]+":");
+                System.out.print("La cantidad de "+equipamiento_text[i]+":");
                 cantidad[i]=sc.nextInt();
                 cantidad_f[i]=cantidad[i]*P_equipamiento[i]*diasUsuarios;
                 //System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
@@ -296,11 +257,11 @@ public class Matrix {
             datos_equipamiento=new Object[]{equipamiento_text,cantidad,P_equipamiento,cantidad_f,total};
             return datos_equipamiento;
         } catch (InputMismatchException e){
-        System.out.println();
-        System.out.println("Solo numeros enteros.");
-        sc.nextLine();
-    }
-    return datos_equipamiento;
+            System.out.println();
+            System.out.println("Solo numeros enteros.");
+            sc.nextLine();
+        }
+        return datos_equipamiento;
     }
     public static Object[] servicio_conferencial(Scanner sc, Object[] resumen_datos){
         Object[] datos_servicio=new Object[]{null};
@@ -308,31 +269,29 @@ public class Matrix {
         double[] servicios = new double[]{100,250,175,60,250,120,40}, cantidad_f=new double[7];
         int[] cantidad=new int[7];
         String[] servicios_text = new String[]{"Registro de Asistentes","Traduccion","Transmisión o grabacion","Café o coffe bar.","Personal","Material","Wi-fi",
-        "Total:"};
+                "Total:"};
         try{
             for(int i=0;i<(servicios_text.length-1);i++){
                 System.out.println("Cantidad de "+servicios_text[i]+":");
                 cantidad[i]=sc.nextInt();
                 cantidad_f[i]=cantidad[i]*servicios[i]*diasUsuario;
                 //System.out.println(servicios_text[i]+":"+cantidad_f[i]);
-        }
+            }
             double total=Arrays.stream(cantidad_f).sum();
             System.out.println(total);
             datos_servicio=new Object[]{servicios_text,cantidad,servicios,cantidad_f,total};
             return datos_servicio;
-    }catch(InputMismatchException w){
-        System.out.println();
-        System.out.println("Solo numeros enteros.");
-        sc.nextLine();
+        }catch(InputMismatchException w){
+            System.out.println();
+            System.out.println("Solo numeros enteros.");
+            sc.nextLine();
+        }
+        return datos_servicio;
     }
-    return datos_servicio;
-}
     /*                                                           2.Parte del teatro                                                                                                */
     public static void montaje_teatro(Scanner sc,Object[]resumen_datos){
-        int opcion;
         Object[] datos_equipamiento=null, datos_servicio=null;
-        do{
-            System.out.print("""
+        System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
             +---------------------------------------------------------------------------------------------+\n| 1. Equipamientos:                           Precios:                                        |
             |     > Escenarios con telón                  200$                                            |\n|     > Butacas fijas o móviles               120$                                            |
@@ -346,30 +305,10 @@ public class Matrix {
             |     > Asistencia técnica en luces/sonido    190$                                            |\n|                                                                                             |
             | 3. Para salir.                                                                              |\n+---------------------------------------------------------------------------------------------+
             """);
-            opcion=sc.nextInt();
-            sc.nextLine();
-            try{
-                switch (opcion){
-                    case 1:
-                        datos_equipamiento=equipamiento_teatro(sc,resumen_datos);
-                        break;
-                    case 2:
-                        datos_servicio=servicios_teatro(sc,resumen_datos);
-                        break;
-                    case 3:
-                        System.out.println("Saliendo");
-                        break;
-                }
-                if(datos_equipamiento!=null && datos_servicio!=null){
-                    Union_General(sc,resumen_datos,datos_equipamiento,datos_servicio);
-                    datos_equipamiento = null;
-                    datos_servicio = null;
-                }
-            }catch(InputMismatchException a){
-                System.out.println();
-                System.out.println("Solo puedes usar numeros del 1 al 3.");
-            }
-        }while(opcion!=3);
+        sc.nextLine();
+        datos_equipamiento=equipamiento_teatro(sc,resumen_datos);
+        datos_servicio=servicios_teatro(sc,resumen_datos);
+        Union_General(sc,resumen_datos,datos_equipamiento,datos_servicio);
     }
     public static Object[] equipamiento_teatro(Scanner sc,Object[] resumen_datos){
         Object[] datos_equipamiento=new Object[]{null};
@@ -377,33 +316,33 @@ public class Matrix {
         double[] equipamiento_precios=new double[]{200,120,70,135,150,240,300}, precio_f=new double[7];
         int[] cantidad=new int[7];
         String[] equipamiento_text=new String[]{"Escenarios","Butacas","Iluminaciónes","Sistemas de sonido","Consolas","Camerinos","Decoraciónes",
-        "Total:"};
+                "Total:"};
         try{
             for(int i=0;i<(equipamiento_text.length-1);i++){
-                System.out.println("Cantidad de "+equipamiento_text[i]+":");
+                System.out.print("Cantidad de "+equipamiento_text[i]+":");
                 cantidad[i]=sc.nextInt();
                 sc.nextLine();
                 precio_f[i]=cantidad[i]*equipamiento_precios[i]*diasUsuario;
                 System.out.println(precio_f[i]);
-        }
+            }
             double total=Arrays.stream(precio_f).sum();
             System.out.println(total);
             datos_equipamiento=new Object[]{equipamiento_text,cantidad,equipamiento_precios,precio_f,total};
             return datos_equipamiento;
-    }catch(InputMismatchException a){
-        System.out.println();
-        System.out.println("Solo numeros enteros.");
-        sc.nextLine();
+        }catch(InputMismatchException a){
+            System.out.println();
+            System.out.println("Solo numeros enteros.");
+            sc.nextLine();
+        }
+        return datos_equipamiento;
     }
-    return datos_equipamiento;
-}
     public static Object[] servicios_teatro(Scanner sc,Object[]resumen_datos){
         Object[] datos_servicio=new Object[]{null};
         int diasUsuario=(int)resumen_datos[4];
         double[] servicio_precios=new double[]{80,350,405,90,250,140,190}, precio_f=new double[7];
         int[] cantidad=new int[7];
         String[] servico_texto=new String[]{"Vendedores","Personal","Seguridad","Servicios de comida","Publicidad","Servicios de limpieza","Técnicos",
-        "Total:"};
+                "Total:"};
 
         try{
             for(int i=0;i<(servico_texto.length-1);i++){
@@ -412,18 +351,18 @@ public class Matrix {
                 sc.nextLine();
                 precio_f[i]=cantidad[i]*servicio_precios[i]*diasUsuario;
                 System.out.println(precio_f[i]);
-        }
+            }
             double total=Arrays.stream(precio_f).sum();
             System.out.println(total);
             datos_servicio=new Object[]{servico_texto,cantidad,servicio_precios,precio_f,total};
             return datos_servicio;
-    }catch(InputMismatchException a){
-        System.out.println();
-        System.out.println("Solo numeros enteros.");
-        sc.nextLine();
+        }catch(InputMismatchException a){
+            System.out.println();
+            System.out.println("Solo numeros enteros.");
+            sc.nextLine();
+        }
+        return datos_servicio;
     }
-    return datos_servicio;
-}
     /*                                          ISAAC                                          */
     // EN ESTA FUNCION LLAMO A LAS DEMAS FUNCIONES Y LES ASIGNO VARIABLES.
     public static void eventoRecepcion(Scanner sc, Object[] resumen_datos) {
@@ -431,7 +370,7 @@ public class Matrix {
         Object[] resumen_equipamiento = equipamientoRecepcion(sc, resumen_datos);
         Object[] resumen_servicios = serviciosRecepcion(sc,resumen_datos);
         Union_General(sc,resumen_datos,resumen_equipamiento,resumen_servicios);
-        
+
     }
     // ARRAY PARA NOMBRES DEL EQUIPAMIENTO
     public static Object[] equipamientoRecepcion(Scanner sc,Object[]resumen_datos) {
@@ -575,7 +514,7 @@ public class Matrix {
         }
         System.out.println("Subtotal: $" + subtotal);
         Object[]resumen_equipo=new Object[]{nombres,cantidades,precios,precioTotal,subtotal};
-        
+
         return resumen_equipo;
     }
     // SERVICIOS DE BANQUETE, ARRAY CON  NOMBRES.
@@ -596,12 +535,12 @@ public class Matrix {
         double subtotal = 0;
         int [] cantidades = new int [precios.length];
         for (int i = 0; i < precios.length; i++) {
-        System.out.print("Cantidad de "  + nombres [i] + ": ");
+            System.out.print("Cantidad de "  + nombres [i] + ": ");
             cantidades [i]= sc.nextInt();
             precioTotal[i] = precios[i] * cantidades[i] * dias;
             subtotal += precioTotal[i];
         }
-                System.out.println("Subtotal: $" + subtotal);
+        System.out.println("Subtotal: $" + subtotal);
 
         Object[] resumen_servicios=new Object[]{nombres,cantidades,precios,precioTotal,subtotal};
         return resumen_servicios;
@@ -708,7 +647,7 @@ public class Matrix {
             sc.nextLine();
         }
     }
-        /* #6 */
+    /* #6 */
     public static void montajeU(
             Scanner sc,
             Object[]resumen_datos
@@ -818,22 +757,30 @@ public class Matrix {
         }
     }
     /*                                                                       Parte final en general                                                    */
-    public static void decFinal(
-            Scanner sc,
-            Object[]resumen_datos,
+    public static void Union_General(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){  //Union de datos para tranfromarlo en a terminos de juan
+            /*
+            resumen datos= [0]nombreUsuario,[1]telefonoUsuario,[2]correoUsuario,[3]personasUsuario,
+            [4]diasUsuario,[5]tipo_Evento
 
-            String[] equipamiento,
-            int[] cantidadEquipamiento,
-            double[] preciosEquipamiento,
-            double[] totalEquipamiento,
-            double sumatotalEquipamiento,
+            String[] equipamientoStrings=(String[])datos_equipamiento[0], servicioStrings=(String[])datos_servicio[0];
+            int [] cantidad_equipamiento=(int[])datos_equipamiento[1], cantidadServicio=(int[])datos_servicio[1];
+            double[] preciosEquipamiento=(double[])datos_equipamiento[2],totalEquipamiento=(double[])datos_equipamiento[3],
+            preciosServicio=(double[])datos_servicio[2], totalServicio=(double[])datos_servicio[3];
 
-            String[] servicio,
-            int[] cantidadServicio,
-            double[] preciosServicio,
-            double[] totalServicio,
-            double sumatotalServicio
-    ) {
+            double sumatotalEquipamiento=(double)datos_equipamiento[4], sumatotalServicio=(double) datos_servicio[4];
+
+            System.out.println(sumatotalServicio);
+            /*Object[] suma=new Object[a.length+b.length];
+            System.arraycopy(a, 0, suma, 0, a.length);              Si quisira unirlos sumarlos
+            System.arraycopy(b, 0, suma, a.length, b.length);
+            System.out.println(Arrays.deepToString(suma));
+            decFinal(sc, resumen_datos, equipamientoStrings, cantidad_equipamiento, preciosEquipamiento, totalEquipamiento,
+            sumatotalEquipamiento, servicioStrings, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio);*/
+
+        decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
+
+    }
+    public static void decFinal(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){
         System.out.println();
         int pasoFinal = 0;
         do {
@@ -850,41 +797,14 @@ public class Matrix {
 
                 switch (pasoFinal) {
                     case 1:
-                        pago(sc,
-                                resumen_datos,
-                                equipamiento,
-                                cantidadEquipamiento,
-                                preciosEquipamiento,
-                                totalEquipamiento,
-                                sumatotalEquipamiento,
-                                servicio,
-                                cantidadServicio,
-                                preciosServicio,
-                                totalServicio,
-                                sumatotalServicio);
+                        pago(sc,resumen_datos,datos_equipamiento,datos_servicio);
                         return;
                     case 2:
-                        informacion(
-                                sc,
-                                resumen_datos,
-
-                                equipamiento,
-                                cantidadEquipamiento,
-                                preciosEquipamiento,
-                                totalEquipamiento,
-                                sumatotalEquipamiento,
-
-                                servicio,
-                                cantidadServicio,
-                                preciosServicio,
-                                totalServicio,
-                                sumatotalServicio);
+                        informacion(sc,resumen_datos,datos_equipamiento,datos_servicio);
                         break;
                     case 3:
-                        montajeSalon(
-                                sc,
-                                resumen_datos);
-                        return;
+                        eventoSocial(sc, resumen_datos);
+                        break;
                     case 4:
                         System.out.println("Saliendo...");
                         break;
@@ -899,24 +819,10 @@ public class Matrix {
 
         } while (pasoFinal != 4);
     }
-    public static void pago(
-            Scanner sc,
-            Object[]resumen_datos,
 
-            String[] equipamiento,
-            int[] cantidadEquipamiento,
-            double[] preciosEquipamiento,
-            double[] totalEquipamiento,
-            double sumatotalEquipamiento,
-
-            String[] servicio,
-            int[] cantidadServicio,
-            double[] preciosServicio,
-            double[] totalServicio,
-            double sumatotalServicio
-
-    ){
+    public static void pago(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio){
         double pagoRealizado;
+        double sumatotalEquipamiento=(double)datos_equipamiento[4],sumatotalServicio=(double)datos_servicio[4];
         do {
             try {
                 System.out.println(); // Salto para mejor apariencia
@@ -942,25 +848,12 @@ public class Matrix {
                             return;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: $" + (montoPagar - pagoRealizado));
-                            decFinal(
-                                    sc,
-                                    resumen_datos,
-                                    equipamiento,
-                                    cantidadEquipamiento,
-                                    preciosEquipamiento,
-                                    totalEquipamiento,
-                                    sumatotalEquipamiento,
-                                    servicio,
-                                    cantidadServicio,
-                                    preciosServicio,
-                                    totalServicio,
-                                    sumatotalServicio);
+                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
                             return;
 
                         }else{
                             sc.next(); // Limpia el buffer
                         }
-
                     }
 
                     // Tamaño Mediano, Tipo Social -> (sumatotalEquipamiento + sumatotalServicio) * 1.5
@@ -983,19 +876,7 @@ public class Matrix {
                             return;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            decFinal(
-                                    sc,
-                                    resumen_datos,
-                                    equipamiento,
-                                    cantidadEquipamiento,
-                                    preciosEquipamiento,
-                                    totalEquipamiento,
-                                    sumatotalEquipamiento,
-                                    servicio,
-                                    cantidadServicio,
-                                    preciosServicio,
-                                    totalServicio,
-                                    sumatotalServicio);
+                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
                             return;
 
                         }else{
@@ -1023,19 +904,7 @@ public class Matrix {
                             return;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            decFinal(
-                                    sc,
-                                    resumen_datos,
-                                    equipamiento,
-                                    cantidadEquipamiento,
-                                    preciosEquipamiento,
-                                    totalEquipamiento,
-                                    sumatotalEquipamiento,
-                                    servicio,
-                                    cantidadServicio,
-                                    preciosServicio,
-                                    totalServicio,
-                                    sumatotalServicio);
+                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
                             return;
 
                         }else{
@@ -1065,19 +934,7 @@ public class Matrix {
                             return;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: $" + (montoPagar - pagoRealizado));
-                            decFinal(
-                                    sc,
-                                    resumen_datos,
-                                    equipamiento,
-                                    cantidadEquipamiento,
-                                    preciosEquipamiento,
-                                    totalEquipamiento,
-                                    sumatotalEquipamiento,
-                                    servicio,
-                                    cantidadServicio,
-                                    preciosServicio,
-                                    totalServicio,
-                                    sumatotalServicio);
+                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
                             return;
 
                         }else{
@@ -1105,19 +962,7 @@ public class Matrix {
                             return;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            decFinal(
-                                    sc,
-                                    resumen_datos,
-                                    equipamiento,
-                                    cantidadEquipamiento,
-                                    preciosEquipamiento,
-                                    totalEquipamiento,
-                                    sumatotalEquipamiento,
-                                    servicio,
-                                    cantidadServicio,
-                                    preciosServicio,
-                                    totalServicio,
-                                    sumatotalServicio);
+                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
                             return;
 
                         }else{
@@ -1145,19 +990,7 @@ public class Matrix {
                             break;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            decFinal(
-                                    sc,
-                                    resumen_datos,
-                                    equipamiento,
-                                    cantidadEquipamiento,
-                                    preciosEquipamiento,
-                                    totalEquipamiento,
-                                    sumatotalEquipamiento,
-                                    servicio,
-                                    cantidadServicio,
-                                    preciosServicio,
-                                    totalServicio,
-                                    sumatotalServicio);
+                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
                             return;
 
                         }else{
@@ -1176,22 +1009,19 @@ public class Matrix {
 
 
     }
-    public static void informacion(
-            Scanner sc,
-            Object[]resumen_datos,
+    public static void informacion(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio){
+        String[] equipamiento=(String[])datos_equipamiento[0];
+        int[] cantidadEquipamiento=(int[])datos_equipamiento[1];
+        double[] preciosEquipamiento=(double[])datos_equipamiento[2];
+        double[] totalEquipamiento=(double[])datos_equipamiento[3];
+        double sumatotalEquipamiento=(double)datos_equipamiento[4];
 
-            String[] equipamiento,
-            int[] cantidadEquipamiento,
-            double[] preciosEquipamiento,
-            double[] totalEquipamiento,
-            double sumatotalEquipamiento,
+        String[] servicio=(String[])datos_servicio[0];
+        int[] cantidadServicio=(int[])datos_servicio[1];
+        double[] preciosServicio=(double[])datos_servicio[2];
+        double[] totalServicio=(double[])datos_servicio[3];
+        double sumatotalServicio=(double)datos_servicio[4];
 
-            String[] servicio,
-            int[] cantidadServicio,
-            double[] preciosServicio,
-            double[] totalServicio,
-            double sumatotalServicio
-    ){
         // Evento Social
         if((int)resumen_datos[5] == 1) {
             // Tamaño Pequeño, Tipo Social -> Todo x 1 (ó sin multiplicar)
