@@ -91,11 +91,12 @@ public class a {
                 }
                 else{
                     int tipo_Evento=1;
+                    String titulo = "";
                     System.out.print("| \u2600\uFE0F Cantidad de días que reservará el evento: ");
                     int diasUsuario = sc.nextInt();
                     System.out.println("+---------------------------------------------------------------------------------------");
                     System.out.println(); // -> Apariencia
-                    Object[] resumen_datos=new Object[]{nombreUsuario,telefonoUsuario,correoUsuario,personasUsuario,diasUsuario,tipo_Evento};
+                    Object[] resumen_datos = new Object[]{nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario, tipo_Evento, titulo};
                     opciones(sc, resumen_datos);
                     break;
                 }
@@ -167,24 +168,30 @@ public class a {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println(); // Apariencia -> Borrar si no es necesario o si hace doble (alt + tab)
+                        resumen_datos[6] = "Conferencia";
                         montaje_conferencia(sc, resumen_datos); // Aplicar como booleano by: Jose
                         return;
                     case 2:
                         System.out.println(); // Apariencia -> Borrar si no es necesario o si hace doble (alt + tab)
+                        resumen_datos[6] = "Teatro";
                         montaje_teatro(sc, resumen_datos);
                         return;
                     case 3:
                         System.out.println(); // Apariencia -> Borrar si no es necesario o si hace doble (alt + tab)
+                        resumen_datos[6] = "Recepción";
                         eventoRecepcion(sc, resumen_datos); // ← NUEVA FUNCIÓN RECEPCIÓN
                         return;
                     case 4:
                         System.out.println(); // Apariencia -> Borrar si no es necesario o si hace doble (alt + tab)
+                        resumen_datos[6] = "Banquete";
                         eventoBanquete(sc, resumen_datos);
                         return;
                     case 5:
+                        resumen_datos[6] = "Salón";
                         montajeSalon(sc, resumen_datos);
                         return;
                     case 6:
+                        resumen_datos[6] = "Disposición en forma de U";
                         montajeU(sc, resumen_datos);
                         return;
                     case 7:
@@ -1158,7 +1165,7 @@ public class a {
                         resumen_datos[3],  // Personas
                         resumen_datos[4],  // Días
                         "Social",          // Tipo de evento
-                        "Salón",           // Evento contratado
+                        resumen_datos[6],           // Evento contratado
                         "Pequeño"          // Tamaño del evento
                 );
                 System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
@@ -1206,7 +1213,7 @@ public class a {
                         resumen_datos[3],  // Personas
                         resumen_datos[4],  // Días
                         "Social",          // Tipo de evento
-                        "Salón",           // Evento contratado
+                        resumen_datos[6],           // Evento contratado
                         "Mediano"          // Tamaño del evento
                 );
                 System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
@@ -1254,7 +1261,7 @@ public class a {
                         resumen_datos[3],  // Personas
                         resumen_datos[4],  // Días
                         "Social",          // Tipo de evento
-                        "Salón",           // Evento contratado
+                        resumen_datos[6],           // Evento contratado
                         "Grande "          // Tamaño del evento
                 );
                 System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
@@ -1305,7 +1312,7 @@ public class a {
                         resumen_datos[3],  // Personas
                         resumen_datos[4],  // Días
                         "Empresarial",          // Tipo de evento
-                        "Salón",           // Evento contratado
+                        resumen_datos[6],           // Evento contratado
                         "Pequeño"          // Tamaño del evento
                 );
                 System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
@@ -1354,7 +1361,7 @@ public class a {
                         resumen_datos[3],  // Personas
                         resumen_datos[4],  // Días
                         "Empresarial",          // Tipo de evento
-                        "Salón",           // Evento contratado
+                        resumen_datos[6],           // Evento contratado
                         "Mediano"          // Tamaño del evento
                 );
                 System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
@@ -1402,7 +1409,7 @@ public class a {
                         resumen_datos[3],  // Personas
                         resumen_datos[4],  // Días
                         "Social",          // Tipo de evento
-                        "Salón",           // Evento contratado
+                        resumen_datos[6],           // Evento contratado
                         "Mediano"          // Tamaño del evento
                 );
                 System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
