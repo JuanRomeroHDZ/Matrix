@@ -228,13 +228,11 @@ public class a {
             |     > Wi-Fi                                 40$                                             |\n|                                                                                             |
             |                                                                                             |\n+---------------------------------------------------------------------------------------------+
             """);
-        // System.out.print("\uD83D\uDCCD Decisión (1 - 3): ");
-        // sc.nextLine();
         datos_equipamiento = equipamiento_conferencial(sc, resumen_datos);
         //System.out.println(Arrays.deepToString(datos_equipamiento));
         datos_servicio = servicio_conferencial(sc, resumen_datos);
         //System.out.println(Arrays.deepToString(datos_servicio));
-        Union_General(sc, resumen_datos, datos_equipamiento, datos_servicio);
+        decFinal(sc, resumen_datos, datos_equipamiento, datos_servicio);
     }
     // ->
     public static Object[] equipamiento_conferencial(Scanner sc, Object[] resumen_datos){
@@ -343,7 +341,7 @@ public class a {
         // sc.nextLine();
         datos_equipamiento = equipamiento_teatro(sc, resumen_datos);
         datos_servicio = servicios_teatro(sc, resumen_datos);
-        Union_General(sc, resumen_datos, datos_equipamiento, datos_servicio);
+        decFinal(sc, resumen_datos, datos_equipamiento, datos_servicio);
     }
     // ->
     public static Object[] equipamiento_teatro(Scanner sc, Object[] resumen_datos){
@@ -436,7 +434,7 @@ public class a {
         int diasUsuario =(int)resumen_datos[4];//Casting good Isaac8)
         Object[] resumen_equipamiento = equipamientoRecepcion(sc, resumen_datos);
         Object[] resumen_servicios = serviciosRecepcion(sc, resumen_datos);
-        Union_General(sc, resumen_datos, resumen_equipamiento, resumen_servicios);
+        decFinal(sc, resumen_datos, resumen_equipamiento, resumen_servicios);
 
     }
     // ->
@@ -555,8 +553,7 @@ public class a {
         int diasUsuario = (int)resumen_datos[4];
         Object[] resumen_equipamiento = equipamientoBanquete(sc, resumen_datos);
         Object[] resumen_servicios = serviciosBanquete(sc, resumen_datos);
-
-        Union_General(sc, resumen_datos, resumen_equipamiento, resumen_servicios);
+        decFinal(sc, resumen_datos, resumen_equipamiento, resumen_servicios);
     }
     // ->
     //ARRAYS PARA GUARDAR LOS NOMBRE DE LOS EQUIPAMENTOS DE BANQUETE
@@ -756,7 +753,7 @@ public class a {
             }
             Object[] resumen_equipo = new Object[]{equipamiento, cantidadEquipamiento, preciosEquipamiento, totalEquipamiento, sumatotalEquipamiento};
             Object[] resumen_servicios = new Object[]{servicio, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio};
-            Union_General(sc, resumen_datos, resumen_equipo, resumen_servicios);
+            decFinal(sc, resumen_datos, resumen_equipo, resumen_servicios);
 
         } catch (InputMismatchException e) {
             System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales.");
@@ -867,38 +864,13 @@ public class a {
             }
             Object[]resumen_equipo = new Object[]{equipamientoU, cantidadEquipamientoU, preciosEquipamientoU, totalEquipamientoU, sumatotalEquipamientoU};
             Object[]resumen_servicio=new Object[]{servicioU, cantidadServicioU, preciosServicioU, totalServicioU, sumatotalServicioU};
-            Union_General(sc, resumen_datos, resumen_equipo, resumen_servicio);
+            decFinal(sc, resumen_datos, resumen_equipo, resumen_servicio);
         } catch (InputMismatchException e) {
             System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales.");
             sc.nextLine();
         }
     }
-    // ->
-    /*                                                                       Parte final en general                                                    */
-    public static void Union_General(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){  //Union de datos para tranfromarlo en a terminos de juan
-            /*
-            resumen datos= [0]nombreUsuario,[1]telefonoUsuario,[2]correoUsuario,[3]personasUsuario,
-            [4]diasUsuario,[5]tipo_Evento
-
-            String[] equipamientoStrings=(String[])datos_equipamiento[0], servicioStrings=(String[])datos_servicio[0];
-            int [] cantidad_equipamiento=(int[])datos_equipamiento[1], cantidadServicio=(int[])datos_servicio[1];
-            double[] preciosEquipamiento=(double[])datos_equipamiento[2],totalEquipamiento=(double[])datos_equipamiento[3],
-            preciosServicio=(double[])datos_servicio[2], totalServicio=(double[])datos_servicio[3];
-
-            double sumatotalEquipamiento=(double)datos_equipamiento[4], sumatotalServicio=(double) datos_servicio[4];
-
-            System.out.println(sumatotalServicio);
-            /*Object[] suma=new Object[a.length+b.length];
-            System.arraycopy(a, 0, suma, 0, a.length);              Si quisira unirlos sumarlos
-            System.arraycopy(b, 0, suma, a.length, b.length);
-            System.out.println(Arrays.deepToString(suma));
-            decFinal(sc, resumen_datos, equipamientoStrings, cantidad_equipamiento, preciosEquipamiento, totalEquipamiento,
-            sumatotalEquipamiento, servicioStrings, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio);*/
-
-        decFinal(sc, resumen_datos, datos_equipamiento, datos_servicio);
-
-    }
-    // ->
+    /*                                 Parte final.                                                                           */
     public static void decFinal(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){
         System.out.println();
         int pasoFinal = 0;
