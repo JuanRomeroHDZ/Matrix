@@ -216,17 +216,17 @@ public class a {
 
         System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
-            +---------------------------------------------------------------------------------------------+\n| 1. Equipamientos:                           Precios:                                        |
+            +---------------------------------------------------------------------------------------------+\n|  Equipamientos:                           Precios:                                          |
             |     > Mesas y sillas                        60$                                             |\n|     > Escenario.                            200$                                            |
             |     > Microfonos.                           120$                                            |\n|     > Proyector y pantalla                  65$                                             |
             |     > Sistema de sonido.                    150$                                            |\n|     > Podio.                                140$                                            |
             |     > Pizarra y rotafolios.                 80$                                             |\n|     > Iluminación.                          125$                                            |
-            |                                                                                             |\n| 2. Servicios:                                                                               |
+            |                                                                                             |\n|  Servicios:                                                                                 |
             |     > Registro de asistentes.               100$                                            |\n|     > Traducción simultanea.                250$                                            |
             |     > Transmisión en vivo o grabacion.      175$                                            |\n|     > Café o coffe break.                   60$                                             |
             |     > Personal técnico.                     250$                                            |\n|     > Material                              120$                                            |
             |     > Wi-Fi                                 40$                                             |\n|                                                                                             |
-            | 3. Para salir.                                                                              |\n+---------------------------------------------------------------------------------------------+
+            |                                                                                             |\n+---------------------------------------------------------------------------------------------+
             """);
         // System.out.print("\uD83D\uDCCD Decisión (1 - 3): ");
         // sc.nextLine();
