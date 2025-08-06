@@ -122,9 +122,7 @@ public class a {
                 \uD83D\uDCCD Decisión (1 - 3):""" + " ");
             try {
                 tipoEvento = sc.nextInt();
-                resumen_datos[5] = tipoEvento;
                 sc.nextLine();
-
                 if(tipoEvento>=1 && tipoEvento<=2){
                     System.out.println();
                     eventoSocial(sc, resumen_datos);
@@ -1168,7 +1166,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], totalEquipamiento[i]);
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[6], "", "", sumatotalEquipamiento);
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", sumatotalEquipamiento);
                 ///* Fin equipamiento
 
                 System.out.println("|                                                                                                                         |");
@@ -1179,7 +1177,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], totalServicio[i]);
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[4], "", "", sumatotalServicio);
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", sumatotalServicio);
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
                 System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio));
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
@@ -1216,7 +1214,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 1.5));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[6], "", "", (sumatotalEquipamiento * 1.5));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 1.5));
                 ///* Fin equipamiento
 
                 System.out.println("|                                                                                                                         |");
@@ -1227,7 +1225,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * 1.5));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[4], "", "", (sumatotalServicio * 1.5));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", (sumatotalServicio * 1.5));
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
                 System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * 1.5);
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
@@ -1264,7 +1262,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 2));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[6], "", "", (sumatotalEquipamiento * 2));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 2));
                 ///* Fin equipamiento
 
                 System.out.println("|                                                                                                                         |");
@@ -1275,7 +1273,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * 2));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[4], "", "", (sumatotalServicio * 2));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", (sumatotalServicio * 2));
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
                 System.out.printf("| Total a pagar: $%-103s |%n", ((sumatotalEquipamiento + sumatotalServicio) * 2));
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
@@ -1315,7 +1313,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 2));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[6], "", "", (sumatotalEquipamiento * 2));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 2));
                 ///* Fin equipamiento
 
                 System.out.println("|                                                                                                                         |");
@@ -1326,7 +1324,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * 2));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[4], "", "", (sumatotalServicio * 2));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", (sumatotalServicio * 2));
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
                 System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * 2);
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
@@ -1364,7 +1362,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 2.5));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",equipamiento[6], "", "", (sumatotalEquipamiento * 2.5));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 2.5));
                 ///* Fin equipamiento
 
                 System.out.println("|                                                                                                                         |");
@@ -1375,7 +1373,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * 2.5));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",servicio[4], "", "", (sumatotalServicio * 2.5));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",servicio[servicio.length-1], "", "", (sumatotalServicio * 2.5));
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
                 System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * 2.5);
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
@@ -1412,7 +1410,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 3));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",equipamiento[6], "", "", (sumatotalEquipamiento * 3));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 3));
                 ///* Fin equipamiento
 
                 System.out.println("|                                                                                                                         |");
@@ -1423,7 +1421,7 @@ public class a {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * 3));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",servicio[4], "", "", (sumatotalServicio * 3));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",servicio[servicio.length-1], "", "", (sumatotalServicio * 3));
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
                 System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * 3);
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
