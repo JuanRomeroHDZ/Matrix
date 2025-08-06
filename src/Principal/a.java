@@ -934,14 +934,10 @@ public class a {
                             System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
                             return;
                         }else if(pagoRealizado > montoPagar){
-                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("💵 Muchas gracias por su compra, vuelva pronto!\n");
+                            pago_aceptado(pagoRealizado,montoPagar);
                             return;
                         }else if(pagoRealizado < montoPagar){
-                            System.out.println("\n💥 Dinero insuficiente, le hace falta: $" + (montoPagar - pagoRealizado));
-                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
-                            return;
-
+                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
                         }else{
                             sc.next(); // Limpia el buffer
                         }
@@ -962,14 +958,10 @@ public class a {
                             System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
                             return;
                         }else if(pagoRealizado > montoPagar){
-                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("Muchas gracias por su compra, vuelva pronto!");
+                            pago_aceptado(pagoRealizado,montoPagar);
                             return;
                         }else if(pagoRealizado < montoPagar){
-                            System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
-                            return;
-
+                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
                         }else{
                             sc.next(); // Limpia el buffer
                         }
@@ -990,20 +982,15 @@ public class a {
                             System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
                             return;
                         }else if(pagoRealizado > montoPagar){
-                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("Muchas gracias por su compra, vuelva pronto!");
+                            pago_aceptado(pagoRealizado,montoPagar);
                             return;
                         }else if(pagoRealizado < montoPagar){
-                            System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
-                            return;
-
+                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
                         }else{
                             sc.next();
                         }
                     }
                 }
-
                 if((int)resumen_datos[5] == 2){
                     // Tamaño Pequeño, Tipo Empresarial -> (sumatotalEquipamiento + sumatotalServicio) * 1 (ó dejar asi sin modificar)
                     if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50){
@@ -1020,14 +1007,10 @@ public class a {
                             System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
                             return;
                         }else if(pagoRealizado > montoPagar){
-                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("💵 Muchas gracias por su compra, vuelva pronto!\n");
+                            pago_aceptado(pagoRealizado,montoPagar);
                             return;
                         }else if(pagoRealizado < montoPagar){
-                            System.out.println("\n💥 Dinero insuficiente, le hace falta: $" + (montoPagar - pagoRealizado));
-                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
-                            return;
-
+                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
                         }else{
                             sc.next(); // Limpia el buffer
                         }
@@ -1048,14 +1031,10 @@ public class a {
                             System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
                             return;
                         }else if(pagoRealizado > montoPagar){
-                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("Muchas gracias por su compra, vuelva pronto!");
+                            pago_aceptado(pagoRealizado,montoPagar);
                             return;
                         }else if(pagoRealizado < montoPagar){
-                            System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
-                            return;
-
+                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
                         }else{
                             sc.next(); // Limpia el buffer
                         }
@@ -1076,29 +1055,28 @@ public class a {
                             System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
                             break;
                         }else if(pagoRealizado > montoPagar){
-                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("Muchas gracias por su compra, vuelva pronto!");
+                            pago_aceptado(pagoRealizado,montoPagar);
                             break;
                         }else if(pagoRealizado < montoPagar){
-                            System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
-                            return;
-
+                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
                         }else{
                             sc.next(); // Limpia el buffer
                         }
                     }
                 }
-
-
             } catch (InputMismatchException z) {
                 System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales");
                 sc.next(); // Limpia el buffer
             }
         } while (true);
-
-
-
+    }
+    public static void pago_aceptado(double pagoRealizado, double montoPagar){
+        System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
+        System.out.println("Muchas gracias por su compra, vuelva pronto!");
+    }
+    public static void pago_denegado(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio,double pagoRealizado,double montoPagar){
+        System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
+        decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
     }
     // ->
     public static void informacion(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio){
