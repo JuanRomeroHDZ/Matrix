@@ -173,53 +173,27 @@ public class a {
                 switch (tipoReservacion) {
                     case 1:
                         System.out.println(); // Apariencia -> Borrar si no es necesario o si hace doble (alt + tab)
+                        equipamientoUniversal = new String[]{"Mesas y Sillas","Escenario","Micrófonos","Proyector y pantalla","Sistemas de sonido",
+                        "Podio","Pizarra y rotafolios","Iluminación","Total:"};
+                        precios_equipamientoUniversal = new double[]{60,200,120,65,150,140,80,125};
+
+                        servicioUniversal = new String[]{"Registro de Asistentes","Traducción","Transmisión o grabación","Café o coffee bar","Personal","Material","Wi-fi","Total:"};
+                        precios_servicioUniversal = new double[]{100,250,175,60,250,120,40};
                         resumen_datos[6] = "Conferencia";
-                        montaje_conferencia(sc, resumen_datos); // Aplicar como booleano by: Jose
+                        montaje_conferencia(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
                         return;
                     case 2:
                         System.out.println(); // Apariencia -> Borrar si no es necesario o si hace doble (alt + tab)
 //                  equipamientos
-                        equipamientoUniversal = new String[]{
-                            "Escenarios",
-                            "Butacas",
-                            "Iluminaciónes",
-                            "Sistemas de sonido",
-                            "Consolas",
-                            "Camerinos",
-                            "Decoraciónes",
-                            "Total:"
-                        };
+                        equipamientoUniversal = new String[]{"Escenarios","Butacas","Iluminaciónes","Sistemas de sonido","Consolas","Camerinos",
+                            "Decoraciónes","Total:"};
 //  precios         equipamientos
-                        precios_equipamientoUniversal = new double[]{
-                            200,
-                            120,
-                            70,
-                            135,
-                            150,
-                            240,
-                            300
-                        };
+                        precios_equipamientoUniversal = new double[]{200,120,70,135,150,240,300};
+
 //                  servicios
-                        servicioUniversal = new String[]{
-                            "Vendedores",
-                            "Personal",
-                            "Seguridad",
-                            "Servicios de comida",
-                            "Publicidad",
-                            "Servicios de limpieza",
-                            "Técnicos",
-                            "Total:"
-                        };
+                        servicioUniversal = new String[]{"Vendedores","Personal","Seguridad","Servicios de comida","Publicidad","Servicios de limpieza","Técnicos","Total:"};
 //  precios         servicios
-                        precios_servicioUniversal = new double[]{
-                            80,
-                            350,
-                            405,
-                            90,
-                            250,
-                            140,
-                            190
-                        };
+                        precios_servicioUniversal = new double[]{80,350,405,90,250,140,190};
                         resumen_datos[6] = "Teatro";
                         eventoTeatro(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
                         return;
@@ -414,10 +388,13 @@ public class a {
     }
     // ->
     /*                                          1. Conferencia, parte de Jose (yo).                                          */
-    public static void montaje_conferencia(Scanner sc, Object[] resumen_datos){
-        Object[] datos_equipamiento = null, datos_servicio = null;
+    public static void montaje_conferencia(Scanner sc,
+        Object[]resumen_datos,
+        String[] equipamientoUniversal,
+        double[] precios_equipamientoUniversal,
+        String[] servicioUniversal,
+        double[] precios_servicioUniversal){
         System.out.println(); // Apariencia
-
         System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
             +---------------------------------------------------------------------------------------------+\n|  Equipamientos:                           Precios:                                          |
@@ -432,98 +409,9 @@ public class a {
             |     > Wi-Fi                                 40$                                             |\n|                                                                                             |
             |                                                                                             |\n+---------------------------------------------------------------------------------------------+
             """);
-        datos_equipamiento = equipamiento_conferencial(sc, resumen_datos);
-        //System.out.println(Arrays.deepToString(datos_equipamiento));
-        datos_servicio = servicio_conferencial(sc, resumen_datos);
-        //System.out.println(Arrays.deepToString(datos_servicio));
-        decFinal(sc, resumen_datos, datos_equipamiento, datos_servicio);
+            montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
+        
     }
-    // ->
-    public static Object[] equipamiento_conferencial(Scanner sc, Object[] resumen_datos){
-        Object[] datos_equipamiento = new Object[]{null};
-        int diasUsuarios = (int)resumen_datos[4]; //Convertor
-        double[] P_equipamiento = new double[]{
-                60,
-                200,
-                120,
-                65,
-                150,
-                140,
-                80,
-                125}, cantidad_f = new double[8];;
-        String[] equipamiento_text = new String[]{
-                "Mesas y Sillas",
-                "Escenario",
-                "Micrófonos",
-                "Proyector y pantalla",
-                "Sistemas de sonido",
-                "Podio",
-                "Pizarra y rotafolios",
-                "Iluminación",
-                "Total:"
-        };
-        int[] cantidad = new int[8];
-        try{
-            for(int i = 0; i < (equipamiento_text.length - 1); i++){
-                System.out.print("⭐ Cantidad de " + equipamiento_text[i] + ": ");
-                cantidad[i] = sc.nextInt();
-                cantidad_f[i] = cantidad[i] * P_equipamiento[i] * diasUsuarios;
-                //System.out.println(equipamiento_text[i]+":"+cantidad_f[i]);
-            }
-            double total = Arrays.stream(cantidad_f).sum();
-            System.out.println(); // Apariencia
-            // System.out.println(total);
-            datos_equipamiento = new Object[]{equipamiento_text, cantidad, P_equipamiento, cantidad_f, total};
-            return datos_equipamiento;
-        } catch (InputMismatchException e){
-            System.out.println();
-            System.out.println("\u274C Error: Solo números enteros.");
-            sc.nextLine();
-        }
-        return datos_equipamiento;
-    }
-    // ->
-    public static Object[] servicio_conferencial(Scanner sc, Object[] resumen_datos){
-        Object[] datos_servicio = new Object[]{null};
-        int diasUsuario = (int)resumen_datos[4];
-        double[] servicios = new double[]{
-                100,
-                250,
-                175,
-                60,
-                250,
-                120,
-                40}, cantidad_f = new double[7];
-        int[] cantidad = new int[7];
-        String[] servicios_text = new String[]{
-                "Registro de Asistentes",
-                "Traducción",
-                "Transmisión o grabación",
-                "Café o coffee bar",
-                "Personal",
-                "Material",
-                "Wi-fi",
-                "Total:"};
-        try{
-            for(int i = 0; i < (servicios_text.length - 1); i++){
-                System.out.print("⭐ Cantidad de " + servicios_text[i] + ": ");
-                cantidad[i] = sc.nextInt();
-                cantidad_f[i] = cantidad[i] * servicios[i] * diasUsuario;
-                //System.out.println(servicios_text[i]+":"+cantidad_f[i]);
-            }
-            double total=Arrays.stream(cantidad_f).sum();
-            //System.out.println(); // Apariencia
-            //System.out.println(total);
-            datos_servicio = new Object[]{servicios_text, cantidad, servicios, cantidad_f, total};
-            return datos_servicio;
-        }catch(InputMismatchException w){
-            System.out.println();
-            System.out.println("\u274C Error: Solo números enteros.");
-            sc.nextLine();
-        }
-        return datos_servicio;
-    }
-    // ->
     /*                                                           2. Parte del teatro                                                                                                */
     public static void eventoTeatro(
         Scanner sc,
