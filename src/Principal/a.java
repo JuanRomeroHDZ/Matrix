@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class a {
+    static String[] equipamientoUniversal = new String[]{};
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             int registro = 1;// Se inicializa porque si no da error en el do-while
@@ -145,6 +146,11 @@ public class a {
     // ->
     public static void eventoSocial(Scanner sc, Object[] resumen_datos) {
         int tipoReservacion = 1;
+        String[] equipamientoUniversal = new String[]{};
+        double[] precios_equipamientoUniversal = new double[]{};
+
+        String[] servicioUniversal = new String[]{};
+        double[] precios_servicioUniversal = new double[]{};
         do {
             System.out.print("""
                 +----------------------------------------------------------------+
@@ -182,16 +188,132 @@ public class a {
                         return;
                     case 4:
                         System.out.println(); // Apariencia -> Borrar si no es necesario o si hace doble (alt + tab)
+//                  equipamientos
+                        equipamientoUniversal = new String[]{
+                            "Mesas redondas o rectangulares",
+                            "Sillas con fundas",
+                            "Mantelería y vajilla formal",
+                            "Centros de mesa",
+                            "Iluminación ambiental",
+                            "Tarima para discursos",
+                            "Total:"
+                        };
+//  precios         equipamientos
+                        precios_equipamientoUniversal = new double[]{
+                            700,
+                            400,
+                            650,
+                            300,
+                            500,
+                            350
+                        };
+//                  servicios
+                        servicioUniversal = new String[]{
+                            "Menú completo",
+                            "Cocineros y meseros",
+                            "Música en vivo o DJ",
+                            "Pastel formal",
+                            "Fotografía profesional",
+                            "Brindis y discursos",
+                            "Estación de bebidas",
+                            "Total:"
+                        };
+//  precios         servicios
+                        precios_servicioUniversal = new double[]{
+                            2500,
+                            1800,
+                            1500,
+                            500,
+                            1000,
+                            600,
+                            400
+                        };
                         resumen_datos[6] = "Banquete";
-                        eventoBanquete(sc, resumen_datos);
+                        eventoBanquete(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
                         return;
                     case 5:
+//                  equipamientos                   
+                        equipamientoUniversal = new String[]{
+                            "Mesas",
+                            "Sillas",
+                            "Aires acondicionados",
+                            "Pantallas",
+                            "Proyectores",
+                            "Focos reflectantes",
+                            "Total:"
+                        };
+//  precios         equipamientos
+                        precios_equipamientoUniversal = new double[]{
+                            50,    // Precio Mesas
+                            10,    // Precio Sillas
+                            80,    // Precio Aires acondicionados
+                            30,    // Precio Pantallas
+                            40,    // Precio Proyectores
+                            20,    // Precio Reflectores
+                        };
+//                  servicios                    
+                        servicioUniversal = new String[]{
+                            "Personal de limpieza",
+                            "Personal de soporte técnico",
+                            "Personal de cocina",
+                            "Personal de decoración",
+                            "Total:"
+                        };
+//  precios         servicios                   
+                        precios_servicioUniversal = new double[]{
+                            100,   // Precio Personal de Limpieza
+                            70,    // Precio Personal de Soporte Técnico
+                            25,    // Precio Personal de Cocina
+                            150,   // Precio Personal de Decoración
+                        };                        
                         resumen_datos[6] = "Salón";
-                        montajeSalon(sc, resumen_datos);
+                        montajeSalon(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
                         return;
                     case 6:
+//                  equipamientos                       
+                        equipamientoUniversal = new String[]{
+                            "Mesas en forma de U",      // 400
+                            "Sillas",                   // 100
+                            "Pantallas",                // 600
+                            "Proyectores",              // 600
+                            "Micrófonos",               // 300
+                            "Pizarras o rotafolios",    // 200
+                            "Paquetes de oficina",      // 150
+                            "Total:"
+                        };
+//  precios         equipamientos
+                        precios_equipamientoUniversal = new double[]{
+                            400,    // Mesas en forma de U
+                            100,    // Sillas
+                            600,    // Pantallas
+                            600,    // Proyectores
+                            300,    // Micrófonos
+                            200,    // Pizarras
+                            150,    // Paquetes de oficina
+                        };
+//                  servicios
+                        servicioUniversal = new String[]{
+                            "Paquetes Coffee Break",     // 350
+                            "Repetidores Wi-Fi",        // 100
+                            "Personal Soporte Técnico", // 500
+                            "Moderadores",              // 800
+                            "Traductores",              // 1200
+                            "Personal de Apoyo",        // 400
+                            "Paquetes de Impresión",    // 250
+                            "Total:"
+                        };
+//  precios         servicios
+                        precios_servicioUniversal = new double[]{
+                            350,
+                            100,
+                            500,
+                            800,
+                            1200,
+                            400,
+                            250,
+                        };
                         resumen_datos[6] = "Disposición en forma de U";
-                        montajeU(sc, resumen_datos);
+                        montajeU(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
                         return;
                     case 7:
                         System.out.println(); // Apariencia
@@ -549,114 +671,38 @@ public class a {
     }
     // ->
     // FUNCION DE BANQUETE
-    public static void eventoBanquete(Scanner sc, Object[]resumen_datos) {
-        int diasUsuario = (int)resumen_datos[4];
-        Object[] resumen_equipamiento = equipamientoBanquete(sc, resumen_datos);
-        Object[] resumen_servicios = serviciosBanquete(sc, resumen_datos);
-        decFinal(sc, resumen_datos, resumen_equipamiento, resumen_servicios);
-    }
-    // ->
-    //ARRAYS PARA GUARDAR LOS NOMBRE DE LOS EQUIPAMENTOS DE BANQUETE
-    public static Object[] equipamientoBanquete(Scanner sc, Object[]resumen_datos) {
-        int dias = (int)resumen_datos[4];
+    public static void eventoBanquete(
+        Scanner sc,
+        Object[]resumen_datos,
+        String[] equipamientoUniversal,
+        double[] precios_equipamientoUniversal,
+        String[] servicioUniversal,
+        double[] precios_servicioUniversal
+        ){
+        System.out.println(); // Apariencia
         System.out.print("""
-        +--------------------------------------------------------------------------------------------------+
-        |                            Bienvenido/a a evento Banquete                                        |
-        +--------------------------------------------------------------------------------------------------+
-        | Equipamientos:                       | Precio c/u  | Descripción                                 |
-        |    > Mesas redondas o rectangulares  | $700.00     | Mesas para eventos elegantes                |
-        |    > Sillas con fundas               | $400.00     | Sillas decoradas con fundas                 |
-        |    > Mantelería y vajilla formal     | $650.00     | Manteles y vajilla para eventos formales    |
-        |    > Centros de mesa                 | $300.00     | Decoración central para mesas               |
-        |    > Iluminación ambiental           | $500.00     | Luces para crear ambiente cálido            |
-        |    > Tarima para discursos           | $350.00     | Plataforma para presentaciones              |
-        |                                                                                                  |
-        | Servicios:                           | Precio c/u  | Descripción                                 |
-        |    > Menú completo                   | $2500.00    | Comida y bebida completa para invitados     |
-        |    > Cocineros y meseros             | $1800.00    | Personal para cocina y atención             |
-        |    > Música en vivo o DJ             | $1500.00    | Entretenimiento musical profesional         |
-        |    > Pastel formal                   | $500.00     | Pastel especial para eventos                |
-        |    > Fotografía profesional          | $1000.00    | Registro fotográfico del evento             |
-        |    > Brindis y discursos             | $600.00     | Organización de brindis y presentaciones    |
-        |    > Estación de bebidas             | $400.00     | Barra de bebidas especializadas             |
-        +--------------------------------------------------------------------------------------------------+
-        """);
-        String[] nombres = new String[] {
-                "Mesas redondas o rectangulares",
-                "Sillas con fundas",
-                "Mantelería y vajilla formal",
-                "Centros de mesa",
-                "Iluminación ambiental",
-                "Tarima para discursos",
-                "Total:"
-        };
-        double[] precios = new double[] {
-                700,
-                400,
-                650,
-                300,
-                500,
-                350}, precioTotal = new double[precios.length];
-        // SI ES EMPRESARIAL LE AUMENTA 20% AL COSTO
-        if ((int)resumen_datos[5] == 2) {
-            for (int i = 0; i < precios.length; i++) {
-                precios[i] = (int)(precios[i] * 2);
-            }
-        }
-        // RECORRE CADA UNO PARA SUMARLOS Y GUARDAR EL PRECIO EN SUBTOTAL
-        double subtotal = 0;
-        int [] cantidades = new int[precios.length];
-        for (int i = 0; i < precios.length; i++) {
-            System.out.print("⭐ Cantidad de " + nombres[i] + ": ");
-            cantidades [i] = sc.nextInt();
-            precioTotal[i] = precios[i] * cantidades [i] * dias;
-            subtotal += precioTotal[i];
-        }
-        // System.out.println("Subtotal: $" + subtotal);
-        Object[]resumen_equipo=new Object[]{nombres,cantidades,precios,precioTotal,subtotal};
-
-        return resumen_equipo;
-    }
-    // ->
-    // SERVICIOS DE BANQUETE, ARRAY CON  NOMBRES.
-    public static Object[] serviciosBanquete(Scanner sc, Object[]resumen_datos) {
-        int dias = (int)resumen_datos[4];
-        String[] nombres = new String[] {
-                "Menú completo",
-                "Cocineros y meseros",
-                "Música en vivo o DJ",
-                "Pastel formal",
-                "Fotografía profesional",
-                "Brindis y discursos",
-                "Estación de bebidas",
-                "Total:" };
-        double[] precios = new double[] {
-                2500,
-                1800,
-                1500,
-                500,
-                1000,
-                600,
-                400}, precioTotal = new double[precios.length];
-        // AUMENTA 20% AL SER EMPRESARIAL
-        if ((int)resumen_datos[5] == 2) {
-            for (int i = 0; i < precios.length; i++) {
-                precios[i] = (int)(precios[i] * 2);
-            }
-        }
-        //SUMA LOS PRECIOS MULTIPLICADOS POR LOS DIAS
-        // System.out.println(" Servicios para Banquete:"); // -> Opino borrar
-        double subtotal = 0;
-        int [] cantidades = new int [precios.length];
-        for (int i = 0; i < precios.length; i++) {
-            System.out.print("⭐ Cantidad de "  + nombres [i] + ": ");
-            cantidades [i]= sc.nextInt();
-            precioTotal[i] = precios[i] * cantidades[i] * dias;
-            subtotal += precioTotal[i];
-        }
-        // System.out.println("Subtotal: $" + subtotal); // -> Opino borrar
-        Object[] resumen_servicios = new Object[]{nombres, cantidades, precios, precioTotal, subtotal};
-        return resumen_servicios;
+            +--------------------------------------------------------------------------------------------------+
+            |                            Bienvenido/a a evento Banquete                                        |
+            +--------------------------------------------------------------------------------------------------+
+            | Equipamientos:                       | Precio c/u  | Descripción                                 |
+            |    > Mesas redondas o rectangulares  | $700.00     | Mesas para eventos elegantes                |
+            |    > Sillas con fundas               | $400.00     | Sillas decoradas con fundas                 |
+            |    > Mantelería y vajilla formal     | $650.00     | Manteles y vajilla para eventos formales    |
+            |    > Centros de mesa                 | $300.00     | Decoración central para mesas               |
+            |    > Iluminación ambiental           | $500.00     | Luces para crear ambiente cálido            |
+            |    > Tarima para discursos           | $350.00     | Plataforma para presentaciones              |
+            |                                                                                                  |
+            | Servicios:                           | Precio c/u  | Descripción                                 |
+            |    > Menú completo                   | $2500.00    | Comida y bebida completa para invitados     |
+            |    > Cocineros y meseros             | $1800.00    | Personal para cocina y atención             |
+            |    > Música en vivo o DJ             | $1500.00    | Entretenimiento musical profesional         |
+            |    > Pastel formal                   | $500.00     | Pastel especial para eventos                |
+            |    > Fotografía profesional          | $1000.00    | Registro fotográfico del evento             |
+            |    > Brindis y discursos             | $600.00     | Organización de brindis y presentaciones    |
+            |    > Estación de bebidas             | $400.00     | Barra de bebidas especializadas             |
+            +--------------------------------------------------------------------------------------------------+
+            """);
+            montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
     }
     // ->
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -664,95 +710,68 @@ public class a {
     /* #5 -> Salón */
     public static void montajeSalon(
             Scanner sc,
-            Object[]resumen_datos
+            Object[]resumen_datos,
+            String[] equipamientoUniversal,
+            double[] precios_equipamientoUniversal,
+            String[] servicioUniversal,
+            double[] precios_servicioUniversal
     ){
 
-        System.out.println(); // Salto de línea para mejor apariencia
+        System.out.println(); // Apariencia
         System.out.print("""
-        +----------------------------------------------------------------------------------------------+
-        |                          Bienvenido/a a la renta del salón                                   |
-        +----------------------------------------------------------------------------------------------+
-        | Equipamientos:                    | Precio c/u  | Descripción                                |
-        |    > Mesas                        | $50.00      | Mesas plegables de 6 plazas                |
-        |    > Sillas                       | $10.00      | Sillas cómodas para eventos                |
-        |    > Aires acondicionados         | $80.00      | Control de temperatura                     |
-        |    > Pantallas                    | $30.00      | Pantallas LED de 50 pulgadas               |
-        |    > Proyectores                  | $40.00      | Proyectores HD                             |
-        |    > Focos reflectantes           | $20.00      | Iluminación profesional                    |
-        |                                                                                              |
-        | Servicios:                        | Precio c/u  | Descripción                                |
-        |    > Personal de limpieza         | $100.00     | Limpieza post-evento                       |
-        |    > Personal de Soporte técnico  | $70.00      | Asistencia durante el evento               |
-        |    > Personal de cocina           | $25.00      | Conexión de alta velocidad                 |
-        |    > Personal de decoración       | $150.00     | Arreglos personalizados                    |
-        +----------------------------------------------------------------------------------------------+
-        """);
-        equipamientoServiciosSalon(sc, resumen_datos); // Llama a la función equipamiento y manda los datos necesarios
+            +----------------------------------------------------------------------------------------------+
+            |                          Bienvenido/a a la renta del salón                                   |
+            +----------------------------------------------------------------------------------------------+
+            | Equipamientos:                    | Precio c/u  | Descripción                                |
+            |    > Mesas                        | $50.00      | Mesas plegables de 6 plazas                |
+            |    > Sillas                       | $10.00      | Sillas cómodas para eventos                |
+            |    > Aires acondicionados         | $80.00      | Control de temperatura                     |
+            |    > Pantallas                    | $30.00      | Pantallas LED de 50 pulgadas               |
+            |    > Proyectores                  | $40.00      | Proyectores HD                             |
+            |    > Focos reflectantes           | $20.00      | Iluminación profesional                    |
+            |                                                                                              |
+            | Servicios:                        | Precio c/u  | Descripción                                |
+            |    > Personal de limpieza         | $100.00     | Limpieza post-evento                       |
+            |    > Personal de Soporte técnico  | $70.00      | Asistencia durante el evento               |
+            |    > Personal de cocina           | $25.00      | Conexión de alta velocidad                 |
+            |    > Personal de decoración       | $150.00     | Arreglos personalizados                    |
+            +----------------------------------------------------------------------------------------------+""");
+        montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal); // Llama a la función equipamiento y manda los datos necesarios
         return;
     }
-    public static void equipamientoServiciosSalon(
+    public static void montajeUniversal(
             Scanner sc,
-            Object[]resumen_datos
+            Object[]resumen_datos,
+            String[] equipamientoUniversal,
+            double[] precios_equipamientoUniversal,
+            String[] servicioUniversal,
+            double[] precios_servicioUniversal
     ){
-        double[] totalEquipamiento = new double[6]; // Equipamiento -1 (Se resta -1 para poder acomodar el Total:)
+        double[] totalEquipamiento = new double[equipamientoUniversal.length - 1]; // Equipamiento -1 (Se resta -1 para poder acomodar el Total:) 
         double sumatotalEquipamiento = 0;
 
-        double[] totalServicio = new double[4];    // Servicio - 1 (Se resta -1 para poder acomodar el Total:)
+        double[] totalServicio = new double[servicioUniversal.length - 1];    // Servicio - 1 (Se resta -1 para poder acomodar el Total:)
         double sumatotalServicio = 0;
 
-        String[] equipamiento = new String[]{
-                "Mesas",
-                "Sillas",
-                "Aires acondicionados",
-                "Pantallas",
-                "Proyectores",
-                "Focos reflectantes",
-                "Total:"
-        };
-
-        double[] preciosEquipamiento = {
-                50,    // Precio Mesas
-                10,    // Precio Sillas
-                80,    // Precio Aires acondicionados
-                30,    // Precio Pantallas
-                40,    // Precio Proyectores
-                20,    // Precio Reflectores
-        };
-
-        String[] servicio = new String[]{
-                "Personal de limpieza",
-                "Personal de soporte técnico",
-                "Personal de cocina",
-                "Personal de decoración",
-                "Total:",
-        };
-
-        double[] preciosServicio = {
-                100,   // Precio Personal de Limpieza
-                70,    // Precio Personal de Soporte Técnico
-                25,    // Precio Personal de Cocina
-                150,   // Precio Personal de Decoración
-        };
-
-        int[] cantidadEquipamiento = new int[6];    // Cantidad de equipamiento -> Ingresado por el usuario
-        int[] cantidadServicio = new int[4];        // Cantidad de personal     -> Ingresado por el usuario
+        int[] cantidadEquipamiento = new int[equipamientoUniversal.length - 1];    // Cantidad de equipamiento -> Ingresado por el usuario
+        int[] cantidadServicio = new int[servicioUniversal.length - 1];        // Cantidad de personal     -> Ingresado por el usuario
 
         try {
-            for (int i = 0; i < equipamiento.length - 1; i++) {
-                System.out.print("⭐ Cantidad de "  + equipamiento[i] + ": ");
+            for (int i = 0; i < equipamientoUniversal.length - 1; i++) {
+                System.out.print("⭐ Cantidad de "  + equipamientoUniversal[i] + ": ");
                 cantidadEquipamiento[i] = sc.nextInt();
-                totalEquipamiento[i] = (cantidadEquipamiento[i] * (int) resumen_datos[4] * preciosEquipamiento[i]);
+                totalEquipamiento[i] = (cantidadEquipamiento[i] * (int) resumen_datos[4] * precios_equipamientoUniversal[i]);
                 sumatotalEquipamiento += totalEquipamiento[i];
             }
             System.out.println(); // Salto de línea para preguntar sobre el personal
-            for (int i = 0; i < servicio.length - 1; i++) {
-                System.out.print("⭐ Cantidad de "  + servicio[i] + ": ");
+            for (int i = 0; i < servicioUniversal.length - 1; i++) {
+                System.out.print("⭐ Cantidad de "  + servicioUniversal[i] + ": ");
                 cantidadServicio[i] = sc.nextInt();
-                totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * preciosServicio[i]);
+                totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * precios_servicioUniversal[i]);
                 sumatotalServicio += totalServicio[i];
             }
-            Object[] resumen_equipo = new Object[]{equipamiento, cantidadEquipamiento, preciosEquipamiento, totalEquipamiento, sumatotalEquipamiento};
-            Object[] resumen_servicios = new Object[]{servicio, cantidadServicio, preciosServicio, totalServicio, sumatotalServicio};
+            Object[] resumen_equipo = new Object[]{equipamientoUniversal, cantidadEquipamiento, precios_equipamientoUniversal, totalEquipamiento, sumatotalEquipamiento};
+            Object[] resumen_servicios = new Object[]{servicioUniversal, cantidadServicio, precios_servicioUniversal, totalServicio, sumatotalServicio};
             decFinal(sc, resumen_datos, resumen_equipo, resumen_servicios);
 
         } catch (InputMismatchException e) {
@@ -763,7 +782,11 @@ public class a {
     /* #6 */
     public static void montajeU(
             Scanner sc,
-            Object[]resumen_datos
+            Object[]resumen_datos,
+            String[] equipamientoUniversal,
+            double[] precios_equipamientoUniversal,
+            String[] servicioUniversal,
+            double[] precios_servicioUniversal
     ){
         System.out.println(); // Salto de línea para mejor apariencia
         System.out.print("""
@@ -788,88 +811,10 @@ public class a {
                 |    > Paquetes de impresión           | $250.00     | Documentos impresos para participantes      |
                 +--------------------------------------------------------------------------------------------------+
                 """);
-
-        equipamientoServiciosU(sc,resumen_datos); // Llama a la funcion equipamiento y manda los datos necesarios
+        montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
         return;
     }
     // ->
-    public static void equipamientoServiciosU(
-            Scanner sc,
-            Object[]resumen_datos
-    ){
-        double[] totalEquipamientoU = new double[7]; // EquipamientoU -1 (Se resta -1 para poder acomodar el Total:)
-        double sumatotalEquipamientoU = 0;
-
-        double[] totalServicioU = new double[7];    // ServicioU - 1 (Se resta -1 para poder acomodar el Total:)
-        double sumatotalServicioU = 0;
-
-        String[] equipamientoU = new String[]{
-                "Mesas en forma de U",      // 400
-                "Sillas",                   // 100
-                "Pantallas",                // 600
-                "Proyectores",              // 600
-                "Micrófonos",               // 300
-                "Pizarras o rotafolios",    // 200
-                "Paquetes de oficina",      // 150
-                "Total:",
-        };
-
-        double[] preciosEquipamientoU = {
-                400,    // Mesas en forma de U
-                100,    // Sillas
-                600,    // Pantallas
-                600,    // Proyectores
-                300,    // Micrófonos
-                200,    // Pizarras
-                150,    // Paquetes de oficina
-        };
-
-        String[] servicioU = new String[]{
-                "Paquetes Coffee Break",     // 350
-                "Repetidores Wi-Fi",        // 100
-                "Personal Soporte Técnico", // 500
-                "Moderadores",              // 800
-                "Traductores",              // 1200
-                "Personal de Apoyo",        // 400
-                "Paquetes de Impresión",    // 250
-                "Total:"
-        };
-
-        double[] preciosServicioU = {
-                350,
-                100,
-                500,
-                800,
-                1200,
-                400,
-                250,
-        };
-
-        int[] cantidadEquipamientoU = new int[7];    // Cantidad de equipamiento -> Ingresado por el usuario
-        int[] cantidadServicioU = new int[7];        // Cantidad de personal     -> Ingresado por el usuario
-
-        try {
-            for (int i = 0; i < equipamientoU.length - 1; i++) {
-                System.out.print("⭐ Cantidad de "  + equipamientoU[i] + ": ");
-                cantidadEquipamientoU[i] = sc.nextInt();
-                totalEquipamientoU[i] = (cantidadEquipamientoU[i] * (int) resumen_datos[4] * preciosEquipamientoU[i]);
-                sumatotalEquipamientoU += totalEquipamientoU[i];
-            }
-            System.out.println(); // Salto de línea para preguntar sobre el personal
-            for (int i = 0; i < servicioU.length - 1; i++) {
-                System.out.print("⭐ Cantidad de "  + servicioU[i] + ": ");
-                cantidadServicioU[i] = sc.nextInt();
-                totalServicioU[i] = (cantidadServicioU[i] * (int) resumen_datos[4] * preciosServicioU[i]);
-                sumatotalServicioU += totalServicioU[i];
-            }
-            Object[]resumen_equipo = new Object[]{equipamientoU, cantidadEquipamientoU, preciosEquipamientoU, totalEquipamientoU, sumatotalEquipamientoU};
-            Object[]resumen_servicio=new Object[]{servicioU, cantidadServicioU, preciosServicioU, totalServicioU, sumatotalServicioU};
-            decFinal(sc, resumen_datos, resumen_equipo, resumen_servicio);
-        } catch (InputMismatchException e) {
-            System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales.");
-            sc.nextLine();
-        }
-    }
     /*                                 Parte final.                                                                           */
     public static void decFinal(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){
         System.out.println();
