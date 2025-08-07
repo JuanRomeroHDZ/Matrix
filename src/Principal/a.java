@@ -857,7 +857,7 @@ public class a {
     }
     // ->
     public static void pago(Scanner sc, Object[]resumen_datos, Object[]datos_equipamiento, Object[]datos_servicio){
-        double pagoRealizado;
+        double pagoRealizado, montoPagar=0;
         double sumatotalEquipamiento=(double)datos_equipamiento[4],sumatotalServicio=(double)datos_servicio[4];
         do {
             try {
@@ -866,80 +866,31 @@ public class a {
                 if((int)resumen_datos[5] == 1){
                     // Tamaño Pequeño, Tipo Social -> (sumatotalEquipamiento + sumatotalServicio) * 1 (ó dejar asi sin modificar)
                     if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50){
-                        double montoPagar = (sumatotalEquipamiento + sumatotalServicio);
-                        System.out.printf("""
-                        +----------------------------+
-                        | Monto a pagar: $%-10s |
-                        +----------------------------+
-                        Ingrese el monto total: $""",
-                                montoPagar);
-                        pagoRealizado = sc.nextDouble();
-
-                        if(pagoRealizado == montoPagar){
-                            System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
-                            return;
-                        }else if(pagoRealizado > montoPagar){
-                            pago_aceptado(pagoRealizado,montoPagar);
-                            return;
-                        }else if(pagoRealizado < montoPagar){
-                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
-                        }else{
-                            sc.next(); // Limpia el buffer
-                        }
+                        montoPagar = (sumatotalEquipamiento + sumatotalServicio);
                     }
-
                     // Tamaño Mediano, Tipo Social -> (sumatotalEquipamiento + sumatotalServicio) * 1.5
                     else if((int) resumen_datos[3] >= 51 && (int) resumen_datos[3] <= 100){
-                        double montoPagar = (sumatotalEquipamiento + sumatotalServicio) * 1.5;
-                        System.out.printf("""
-                        +----------------------------+
-                        | Monto a pagar: $%-10s |
-                        +----------------------------+
-                        Ingrese el monto: $""",
-                                montoPagar);
-                        pagoRealizado = sc.nextDouble();
-
-                        if(pagoRealizado == montoPagar){
-                            System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
-                            return;
-                        }else if(pagoRealizado > montoPagar){
-                            pago_aceptado(pagoRealizado,montoPagar);
-                            return;
-                        }else if(pagoRealizado < montoPagar){
-                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
-                        }else{
-                            sc.next(); // Limpia el buffer
-                        }
+                        montoPagar = (sumatotalEquipamiento + sumatotalServicio) * 1.5;
                     }
-
                     // Tamaño Grande, Tipo Social -> (sumatotalEquipamiento + sumatotalServicio) * 2
                     else if((int) resumen_datos[3] >= 101){
-                        double montoPagar = (sumatotalEquipamiento + sumatotalServicio) * 2;
-                        System.out.printf("""
-                        +----------------------------+
-                        | Monto a pagar: $%-10s |
-                        +----------------------------+
-                        Ingrese el monto: $""",
-                                montoPagar);
-                        pagoRealizado = sc.nextDouble();
-
-                        if(pagoRealizado == montoPagar){
-                            System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
-                            return;
-                        }else if(pagoRealizado > montoPagar){
-                            pago_aceptado(pagoRealizado,montoPagar);
-                            return;
-                        }else if(pagoRealizado < montoPagar){
-                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
-                        }else{
-                            sc.next();
-                        }
+                        montoPagar = (sumatotalEquipamiento + sumatotalServicio) * 2;
                     }
                 }
-                if((int)resumen_datos[5] == 2){
+                else if((int)resumen_datos[5] == 2){
                     // Tamaño Pequeño, Tipo Empresarial -> (sumatotalEquipamiento + sumatotalServicio) * 1 (ó dejar asi sin modificar)
                     if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50){
-                        double montoPagar = ((sumatotalEquipamiento + sumatotalServicio) * 2);
+                        montoPagar = ((sumatotalEquipamiento + sumatotalServicio) * 2);
+                    }
+                    // Tamaño Mediano, Tipo Empresarial -> (sumatotalEquipamiento + sumatotalServicio) * 2.5
+                    else if((int) resumen_datos[3] >= 51 && (int) resumen_datos[3] <= 100){
+                        montoPagar = ((sumatotalEquipamiento + sumatotalServicio) * 2.5);
+                        }
+                    // Tamaño Grande, Tipo Empresarial -> (sumatotalEquipamiento + sumatotalServicio) * 2
+                    else if((int) resumen_datos[3] >= 101){
+                        montoPagar = ((sumatotalEquipamiento + sumatotalServicio) * 3);
+                    }
+                }
                         System.out.printf("""
                         +----------------------------+
                         | Monto a pagar: $%-10s |
@@ -950,80 +901,26 @@ public class a {
 
                         if(pagoRealizado == montoPagar){
                             System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
-                            return;
-                        }else if(pagoRealizado > montoPagar){
-                            pago_aceptado(pagoRealizado,montoPagar);
-                            return;
-                        }else if(pagoRealizado < montoPagar){
-                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
-                        }else{
-                            sc.next(); // Limpia el buffer
-                        }
-                    }
-
-                    // Tamaño Mediano, Tipo Empresarial -> (sumatotalEquipamiento + sumatotalServicio) * 2.5
-                    else if((int) resumen_datos[3] >= 51 && (int) resumen_datos[3] <= 100){
-                        double montoPagar = ((sumatotalEquipamiento + sumatotalServicio) * 2.5);
-                        System.out.printf("""
-                        +----------------------------+
-                        | Monto a pagar: $%-10s |
-                        +----------------------------+
-                        Ingrese el monto: $""",
-                                montoPagar);
-                        pagoRealizado = sc.nextDouble();
-
-                        if(pagoRealizado == montoPagar){
-                            System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
-                            return;
-                        }else if(pagoRealizado > montoPagar){
-                            pago_aceptado(pagoRealizado,montoPagar);
-                            return;
-                        }else if(pagoRealizado < montoPagar){
-                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
-                        }else{
-                            sc.next(); // Limpia el buffer
-                        }
-                    }
-
-                    // Tamaño Grande, Tipo Empresarial -> (sumatotalEquipamiento + sumatotalServicio) * 2
-                    else if((int) resumen_datos[3] >= 101){
-                        double montoPagar = ((sumatotalEquipamiento + sumatotalServicio) * 3);
-                        System.out.printf("""
-                        +----------------------------+
-                        | Monto a pagar: $%-10s |
-                        +----------------------------+
-                        Ingrese el monto: $""",
-                                montoPagar);
-                        pagoRealizado = sc.nextDouble();
-
-                        if(pagoRealizado == montoPagar){
-                            System.out.println("\nMuchas gracias por su compra, vuelva pronto!");
                             break;
                         }else if(pagoRealizado > montoPagar){
-                            pago_aceptado(pagoRealizado,montoPagar);
+                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
+                            System.out.println("Muchas gracias por su compra, vuelva pronto!");
                             break;
                         }else if(pagoRealizado < montoPagar){
-                            pago_denegado(sc,resumen_datos,datos_equipamiento,datos_servicio,pagoRealizado,montoPagar);
+                            System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
+                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
+                            return;
                         }else{
                             sc.next(); // Limpia el buffer
                         }
-                    }
-                }
+                
             } catch (InputMismatchException z) {
                 System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales");
                 sc.next(); // Limpia el buffer
             }
         } while (true);
     }
-    public static void pago_aceptado(double pagoRealizado, double montoPagar){
-        System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
-        System.out.println("Muchas gracias por su compra, vuelva pronto!");
-    }
-    public static void pago_denegado(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio,double pagoRealizado,double montoPagar){
-        System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-        decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
-    }
-    // ->
+    //-->
     public static void informacion(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio){
         String[] equipamiento = (String[])datos_equipamiento[0];
         int[] cantidadEquipamiento = (int[])datos_equipamiento[1];
