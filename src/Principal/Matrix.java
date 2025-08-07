@@ -2,7 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class a {
+public class Matrix {
     static String[] equipamientoUniversal = new String[]{};
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
@@ -66,11 +66,11 @@ public class a {
             } while (registro != 2);
         }
     }
-    // ->
     public static void datosUsuarios(Scanner sc){
-        System.out.println("+---------------------------------------------------------------------------------------");
+        
         do {
             try {
+                System.out.println("+---------------------------------------------------------------------------------------");
                 System.out.print("| Ingrese su nombre completo (Empezando por apellidos): ");
                 String nombreUsuario = sc.nextLine();
 
@@ -103,13 +103,12 @@ public class a {
                 }
 
             } catch (InputMismatchException e) {
+                
+                System.out.println("\n\u274C Error: Solo números, no espacios ni letras\n");
                 sc.nextLine(); //
-                System.out.println(); // -> Apariencia
-                System.out.println("\u274C Error: Solo números, no espacios ni letras");
             }
         } while (true);
     }
-    // ->
     public static void opciones(Scanner sc, Object[] resumen_datos){
         do {
             System.out.print("""
@@ -143,7 +142,6 @@ public class a {
             }
         } while ((int) resumen_datos[5] != 3);
     }
-    // ->
     public static void eventoSocial(Scanner sc, Object[] resumen_datos) {
         int tipoReservacion = 1;
         String[] equipamientoUniversal = new String[]{};
@@ -172,33 +170,103 @@ public class a {
 
                 switch (tipoReservacion) {
                     case 1:
-                        System.out.println(); // Apariencia -> Borrar si no es necesario o si hace doble (alt + tab)
-                        equipamientoUniversal = new String[]{"Mesas y Sillas","Escenario","Micrófonos","Proyector y pantalla","Sistemas de sonido",
-                        "Podio","Pizarra y rotafolios","Iluminación","Total:"};
-                        precios_equipamientoUniversal = new double[]{60,200,120,65,150,140,80,125};
-
-                        servicioUniversal = new String[]{"Registro de Asistentes","Traducción","Transmisión o grabación","Café o coffee bar","Personal","Material","Wi-fi","Total:"};
-                        precios_servicioUniversal = new double[]{100,250,175,60,250,120,40};
+                        System.out.println(); // -> Apariencia 
+//                  equipamientos                        
+                        equipamientoUniversal = new String[]{
+                            "Mesas y Sillas",
+                            "Escenario",
+                            "Micrófonos",
+                            "Proyector y pantalla",
+                            "Sistemas de sonido",
+                            "Podio",
+                            "Pizarra y rotafolios",
+                            "Iluminación",
+                            "Total:"
+                        };
+//  precios         equipamientos                        
+                        precios_equipamientoUniversal = new double[]{
+                            60,
+                            200,
+                            120,
+                            65,
+                            150,
+                            140,
+                            80,
+                            125
+                        };
+//                  servicios
+                        servicioUniversal = new String[]{
+                            "Registro de Asistentes",
+                            "Traducción",
+                            "Transmisión o grabación",
+                            "Café o coffee bar",
+                            "Personal",
+                            "Material",
+                            "Wi-fi",
+                            "Total:"
+                        };
+//  precios         servicios                        
+                        precios_servicioUniversal = new double[]{
+                            100,
+                            250,
+                            175,
+                            60,
+                            250,
+                            120,
+                            40
+                        };
                         resumen_datos[6] = "Conferencia";
-                        montaje_conferencia(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
+                        eventoConferencia(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
                         return;
                     case 2:
-                        System.out.println(); // Apariencia -> Borrar si no es necesario o si hace doble (alt + tab)
+                        System.out.println(); // -> Apariencia
 //                  equipamientos
-                        equipamientoUniversal = new String[]{"Escenarios","Butacas","Iluminaciónes","Sistemas de sonido","Consolas","Camerinos",
-                            "Decoraciónes","Total:"};
+                        equipamientoUniversal = new String[]{
+                            "Escenarios",
+                            "Butacas",
+                            "Iluminaciónes",
+                            "Sistemas de sonido",
+                            "Consolas",
+                            "Camerinos",
+                            "Decoraciónes",
+                            "Total:"
+                        };
 //  precios         equipamientos
-                        precios_equipamientoUniversal = new double[]{200,120,70,135,150,240,300};
-
+                        precios_equipamientoUniversal = new double[]{
+                            200,
+                            120,
+                            70,
+                            135,
+                            150,
+                            240,
+                            300
+                        };
 //                  servicios
-                        servicioUniversal = new String[]{"Vendedores","Personal","Seguridad","Servicios de comida","Publicidad","Servicios de limpieza","Técnicos","Total:"};
+                        servicioUniversal = new String[]{
+                            "Vendedores",
+                            "Personal",
+                            "Seguridad",
+                            "Servicios de comida",
+                            "Publicidad",
+                            "Servicios de limpieza",
+                            "Técnicos",
+                            "Total:"
+                        };
 //  precios         servicios
-                        precios_servicioUniversal = new double[]{80,350,405,90,250,140,190};
+                        precios_servicioUniversal = new double[]{
+                            80,
+                            350,
+                            405,
+                            90,
+                            250,
+                            140,
+                            190
+                        };
                         resumen_datos[6] = "Teatro";
                         eventoTeatro(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
                         return;
                     case 3:
-                        System.out.println(); // Apariencia -> Borrar si no es necesario o si hace doble (alt + tab)
+                        System.out.println(); // -> Apariencia 
 //                  equipamientos
                         equipamientoUniversal = new String[]{
                             "Mesas altas tipo cóctel",
@@ -386,14 +454,8 @@ public class a {
             }
         } while (tipoReservacion != 7);
     }
-    // ->
-    /*                                          1. Conferencia, parte de Jose (yo).                                          */
-    public static void montaje_conferencia(Scanner sc,
-        Object[]resumen_datos,
-        String[] equipamientoUniversal,
-        double[] precios_equipamientoUniversal,
-        String[] servicioUniversal,
-        double[] precios_servicioUniversal){
+////    H E R E D I A    
+    public static void eventoConferencia(Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
         System.out.println(); // Apariencia
         System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
@@ -406,52 +468,31 @@ public class a {
             |     > Registro de asistentes.               100$                                            |\n|     > Traducción simultanea.                250$                                            |
             |     > Transmisión en vivo o grabacion.      175$                                            |\n|     > Café o coffe break.                   60$                                             |
             |     > Personal técnico.                     250$                                            |\n|     > Material                              120$                                            |
-            |     > Wi-Fi                                 40$                                             |\n|                                                                                             |
-            |                                                                                             |\n+---------------------------------------------------------------------------------------------+
+            |     > Wi-Fi                                 40$                                             |
+            +---------------------------------------------------------------------------------------------+
             """);
             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
-        
-    }
-    /*                                                           2. Parte del teatro                                                                                                */
-    public static void eventoTeatro(
-        Scanner sc,
-        Object[]resumen_datos,
-        String[] equipamientoUniversal,
-        double[] precios_equipamientoUniversal,
-        String[] servicioUniversal,
-        double[] precios_servicioUniversal
-    ){
+        }
+    public static void eventoTeatro( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
         System.out.println(); // -> Apariencia
         System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta del teatro                                |
-            +---------------------------------------------------------------------------------------------+\n| 1. Equipamientos:                           Precios:                                        |
+            +---------------------------------------------------------------------------------------------+\n| Equipamientos:                           Precios:                                           |
             |     > Escenarios con telón                  200$                                            |\n|     > Butacas fijas o móviles               120$                                            |
             |     > Iluminaciónes teatral                  70$                                            |\n|     > Sistemas de sonido envolvente         135$                                            |
             |     > Consolas de audio/luces               150$                                            |\n|     > Camerinos o vestidores                240$                                            |
             |     > Decoración y escenografía             300$                                            |
-            |                                                                                             |\n| 2. Servicios:                                                                               |
+            |                                                                                             |\n| Servicios:                                                                                  |
             |     > Vendedores de boletos                  80$                                            |\n|     > Personal de taquilla y acomodadores.  350$                                            |
             |     > Seguridad y control de acceso         405$                                            |\n|     > Servicios de cafetería o snacks        90$                                            |
             |     > Publicidad y promoción                250$                                            |\n|     > Servicios de limpieza                 140$                                            |
-            |     > Asistencia técnica en luces/sonido    190$                                            |\n|                                                                                             |
-            | 3. Para salir.                                                                              |\n+---------------------------------------------------------------------------------------------+
+            |     > Asistencia técnica en luces/sonido    190$                                            |
+            +---------------------------------------------------------------------------------------------+
             """);
             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
     }
-    // ->
-
-
-    // ->
-    /*                                          ISAAC                                          */
-    // EN ESTA FUNCION LLAMO A LAS DEMAS FUNCIONES Y LES ASIGNO VARIABLES.
-    public static void eventoRecepcion(
-            Scanner sc,
-            Object[]resumen_datos,
-            String[] equipamientoUniversal,
-            double[] precios_equipamientoUniversal,
-            String[] servicioUniversal,
-            double[] precios_servicioUniversal
-    ){
+////    I S A A C    
+    public static void eventoRecepcion( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
         System.out.println(); // -> Apariencia
         System.out.print("""
             +--------------------------------------------------------------------------------------------------+
@@ -477,16 +518,7 @@ public class a {
             """);
             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
     }
-    // ->
-    // FUNCION DE BANQUETE
-    public static void eventoBanquete(
-        Scanner sc,
-        Object[]resumen_datos,
-        String[] equipamientoUniversal,
-        double[] precios_equipamientoUniversal,
-        String[] servicioUniversal,
-        double[] precios_servicioUniversal
-        ){
+    public static void eventoBanquete( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal ){
         System.out.println(); // -> Apariencia
         System.out.print("""
             +--------------------------------------------------------------------------------------------------+
@@ -512,18 +544,8 @@ public class a {
             """);
             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
     }
-    // ->
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /*                                          Juan                                          */
-    /* #5 -> Salón */
-    public static void eventoSalon(
-            Scanner sc,
-            Object[]resumen_datos,
-            String[] equipamientoUniversal,
-            double[] precios_equipamientoUniversal,
-            String[] servicioUniversal,
-            double[] precios_servicioUniversal
-    ){
+////    J U A N
+    public static void eventoSalon( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
         System.out.println(); // -> Apariencia
         System.out.print("""
             +----------------------------------------------------------------------------------------------+
@@ -545,49 +567,7 @@ public class a {
             +----------------------------------------------------------------------------------------------+
             """);
         montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal); // Llama a la función equipamiento y manda los datos necesarios
-        return;
     }
-    public static void montajeUniversal(
-            Scanner sc,
-            Object[]resumen_datos,
-            String[] equipamientoUniversal,
-            double[] precios_equipamientoUniversal,
-            String[] servicioUniversal,
-            double[] precios_servicioUniversal
-    ){
-        double[] totalEquipamiento = new double[equipamientoUniversal.length - 1]; // Equipamiento -1 (Se resta -1 para poder acomodar el Total:) 
-        double sumatotalEquipamiento = 0;
-
-        double[] totalServicio = new double[servicioUniversal.length - 1];    // Servicio - 1 (Se resta -1 para poder acomodar el Total:)
-        double sumatotalServicio = 0;
-
-        int[] cantidadEquipamiento = new int[equipamientoUniversal.length - 1];    // Cantidad de equipamiento -> Ingresado por el usuario
-        int[] cantidadServicio = new int[servicioUniversal.length - 1];        // Cantidad de personal     -> Ingresado por el usuario
-
-        try {
-            for (int i = 0; i < equipamientoUniversal.length - 1; i++) {
-                System.out.print("⭐ Cantidad de "  + equipamientoUniversal[i] + ": ");
-                cantidadEquipamiento[i] = sc.nextInt();
-                totalEquipamiento[i] = (cantidadEquipamiento[i] * (int) resumen_datos[4] * precios_equipamientoUniversal[i]);
-                sumatotalEquipamiento += totalEquipamiento[i];
-            }
-            System.out.println(); // Salto de línea para preguntar sobre el personal
-            for (int i = 0; i < servicioUniversal.length - 1; i++) {
-                System.out.print("⭐ Cantidad de "  + servicioUniversal[i] + ": ");
-                cantidadServicio[i] = sc.nextInt();
-                totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * precios_servicioUniversal[i]);
-                sumatotalServicio += totalServicio[i];
-            }
-            Object[] resumen_equipo = new Object[]{equipamientoUniversal, cantidadEquipamiento, precios_equipamientoUniversal, totalEquipamiento, sumatotalEquipamiento};
-            Object[] resumen_servicios = new Object[]{servicioUniversal, cantidadServicio, precios_servicioUniversal, totalServicio, sumatotalServicio};
-            decFinal(sc, resumen_datos, resumen_equipo, resumen_servicios);
-
-        } catch (InputMismatchException e) {
-            System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales.");
-            sc.nextLine();
-        }
-    }
-    /* #6 */
     public static void eventoU(
             Scanner sc,
             Object[]resumen_datos,
@@ -622,8 +602,42 @@ public class a {
         montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
         return;
     }
-    // ->
-    /*                                 Parte final.                                                                           */
+////    P A R T E   F I N A L   
+    public static void montajeUniversal( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
+        do {
+            double[] totalEquipamiento = new double[equipamientoUniversal.length - 1]; // Equipamiento -1 (Se resta -1 para poder acomodar el Total:) 
+        double sumatotalEquipamiento = 0;
+
+        double[] totalServicio = new double[servicioUniversal.length - 1];    // Servicio - 1 (Se resta -1 para poder acomodar el Total:)
+        double sumatotalServicio = 0;
+
+        int[] cantidadEquipamiento = new int[equipamientoUniversal.length - 1];    // Cantidad de equipamiento -> Ingresado por el usuario
+        int[] cantidadServicio = new int[servicioUniversal.length - 1];        // Cantidad de personal     -> Ingresado por el usuario
+
+        try {
+            for (int i = 0; i < equipamientoUniversal.length - 1; i++) {
+                System.out.print("⭐ Cantidad de "  + equipamientoUniversal[i] + ": ");
+                cantidadEquipamiento[i] = sc.nextInt();
+                totalEquipamiento[i] = (cantidadEquipamiento[i] * (int) resumen_datos[4] * precios_equipamientoUniversal[i]);
+                sumatotalEquipamiento += totalEquipamiento[i];
+            }
+            System.out.println(); // Salto de línea para preguntar sobre el personal
+            for (int i = 0; i < servicioUniversal.length - 1; i++) {
+                System.out.print("⭐ Cantidad de "  + servicioUniversal[i] + ": ");
+                cantidadServicio[i] = sc.nextInt();
+                totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * precios_servicioUniversal[i]);
+                sumatotalServicio += totalServicio[i];
+            }
+            Object[] resumen_equipo = new Object[]{equipamientoUniversal, cantidadEquipamiento, precios_equipamientoUniversal, totalEquipamiento, sumatotalEquipamiento};
+            Object[] resumen_servicios = new Object[]{servicioUniversal, cantidadServicio, precios_servicioUniversal, totalServicio, sumatotalServicio};
+            decFinal(sc, resumen_datos, resumen_equipo, resumen_servicios);
+
+        } catch (InputMismatchException e) {
+            System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales\n");
+            sc.nextLine();
+        }
+        } while (true);
+    }
     public static void decFinal(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){
         System.out.println();
         int pasoFinal = 0;
@@ -638,7 +652,6 @@ public class a {
                     +--------------------------+
                     📍 Decisión (1 - 4):""" + " ");
                 pasoFinal = sc.nextInt();
-
                 switch (pasoFinal) {
                     case 1:
                         pago(sc,resumen_datos,datos_equipamiento,datos_servicio);
@@ -663,10 +676,9 @@ public class a {
             }
         } while (pasoFinal != 4);
     }
-    // ->
     public static void pago(Scanner sc, Object[]resumen_datos, Object[]datos_equipamiento, Object[]datos_servicio){
-        double pagoRealizado, montoPagar=0;
-        double sumatotalEquipamiento=(double)datos_equipamiento[4],sumatotalServicio=(double)datos_servicio[4];
+        double pagoRealizado, montoPagar = 0;
+        double sumatotalEquipamiento = (double)datos_equipamiento[4], sumatotalServicio = (double)datos_servicio[4];
         do {
             try {
                 System.out.println(); // Salto para mejor apariencia
@@ -712,7 +724,7 @@ public class a {
                             break;
                         }else if(pagoRealizado > montoPagar){
                             System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("Muchas gracias por su compra, vuelva pronto!");
+                            System.out.println("💵Muchas gracias por su compra, vuelva pronto!");
                             break;
                         }else if(pagoRealizado < montoPagar){
                             System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
@@ -728,7 +740,6 @@ public class a {
             }
         } while (true);
     }
-    //-->
     public static void informacion(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio){
         String[] equipamiento = (String[])datos_equipamiento[0];
         int[] cantidadEquipamiento = (int[])datos_equipamiento[1];
