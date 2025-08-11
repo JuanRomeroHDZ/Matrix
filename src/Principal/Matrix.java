@@ -1,8 +1,13 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import javax.lang.model.type.PrimitiveType;
+
+import java.io.*;
+import java.rmi.server.ExportException;
+
 public class Matrix {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         try (Scanner sc = new Scanner(System.in)) {
             int registro = 1;// Se inicializa porque si no da error en el do-while
             System.out.print("""
@@ -64,7 +69,7 @@ public class Matrix {
             } while (registro != 2);
         }
     }
-    public static void datosUsuarios(Scanner sc){
+    public static void datosUsuarios(Scanner sc) throws Exception{
         do {
             try {
                 System.out.println("+---------------------------------------------------------------------------------------");
@@ -89,13 +94,11 @@ public class Matrix {
                 }
                 else{
                     int tipo_Evento= 2;
-                    String titulo = ""; // Revisar con mi equipo
                     System.out.print("| \u2600\uFE0F Cantidad de días que reservará el evento: ");
                     int diasUsuario = sc.nextInt();
-                    
                     System.out.println("+---------------------------------------------------------------------------------------");
                     System.out.println(); // -> Apariencia
-                    Object[] resumen_datos = new Object[]{nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario, tipo_Evento, titulo}; // <- Nada más se está utilizando aquí
+                    Object[] resumen_datos = new Object[]{nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario, tipo_Evento, "titulo", "tamanoEvento"}; // <- Nada más se está utilizando aquí
                     opciones(sc, resumen_datos);
                     break;
                 }
@@ -107,7 +110,7 @@ public class Matrix {
             }
         } while (true);
     }
-    public static void opciones(Scanner sc, Object[] resumen_datos){
+    public static void opciones(Scanner sc, Object[] resumen_datos) throws Exception{
         do {
             System.out.print("""
                 +----------------------------------------+
@@ -140,7 +143,7 @@ public class Matrix {
             }
         } while ((int) resumen_datos[5] != 3);
     }
-    public static void eventoSocial(Scanner sc, Object[] resumen_datos) {
+    public static void eventoSocial(Scanner sc, Object[] resumen_datos) throws Exception{
         int tipoReservacion = 1;
         String[] equipamientoUniversal = new String[]{};
         double[] precios_equipamientoUniversal = new double[]{};
@@ -453,7 +456,7 @@ public class Matrix {
         } while (tipoReservacion != 7);
     }
 ////    H E R E D I A    
-    public static void eventoConferencia(Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
+    public static void eventoConferencia(Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal) throws Exception{
         System.out.println(); // Apariencia
         System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
@@ -471,7 +474,7 @@ public class Matrix {
             """);
             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
         }
-    public static void eventoTeatro( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
+    public static void eventoTeatro( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal) throws Exception{
         System.out.println(); // -> Apariencia
         System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta del teatro                                |
@@ -490,7 +493,7 @@ public class Matrix {
             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
     }
 ////    I S A A C    
-    public static void eventoRecepcion( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
+    public static void eventoRecepcion( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal) throws Exception{
         System.out.println(); // -> Apariencia
         System.out.print("""
             +--------------------------------------------------------------------------------------------------+
@@ -516,7 +519,7 @@ public class Matrix {
             """);
             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
     }
-    public static void eventoBanquete( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal ){
+    public static void eventoBanquete( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal ) throws Exception{ 
         System.out.println(); // -> Apariencia
         System.out.print("""
             +--------------------------------------------------------------------------------------------------+
@@ -543,7 +546,7 @@ public class Matrix {
             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
     }
 ////    J U A N
-    public static void eventoSalon( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
+    public static void eventoSalon( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal) throws Exception{
         System.out.println(); // -> Apariencia
         System.out.print("""
             +----------------------------------------------------------------------------------------------+
@@ -566,14 +569,7 @@ public class Matrix {
             """);
         montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal); // Llama a la función equipamiento y manda los datos necesarios
     }
-    public static void eventoU(
-            Scanner sc,
-            Object[]resumen_datos,
-            String[] equipamientoUniversal,
-            double[] precios_equipamientoUniversal,
-            String[] servicioUniversal,
-            double[] precios_servicioUniversal
-    ){
+    public static void eventoU( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal) throws Exception{
         System.out.println(); // Salto de línea para mejor apariencia
         System.out.print("""
                 +--------------------------------------------------------------------------------------------------+
@@ -601,7 +597,7 @@ public class Matrix {
         return;
     }
 ////    P A R T E   F I N A L   
-    public static void montajeUniversal( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
+    public static void montajeUniversal( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal) throws Exception{
         do {
             double[] totalEquipamiento = new double[equipamientoUniversal.length - 1]; // Equipamiento -1 (Se resta -1 para poder acomodar el Total:) 
             double sumatotalEquipamiento = 0;
@@ -637,7 +633,7 @@ public class Matrix {
             break;
             } while (true);
     }
-    public static void decFinal(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){
+    public static void decFinal(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio) throws Exception{
         System.out.println();
         int pasoFinal = 0;
         do {
@@ -675,7 +671,10 @@ public class Matrix {
             }
         } while (pasoFinal != 4);
     }
-    public static void pago(Scanner sc, Object[]resumen_datos, Object[]datos_equipamiento, Object[]datos_servicio){
+    public static void pago(Scanner sc, Object[]resumen_datos, Object[]datos_equipamiento, Object[]datos_servicio) throws Exception{
+        FileWriter archivo = new FileWriter("TicketsPago.txt", true);
+        PrintWriter escritor = new PrintWriter(archivo);
+
         double pagoRealizado, montoPagar = 0;
         double sumatotalEquipamiento = (double)datos_equipamiento[4], sumatotalServicio = (double)datos_servicio[4];
         do {
@@ -710,36 +709,40 @@ public class Matrix {
                         montoPagar = ((sumatotalEquipamiento + sumatotalServicio) * 3);
                     }
                 }
-                        System.out.printf("""
-                        +----------------------------+
-                        | Monto a pagar: $%-10s |
-                        +----------------------------+
-                        Ingrese el monto total: $""",
-                                montoPagar);
-                        pagoRealizado = sc.nextDouble();
+                System.out.printf("""
+                +----------------------------+
+                | Monto a pagar: $%-10s |
+                +----------------------------+
+                Ingrese el monto total: $""",
+                montoPagar);
+                pagoRealizado = sc.nextDouble();
 
-                        if(pagoRealizado == montoPagar){
-                            System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
-                            break;
-                        }else if(pagoRealizado > montoPagar){
-                            System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
-                            System.out.println("💵Muchas gracias por su compra, vuelva pronto!");
-                            break;
-                        }else if(pagoRealizado < montoPagar){
-                            System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
-                            decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
-                            return;
-                        }else{
-                            sc.next(); // Limpia el buffer
-                        }
-                
+                if(pagoRealizado == montoPagar){
+                    System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
+                    escritor.println("PAgo o no pago");
+                    escritor.close();
+                    break;
+                }else if(pagoRealizado > montoPagar){
+                    System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
+                    System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!");
+                    escritor.println(informacion(sc, resumen_datos, datos_equipamiento, datos_servicio));
+                    escritor.close();
+                    break;
+                }else if(pagoRealizado < montoPagar){
+                    System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
+                    decFinal(sc,resumen_datos,datos_equipamiento,datos_servicio);
+                    return;
+                }else{
+                    sc.next(); // Limpia el buffer
+                }
+                archivo.close();
             } catch (InputMismatchException z) {
                 System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales");
                 sc.next(); // Limpia el buffer
             }
         } while (true);
     }
-    public static void informacion(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio){
+    public static String informacion(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio){
         String[] equipamiento = (String[])datos_equipamiento[0];
         int[] cantidadEquipamiento = (int[])datos_equipamiento[1];
         double[] preciosEquipamiento = (double[])datos_equipamiento[2];
@@ -751,159 +754,38 @@ public class Matrix {
         double[] preciosServicio = (double[])datos_servicio[2];
         double[] totalServicio = (double[])datos_servicio[3];
         double sumatotalServicio = (double)datos_servicio[4];
+        double porcentaje = 0;
 
-        // Evento Social
-        if((int)resumen_datos[5] == 1) {
+        if((int) resumen_datos[5] == 1){
             // Tamaño Pequeño, Tipo Social -> Todo x 1 (ó sin multiplicar)
-            if ((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50) {
-                System.out.printf("""
-                                \n----------------------------------------------------------------------
-                                | Nombre:                   %-40s |
-                                | Número de teléfono:       %-40s |
-                                | Correo:                   %-40s |
-                                | Cantidad de personas:     %-40s |
-                                | Días de renta:            %-40s |
-                                | Tipo de evento:           %-40s |
-                                | Evento contratado:        %-40s |
-                                | Tamaño del evento:        %-40s |
-                                +-------------------------------------------------------------------------------------------------------------------------+
-                                """,
-                        resumen_datos[0],  // Nombre
-                        resumen_datos[1],  // Teléfono
-                        resumen_datos[2],  // Correo
-                        resumen_datos[3],  // Personas
-                        resumen_datos[4],  // Días
-                        "Social",          // Tipo de evento
-                        resumen_datos[6],           // Evento contratado
-                        "Pequeño"          // Tamaño del evento
-                );
-                System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
-                for (int i = 0; i < equipamiento.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], totalEquipamiento[i]);
-                }
-                System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", sumatotalEquipamiento);
-                ///* Fin equipamiento
-
-                System.out.println("|                                                                                                                         |");
-
-                ///* Muestra en pantalla: | Servicio | Cantidad | Precio c/u
-                System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Servicio", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
-                for (int i = 0; i < servicio.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], totalServicio[i]);
-                }
-                System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", sumatotalServicio);
-                System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio));
-                System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                /// * Fin Servicio
-                sc.nextLine(); // Limpia el buffer
-                System.out.print("\uD83D\uDC46 Presiona enter para volver: ");
-                sc.nextLine(); // Limpia el buffer
-            }
-            // Tamaño Mediano, Tipo Social -> Todo x 1.5
-            else if ((int) resumen_datos[3] >= 51 && (int) resumen_datos[3] <= 100) {
-                System.out.printf("""
-                                \n----------------------------------------------------------------------
-                                | Nombre:                   %-40s |
-                                | Número de teléfono:       %-40s |
-                                | Correo:                   %-40s |
-                                | Cantidad de personas:     %-40s |
-                                | Días de renta:            %-40s |
-                                | Tipo de evento:           %-40s |
-                                | Evento contratado:        %-40s |
-                                | Tamaño del evento:        %-40s |
-                                +-------------------------------------------------------------------------------------------------------------------------+
-                                """,
-                        resumen_datos[0],  // Nombre
-                        resumen_datos[1],  // Teléfono
-                        resumen_datos[2],  // Correo
-                        resumen_datos[3],  // Personas
-                        resumen_datos[4],  // Días
-                        "Social",          // Tipo de evento
-                        resumen_datos[6],           // Evento contratado
-                        "Mediano"          // Tamaño del evento
-                );
-                System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
-                for (int i = 0; i < equipamiento.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 1.5));
-                }
-                System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 1.5));
-                ///* Fin equipamiento
-
-                System.out.println("|                                                                                                                         |");
-
-                ///* Muestra en pantalla: | Servicio | Cantidad | Precio c/u
-                System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Servicio", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
-                for (int i = 0; i < servicio.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * 1.5));
-                }
-                System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", (sumatotalServicio * 1.5));
-                System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * 1.5);
-                System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                /// * Fin Servicio
-                sc.nextLine(); // Limpia el buffer
-                System.out.print("\uD83D\uDC46 Presiona enter para volver: ");
-                sc.nextLine(); // Limpia el buffer
-            }
-            // Tamaño Grande, Tipo Social -> todo x 2
-            else if ((int) resumen_datos[3] >= 101) {
-                System.out.printf("""
-                                \n----------------------------------------------------------------------
-                                | Nombre:                   %-40s |
-                                | Número de teléfono:       %-40s |
-                                | Correo:                   %-40s |
-                                | Cantidad de personas:     %-40s |
-                                | Días de renta:            %-40s |
-                                | Tipo de evento:           %-40s |
-                                | Evento contratado:        %-40s |
-                                | Tamaño del evento:        %-40s |
-                                +-------------------------------------------------------------------------------------------------------------------------+
-                                """,
-                        resumen_datos[0],  // Nombre
-                        resumen_datos[1],  // Teléfono
-                        resumen_datos[2],  // Correo
-                        resumen_datos[3],  // Personas
-                        resumen_datos[4],  // Días
-                        "Social",          // Tipo de evento
-                        resumen_datos[6],           // Evento contratado
-                        "Grande "          // Tamaño del evento
-                );
-                System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
-                for (int i = 0; i < equipamiento.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 2));
-                }
-                System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 2));
-                ///* Fin equipamiento
-
-                System.out.println("|                                                                                                                         |");
-
-                ///* Muestra en pantalla: | Servicio | Cantidad | Precio c/u
-                System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Servicio", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
-                for (int i = 0; i < servicio.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * 2));
-                }
-                System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", (sumatotalServicio * 2));
-                System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                System.out.printf("| Total a pagar: $%-103s |%n", ((sumatotalEquipamiento + sumatotalServicio) * 2));
-                System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                /// * Fin Servicio
-                sc.nextLine(); // Limpia el buffer
-                System.out.print("\uD83D\uDC46 Presiona enter para volver: ");
-                sc.nextLine(); // Limpia el buffer
-            }
+            if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50){
+                porcentaje = 1;
+                resumen_datos[7] = "Pequeño";
+            } 
+            else if((int) resumen_datos[3] >= 51 && (int) resumen_datos[3] <= 100) {
+                porcentaje = 1.5;
+                resumen_datos[7] = "Mediano";
+            }        
+            else if((int) resumen_datos[3] >= 101) {
+                porcentaje = 2;
+                resumen_datos[7] = "Grande";
         }
-        // Evento Empresarial
         else if((int)resumen_datos[5] == 2) {
-            // Tamaño Pequeño, Tipo Empresarial -> Todo x 2
-            if ((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50) {
-                System.out.printf("""
+            if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50) {
+                porcentaje = 2;
+                resumen_datos[7] = "Pequeño";
+            }
+            else if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50) {
+                porcentaje = 2.5;
+                resumen_datos[7] = "Mediano";
+            }
+            else if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50) {
+                porcentaje = 3;
+                resumen_datos[7] = "Grande";
+            }
+        }
+                
+        System.out.printf("""
                                 \n----------------------------------------------------------------------
                                 | Nombre:                   %-40s |
                                 | Número de teléfono:       %-40s |
@@ -920,113 +802,16 @@ public class Matrix {
                         resumen_datos[2],  // Correo
                         resumen_datos[3],  // Personas
                         resumen_datos[4],  // Días
-                        "Empresarial",          // Tipo de evento
-                        resumen_datos[6],           // Evento contratado
-                        "Pequeño"          // Tamaño del evento
-                );
-                System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
-                for (int i = 0; i < equipamiento.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 2));
-                }
-                System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 2));
-                ///* Fin equipamiento
-
-                System.out.println("|                                                                                                                         |");
-
-                ///* Muestra en pantalla: | Servicio | Cantidad | Precio c/u
-                System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Servicio", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
-                for (int i = 0; i < servicio.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * 2));
-                }
-                System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", (sumatotalServicio * 2));
-                System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * 2);
-                System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                /// * Fin Servicio
-                sc.nextLine(); // Limpia el buffer
-                System.out.print("\uD83D\uDC46 Presiona enter para volver: ");
-                sc.nextLine(); // Limpia el buffer
-            }
-
-            // Tamaño Mediano, Tipo Empresarial -> Todo x 2.5
-            else if ((int) resumen_datos[3] >= 51 && (int) resumen_datos[3] <= 100) {
-                System.out.printf("""
-                        \n----------------------------------------------------------------------
-                        | Nombre:                   %-40s |
-                        | Número de teléfono:       %-40s |
-                        | Correo:                   %-40s |
-                        | Cantidad de personas:     %-40s |
-                        | Días de renta:            %-40s |
-                        | Tipo de evento:           %-40s |
-                        | Evento contratado:        %-40s |
-                        | Tamaño del evento:        %-40s |
-                        +-------------------------------------------------------------------------------------------------------------------------+
-                        """,
-                        resumen_datos[0],  // Nombre
-                        resumen_datos[1],  // Teléfono
-                        resumen_datos[2],  // Correo
-                        resumen_datos[3],  // Personas
-                        resumen_datos[4],  // Días
-                        "Empresarial",          // Tipo de evento
-                        resumen_datos[6],           // Evento contratado
-                        "Mediano"          // Tamaño del evento
-                );
-                System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
-                for (int i = 0; i < equipamiento.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 2.5));
-                }
-                System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 2.5));
-                ///* Fin equipamiento
-
-                System.out.println("|                                                                                                                         |");
-
-                ///* Muestra en pantalla: | Servicio | Cantidad | Precio c/u
-                System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Servicio", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
-                for (int i = 0; i < servicio.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * 2.5));
-                }
-                System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",servicio[servicio.length-1], "", "", (sumatotalServicio * 2.5));
-                System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * 2.5);
-                System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                /// * Fin Servicio
-                sc.nextLine(); // Limpia el buffer
-                System.out.print("\uD83D\uDC46 Presiona enter para volver: ");
-                sc.nextLine(); // Limpia el buffer
-            }
-            // Tamaño Grande, Tipo Empresarial -> Todo x 3
-            else if ((int) resumen_datos[3] >= 101) {
-                System.out.printf("""
-                        \n----------------------------------------------------------------------
-                        | Nombre:                   %-40s |
-                        | Número de teléfono:       %-40s |
-                        | Correo:                   %-40s |
-                        | Cantidad de personas:     %-40s |
-                        | Días de renta:            %-40s |
-                        | Tipo de evento:           %-40s |
-                        | Evento contratado:        %-40s |
-                        | Tamaño del evento:        %-40s |
-                        +-------------------------------------------------------------------------------------------------------------------------+
-                        """,
-                        resumen_datos[0],  // Nombre
-                        resumen_datos[1],  // Teléfono
-                        resumen_datos[2],  // Correo
-                        resumen_datos[3],  // Personas
-                        resumen_datos[4],  // Días
                         "Social",          // Tipo de evento
                         resumen_datos[6],           // Evento contratado
-                        "Mediano"          // Tamaño del evento
+                        resumen_datos[7]          // Tamaño del evento
                 );
                 System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
                 for (int i = 0; i < equipamiento.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 3));
+                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * porcentaje));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 3));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * porcentaje));
                 ///* Fin equipamiento
 
                 System.out.println("|                                                                                                                         |");
@@ -1034,19 +819,19 @@ public class Matrix {
                 ///* Muestra en pantalla: | Servicio | Cantidad | Precio c/u
                 System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Servicio", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
                 for (int i = 0; i < servicio.length - 1; i++) {
-                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * 3));
+                    System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * porcentaje));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",servicio[servicio.length-1], "", "", (sumatotalServicio * 3));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", (sumatotalServicio * porcentaje));
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
-                System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * 3);
+                System.out.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * porcentaje);
                 System.out.println("+-------------------------------------------------------------------------------------------------------------------------+");
                 /// * Fin Servicio
                 sc.nextLine(); // Limpia el buffer
                 System.out.print("\uD83D\uDC46 Presiona enter para volver: ");
                 sc.nextLine(); // Limpia el buffer
             }
-        }
         System.out.println(); // Salto de línea para mejor apariencia
+        return "Hola";
     }
 }
