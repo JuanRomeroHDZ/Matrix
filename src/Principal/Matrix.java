@@ -1,9 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Matrix {
-    static String[] equipamientoUniversal = new String[]{};
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             int registro = 1;// Se inicializa porque si no da error en el do-while
@@ -67,7 +65,6 @@ public class Matrix {
         }
     }
     public static void datosUsuarios(Scanner sc){
-        
         do {
             try {
                 System.out.println("+---------------------------------------------------------------------------------------");
@@ -92,12 +89,13 @@ public class Matrix {
                 }
                 else{
                     int tipo_Evento= 2;
-                    String titulo = "";
+                    String titulo = ""; // Revisar con mi equipo
                     System.out.print("| \u2600\uFE0F Cantidad de días que reservará el evento: ");
                     int diasUsuario = sc.nextInt();
+                    
                     System.out.println("+---------------------------------------------------------------------------------------");
                     System.out.println(); // -> Apariencia
-                    Object[] resumen_datos = new Object[]{nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario, tipo_Evento, titulo};
+                    Object[] resumen_datos = new Object[]{nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario, tipo_Evento, titulo}; // <- Nada más se está utilizando aquí
                     opciones(sc, resumen_datos);
                     break;
                 }
@@ -606,37 +604,38 @@ public class Matrix {
     public static void montajeUniversal( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal){
         do {
             double[] totalEquipamiento = new double[equipamientoUniversal.length - 1]; // Equipamiento -1 (Se resta -1 para poder acomodar el Total:) 
-        double sumatotalEquipamiento = 0;
+            double sumatotalEquipamiento = 0;
 
-        double[] totalServicio = new double[servicioUniversal.length - 1];    // Servicio - 1 (Se resta -1 para poder acomodar el Total:)
-        double sumatotalServicio = 0;
+            double[] totalServicio = new double[servicioUniversal.length - 1];    // Servicio - 1 (Se resta -1 para poder acomodar el Total:)
+            double sumatotalServicio = 0;
 
-        int[] cantidadEquipamiento = new int[equipamientoUniversal.length - 1];    // Cantidad de equipamiento -> Ingresado por el usuario
-        int[] cantidadServicio = new int[servicioUniversal.length - 1];        // Cantidad de personal     -> Ingresado por el usuario
+            int[] cantidadEquipamiento = new int[equipamientoUniversal.length - 1];    // Cantidad de equipamiento -> Ingresado por el usuario
+            int[] cantidadServicio = new int[servicioUniversal.length - 1];        // Cantidad de personal     -> Ingresado por el usuario
 
-        try {
-            for (int i = 0; i < equipamientoUniversal.length - 1; i++) {
-                System.out.print("⭐ Cantidad de "  + equipamientoUniversal[i] + ": ");
-                cantidadEquipamiento[i] = sc.nextInt();
-                totalEquipamiento[i] = (cantidadEquipamiento[i] * (int) resumen_datos[4] * precios_equipamientoUniversal[i]);
-                sumatotalEquipamiento += totalEquipamiento[i];
+            try {
+                for (int i = 0; i < equipamientoUniversal.length - 1; i++) {
+                    System.out.print("⭐ Cantidad de "  + equipamientoUniversal[i] + ": ");
+                    cantidadEquipamiento[i] = sc.nextInt();
+                    totalEquipamiento[i] = (cantidadEquipamiento[i] * (int) resumen_datos[4] * precios_equipamientoUniversal[i]);
+                    sumatotalEquipamiento += totalEquipamiento[i];
+                }
+                System.out.println(); // Salto de línea para preguntar sobre el personal
+                for (int i = 0; i < servicioUniversal.length - 1; i++) {
+                    System.out.print("⭐ Cantidad de "  + servicioUniversal[i] + ": ");
+                    cantidadServicio[i] = sc.nextInt();
+                    totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * precios_servicioUniversal[i]);
+                    sumatotalServicio += totalServicio[i];
+                }
+                Object[] resumen_equipo = new Object[]{equipamientoUniversal, cantidadEquipamiento, precios_equipamientoUniversal, totalEquipamiento, sumatotalEquipamiento};
+                Object[] resumen_servicios = new Object[]{servicioUniversal, cantidadServicio, precios_servicioUniversal, totalServicio, sumatotalServicio};
+                decFinal(sc, resumen_datos, resumen_equipo, resumen_servicios);
+
+            } catch (InputMismatchException e) {
+                System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales\n");
+                sc.nextLine();
             }
-            System.out.println(); // Salto de línea para preguntar sobre el personal
-            for (int i = 0; i < servicioUniversal.length - 1; i++) {
-                System.out.print("⭐ Cantidad de "  + servicioUniversal[i] + ": ");
-                cantidadServicio[i] = sc.nextInt();
-                totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * precios_servicioUniversal[i]);
-                sumatotalServicio += totalServicio[i];
-            }
-            Object[] resumen_equipo = new Object[]{equipamientoUniversal, cantidadEquipamiento, precios_equipamientoUniversal, totalEquipamiento, sumatotalEquipamiento};
-            Object[] resumen_servicios = new Object[]{servicioUniversal, cantidadServicio, precios_servicioUniversal, totalServicio, sumatotalServicio};
-            decFinal(sc, resumen_datos, resumen_equipo, resumen_servicios);
-
-        } catch (InputMismatchException e) {
-            System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales\n");
-            sc.nextLine();
-        }
-        } while (true);
+            break;
+            } while (true);
     }
     public static void decFinal(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio){
         System.out.println();
@@ -1027,7 +1026,7 @@ public class Matrix {
                     System.out.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * 3));
                 }
                 System.out.println();
-                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n",equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 3));
+                System.out.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * 3));
                 ///* Fin equipamiento
 
                 System.out.println("|                                                                                                                         |");
