@@ -1,10 +1,10 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import javax.lang.model.type.PrimitiveType;
+//import javax.lang.model.type.PrimitiveType;
 
 import java.io.*;
-import java.rmi.server.ExportException;
+//import java.rmi.server.ExportException;
 
 public class Matrix {
     public static void main(String[] args) throws Exception{
@@ -94,7 +94,7 @@ public class Matrix {
                 }
                 else{
                     int tipo_Evento= 2;
-                    System.out.print("| \u2600\uFE0F Cantidad de días que reservará el evento: ");
+                    System.out.print("| \u2600\uFE0F  Cantidad de días que reservará el evento: ");
                     int diasUsuario = sc.nextInt();
                     System.out.println("+---------------------------------------------------------------------------------------");
                     System.out.println(); // -> Apariencia
@@ -630,7 +630,7 @@ public class Matrix {
                 System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales\n");
                 sc.nextLine();
             }
-            break;
+            return;
             } while (true);
     }
     public static void decFinal(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio) throws Exception{
@@ -672,8 +672,6 @@ public class Matrix {
         } while (pasoFinal != 4);
     }
     public static void pago(Scanner sc, Object[]resumen_datos, Object[]datos_equipamiento, Object[]datos_servicio) throws Exception{
-        FileWriter archivo = new FileWriter("TicketsPago.txt", true);
-        PrintWriter escritor = new PrintWriter(archivo);
 
         double pagoRealizado, montoPagar = 0;
         double sumatotalEquipamiento = (double)datos_equipamiento[4], sumatotalServicio = (double)datos_servicio[4];
@@ -719,14 +717,12 @@ public class Matrix {
 
                 if(pagoRealizado == montoPagar){
                     System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
-                    escritor.println("PAgo o no pago");
-                    escritor.close();
+                    tickets(sc, resumen_datos, datos_equipamiento, datos_servicio);
                     break;
                 }else if(pagoRealizado > montoPagar){
                     System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
                     System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!");
-                    escritor.println(informacion(sc, resumen_datos, datos_equipamiento, datos_servicio));
-                    escritor.close();
+                    tickets(sc, resumen_datos, datos_equipamiento, datos_servicio);
                     break;
                 }else if(pagoRealizado < montoPagar){
                     System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
@@ -735,14 +731,13 @@ public class Matrix {
                 }else{
                     sc.next(); // Limpia el buffer
                 }
-                archivo.close();
             } catch (InputMismatchException z) {
                 System.out.println("\n❌ Error: No se permiten letras ni caracteres especiales");
                 sc.next(); // Limpia el buffer
             }
         } while (true);
     }
-    public static String informacion(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio){
+    public static void informacion(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio){
         String[] equipamiento = (String[])datos_equipamiento[0];
         int[] cantidadEquipamiento = (int[])datos_equipamiento[1];
         double[] preciosEquipamiento = (double[])datos_equipamiento[2];
@@ -755,8 +750,10 @@ public class Matrix {
         double[] totalServicio = (double[])datos_servicio[3];
         double sumatotalServicio = (double)datos_servicio[4];
         double porcentaje = 0;
+        String typeEvent = "";
 
         if((int) resumen_datos[5] == 1){
+            typeEvent = "Social";
             // Tamaño Pequeño, Tipo Social -> Todo x 1 (ó sin multiplicar)
             if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50){
                 porcentaje = 1;
@@ -770,16 +767,18 @@ public class Matrix {
                 porcentaje = 2;
                 resumen_datos[7] = "Grande";
         }
+    }
         else if((int)resumen_datos[5] == 2) {
+        typeEvent = "Empresarial";
             if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50) {
                 porcentaje = 2;
                 resumen_datos[7] = "Pequeño";
             }
-            else if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50) {
+            else if((int) resumen_datos[3] >= 51 && (int) resumen_datos[3] <= 100) {
                 porcentaje = 2.5;
                 resumen_datos[7] = "Mediano";
             }
-            else if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50) {
+            else if((int) resumen_datos[3] >= 101) {
                 porcentaje = 3;
                 resumen_datos[7] = "Grande";
             }
@@ -802,8 +801,8 @@ public class Matrix {
                         resumen_datos[2],  // Correo
                         resumen_datos[3],  // Personas
                         resumen_datos[4],  // Días
-                        "Social",          // Tipo de evento
-                        resumen_datos[6],           // Evento contratado
+                        typeEvent,         // Tipo de evento
+                        resumen_datos[6], // Evento contratado
                         resumen_datos[7]          // Tamaño del evento
                 );
                 System.out.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
@@ -830,8 +829,117 @@ public class Matrix {
                 sc.nextLine(); // Limpia el buffer
                 System.out.print("\uD83D\uDC46 Presiona enter para volver: ");
                 sc.nextLine(); // Limpia el buffer
-            }
+            
         System.out.println(); // Salto de línea para mejor apariencia
-        return "Hola";
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public static void tickets(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio) throws Exception{
+        String[] equipamiento = (String[])datos_equipamiento[0];
+        int[] cantidadEquipamiento = (int[])datos_equipamiento[1];
+        double[] preciosEquipamiento = (double[])datos_equipamiento[2];
+        double[] totalEquipamiento = (double[])datos_equipamiento[3];
+        double sumatotalEquipamiento = (double)datos_equipamiento[4];
+
+        String[] servicio = (String[])datos_servicio[0];
+        int[] cantidadServicio = (int[])datos_servicio[1];
+        double[] preciosServicio = (double[])datos_servicio[2];
+        double[] totalServicio = (double[])datos_servicio[3];
+        double sumatotalServicio = (double)datos_servicio[4];
+        double porcentaje = 0;
+        String typeEvent = "";
+
+        FileWriter archivo = new FileWriter("TicketsPago.txt", true);
+        PrintWriter escritor = new PrintWriter(archivo);
+        if((int) resumen_datos[5] == 1){
+            typeEvent = "Social";
+            // Tamaño Pequeño, Tipo Social -> Todo x 1 (ó sin multiplicar)
+            if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50){
+                porcentaje = 1;
+                resumen_datos[7] = "Pequeño";
+            } 
+            else if((int) resumen_datos[3] >= 51 && (int) resumen_datos[3] <= 100) {
+                porcentaje = 1.5;
+                resumen_datos[7] = "Mediano";
+            }        
+            else if((int) resumen_datos[3] >= 101) {
+                porcentaje = 2;
+                resumen_datos[7] = "Grande";
+        }
+    }
+        else if((int)resumen_datos[5] == 2) {
+        typeEvent = "Empresarial";
+            if((int) resumen_datos[3] >= 1 && (int) resumen_datos[3] <= 50) {
+                porcentaje = 2;
+                resumen_datos[7] = "Pequeño";
+            }
+            else if((int) resumen_datos[3] >= 51 && (int) resumen_datos[3] <= 100) {
+                porcentaje = 2.5;
+                resumen_datos[7] = "Mediano";
+            }
+            else if((int) resumen_datos[3] >= 101) {
+                porcentaje = 3;
+                resumen_datos[7] = "Grande";
+            }
+        }
+                
+        escritor.printf("""
+                                \n----------------------------------------------------------------------
+                                | Nombre:                   %-40s |
+                                | Número de teléfono:       %-40s |
+                                | Correo:                   %-40s |
+                                | Cantidad de personas:     %-40s |
+                                | Días de renta:            %-40s |
+                                | Tipo de evento:           %-40s |
+                                | Evento contratado:        %-40s |
+                                | Tamaño del evento:        %-40s |
+                                +-------------------------------------------------------------------------------------------------------------------------+
+                                """,
+                        resumen_datos[0],  // Nombre
+                        resumen_datos[1],  // Teléfono
+                        resumen_datos[2],  // Correo
+                        resumen_datos[3],  // Personas
+                        resumen_datos[4],  // Días
+                        typeEvent,         // Tipo de evento
+                        resumen_datos[6], // Evento contratado
+                        resumen_datos[7]          // Tamaño del evento
+                );
+
+                ///* Muestra en pantalla: | Equipamiento ...
+                escritor.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
+                for (int i = 0; i < equipamiento.length - 1; i++) {
+                    escritor.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", equipamiento[i], cantidadEquipamiento[i], preciosEquipamiento[i], (totalEquipamiento[i] * porcentaje));
+                }
+                escritor.println();
+                escritor.printf("| %-27s | %-8s | %-10s | $%-64s |\n", equipamiento[equipamiento.length-1], "", "", (sumatotalEquipamiento * porcentaje));
+                ///* Fin equipamiento
+
+                escritor.println("|                                                                                                                         |");
+
+                ///* Muestra en pantalla: | Servicio | Cantidad | Precio c/u
+                escritor.printf("| %-27s | %-5s | %-10s | %-65s |", "Servicio", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
+                for (int i = 0; i < servicio.length - 1; i++) {
+                    escritor.printf("\n| %-27s | %-8s | $%-9s | $%-64s |", servicio[i], cantidadServicio[i], preciosServicio[i], (totalServicio[i] * porcentaje));
+                }
+                escritor.println();
+                escritor.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", (sumatotalServicio * porcentaje));
+                escritor.println("+-------------------------------------------------------------------------------------------------------------------------+");
+                escritor.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * porcentaje);
+                escritor.println("+-------------------------------------------------------------------------------------------------------------------------+");
+                /// * Fin Servicio
+                //sc.nextLine(); // Limpia el buffer
+                escritor.print("\uD83D\uDC46 Presiona enter para volver: ");
+                //sc.nextLine(); // Limpia el buffer
+            escritor.close();
+        System.out.println(); // Salto de línea para mejor apariencia
     }
 }
