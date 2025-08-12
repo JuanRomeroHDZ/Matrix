@@ -1,10 +1,6 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-//import javax.lang.model.type.PrimitiveType;
-
 import java.io.*;
-//import java.rmi.server.ExportException;
 
 public class Matrix {
     public static void main(String[] args) throws Exception{
@@ -58,12 +54,12 @@ public class Matrix {
                             System.out.println("\uD83E\uDD1AVUELVA PRONTO\u270B"); // -> Será el único que saldrá del programa
                             break;
                         default:
-                            System.out.println("\n\u274CError: Ingresa un número entre (1 - 2).");
+                            System.out.println("\n\u274C Error: Ingresa un número entre (1 - 2).");
                             sc.nextLine();
                     }
                 }
                 catch (InputMismatchException a) {
-                    System.out.println("\n\u274CError: No se permiten letras ni caracteres especiales.");
+                    System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales.");
                     sc.nextLine();
                 }
             } while (registro != 2);
@@ -461,15 +457,15 @@ public class Matrix {
         System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta de la conferencia                         |
             +---------------------------------------------------------------------------------------------+\n|  Equipamientos:                           Precios:                                          |
-            |     > Mesas y sillas                        60$                                             |\n|     > Escenario.                            200$                                            |
-            |     > Microfonos.                           120$                                            |\n|     > Proyector y pantalla                  65$                                             |
-            |     > Sistema de sonido.                    150$                                            |\n|     > Podio.                                140$                                            |
-            |     > Pizarra y rotafolios.                 80$                                             |\n|     > Iluminación.                          125$                                            |
+            |     > Mesas y sillas                        $60                                             |\n|     > Escenario.                            $200                                            |
+            |     > Microfonos.                           $120                                            |\n|     > Proyector y pantalla                  $65                                             |
+            |     > Sistema de sonido.                    $150                                            |\n|     > Podio.                                $140                                            |
+            |     > Pizarra y rotafolios.                 $80                                             |\n|     > Iluminación.                          $125                                            |
             |                                                                                             |\n|  Servicios:                                                                                 |
-            |     > Registro de asistentes.               100$                                            |\n|     > Traducción simultanea.                250$                                            |
-            |     > Transmisión en vivo o grabacion.      175$                                            |\n|     > Café o coffe break.                   60$                                             |
-            |     > Personal técnico.                     250$                                            |\n|     > Material                              120$                                            |
-            |     > Wi-Fi                                 40$                                             |
+            |     > Registro de asistentes.               $100                                            |\n|     > Traducción simultanea.                $250                                            |
+            |     > Transmisión en vivo o grabacion.      $175                                            |\n|     > Café o coffe break.                   $60                                             |
+            |     > Personal técnico.                     $250                                            |\n|     > Material                              $120                                            |
+            |     > Wi-Fi                                 $40                                             |
             +---------------------------------------------------------------------------------------------+
             """);
             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
@@ -479,15 +475,15 @@ public class Matrix {
         System.out.print("""
             +---------------------------------------------------------------------------------------------+\n|                           Bienvenido/a a la renta del teatro                                |
             +---------------------------------------------------------------------------------------------+\n| Equipamientos:                           Precios:                                           |
-            |     > Escenarios con telón                  200$                                            |\n|     > Butacas fijas o móviles               120$                                            |
-            |     > Iluminaciónes teatral                  70$                                            |\n|     > Sistemas de sonido envolvente         135$                                            |
-            |     > Consolas de audio/luces               150$                                            |\n|     > Camerinos o vestidores                240$                                            |
-            |     > Decoración y escenografía             300$                                            |
+            |     > Escenarios con telón                  $200                                            |\n|     > Butacas fijas o móviles               $120                                            |
+            |     > Iluminaciónes teatral                  $70                                            |\n|     > Sistemas de sonido envolvente         $135                                            |
+            |     > Consolas de audio/luces               $150                                            |\n|     > Camerinos o vestidores                $240                                            |
+            |     > Decoración y escenografía             $300                                            |
             |                                                                                             |\n| Servicios:                                                                                  |
-            |     > Vendedores de boletos                  80$                                            |\n|     > Personal de taquilla y acomodadores.  350$                                            |
-            |     > Seguridad y control de acceso         405$                                            |\n|     > Servicios de cafetería o snacks        90$                                            |
-            |     > Publicidad y promoción                250$                                            |\n|     > Servicios de limpieza                 140$                                            |
-            |     > Asistencia técnica en luces/sonido    190$                                            |
+            |     > Vendedores de boletos                  $80                                            |\n|     > Personal de taquilla y acomodadores.  $350                                            |
+            |     > Seguridad y control de acceso         $405                                            |\n|     > Servicios de cafetería o snacks        $90                                            |
+            |     > Publicidad y promoción                $250                                            |\n|     > Servicios de limpieza                 $140                                            |
+            |     > Asistencia técnica en luces/sonido    $190                                            |
             +---------------------------------------------------------------------------------------------+
             """);
             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
@@ -598,7 +594,7 @@ public class Matrix {
     }
 ////    P A R T E   F I N A L   
     public static void montajeUniversal( Scanner sc, Object[]resumen_datos, String[] equipamientoUniversal, double[] precios_equipamientoUniversal, String[] servicioUniversal, double[] precios_servicioUniversal) throws Exception{
-        do {
+        
             double[] totalEquipamiento = new double[equipamientoUniversal.length - 1]; // Equipamiento -1 (Se resta -1 para poder acomodar el Total:) 
             double sumatotalEquipamiento = 0;
 
@@ -607,30 +603,30 @@ public class Matrix {
 
             int[] cantidadEquipamiento = new int[equipamientoUniversal.length - 1];    // Cantidad de equipamiento -> Ingresado por el usuario
             int[] cantidadServicio = new int[servicioUniversal.length - 1];        // Cantidad de personal     -> Ingresado por el usuario
+            do {
+                try {
+                    for (int i = 0; i < equipamientoUniversal.length - 1; i++) {
+                        System.out.print("⭐ Cantidad de "  + equipamientoUniversal[i] + ": ");
+                        cantidadEquipamiento[i] = sc.nextInt();
+                        totalEquipamiento[i] = (cantidadEquipamiento[i] * (int) resumen_datos[4] * precios_equipamientoUniversal[i]);
+                        sumatotalEquipamiento += totalEquipamiento[i];
+                    }
+                    System.out.println(); // Salto de línea para preguntar sobre el personal
+                    for (int i = 0; i < servicioUniversal.length - 1; i++) {
+                        System.out.print("⭐ Cantidad de "  + servicioUniversal[i] + ": ");
+                        cantidadServicio[i] = sc.nextInt();
+                        totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * precios_servicioUniversal[i]);
+                        sumatotalServicio += totalServicio[i];
+                    }
+                    Object[] resumen_equipo = new Object[]{equipamientoUniversal, cantidadEquipamiento, precios_equipamientoUniversal, totalEquipamiento, sumatotalEquipamiento};
+                    Object[] resumen_servicios = new Object[]{servicioUniversal, cantidadServicio, precios_servicioUniversal, totalServicio, sumatotalServicio};
+                    decFinal(sc, resumen_datos, resumen_equipo, resumen_servicios);
 
-            try {
-                for (int i = 0; i < equipamientoUniversal.length - 1; i++) {
-                    System.out.print("⭐ Cantidad de "  + equipamientoUniversal[i] + ": ");
-                    cantidadEquipamiento[i] = sc.nextInt();
-                    totalEquipamiento[i] = (cantidadEquipamiento[i] * (int) resumen_datos[4] * precios_equipamientoUniversal[i]);
-                    sumatotalEquipamiento += totalEquipamiento[i];
+                } catch (InputMismatchException e) {
+                    System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales\n");
+                    sc.nextLine();
                 }
-                System.out.println(); // Salto de línea para preguntar sobre el personal
-                for (int i = 0; i < servicioUniversal.length - 1; i++) {
-                    System.out.print("⭐ Cantidad de "  + servicioUniversal[i] + ": ");
-                    cantidadServicio[i] = sc.nextInt();
-                    totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * precios_servicioUniversal[i]);
-                    sumatotalServicio += totalServicio[i];
-                }
-                Object[] resumen_equipo = new Object[]{equipamientoUniversal, cantidadEquipamiento, precios_equipamientoUniversal, totalEquipamiento, sumatotalEquipamiento};
-                Object[] resumen_servicios = new Object[]{servicioUniversal, cantidadServicio, precios_servicioUniversal, totalServicio, sumatotalServicio};
-                decFinal(sc, resumen_datos, resumen_equipo, resumen_servicios);
-
-            } catch (InputMismatchException e) {
-                System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales\n");
-                sc.nextLine();
-            }
-            return;
+            //return;
             } while (true);
     }
     public static void decFinal(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio) throws Exception{
@@ -650,11 +646,13 @@ public class Matrix {
                 switch (pasoFinal) {
                     case 1:
                         pago(sc,resumen_datos,datos_equipamiento,datos_servicio);
+                        main(null);
                         return;
                     case 2:
                         informacion(sc,resumen_datos,datos_equipamiento,datos_servicio);
                         break;
                     case 3:
+                        System.out.println();
                         eventoSocial(sc, resumen_datos);
                         break;
                     case 4:
@@ -717,12 +715,12 @@ public class Matrix {
 
                 if(pagoRealizado == montoPagar){
                     System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
-                    tickets(sc, resumen_datos, datos_equipamiento, datos_servicio);
+                    tickets(sc, resumen_datos, datos_equipamiento, datos_servicio, pagoRealizado);
                     break;
                 }else if(pagoRealizado > montoPagar){
                     System.out.println("\nSu cambio es de: " + (pagoRealizado - montoPagar));
-                    System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!");
-                    tickets(sc, resumen_datos, datos_equipamiento, datos_servicio);
+                    System.out.println("\n💵 Muchas gracias por su compra, vuelva pronto!\n");
+                    tickets(sc, resumen_datos, datos_equipamiento, datos_servicio, pagoRealizado);
                     break;
                 }else if(pagoRealizado < montoPagar){
                     System.out.println("\n💥 Dinero insuficiente, le hace falta: " + (montoPagar - pagoRealizado));
@@ -832,18 +830,7 @@ public class Matrix {
             
         System.out.println(); // Salto de línea para mejor apariencia
     }
-
-
-
-
-
-
-
-
-
-
-
-    public static void tickets(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio) throws Exception{
+    public static void tickets(Scanner sc,Object[]resumen_datos,Object[]datos_equipamiento,Object[]datos_servicio, double pagoRealizado) throws Exception{
         String[] equipamiento = (String[])datos_equipamiento[0];
         int[] cantidadEquipamiento = (int[])datos_equipamiento[1];
         double[] preciosEquipamiento = (double[])datos_equipamiento[2];
@@ -858,8 +845,9 @@ public class Matrix {
         double porcentaje = 0;
         String typeEvent = "";
 
-        FileWriter archivo = new FileWriter("TicketsPago.txt", true);
-        PrintWriter escritor = new PrintWriter(archivo);
+        FileWriter archivo = new FileWriter("TicketsPago.txt", true); // Crea el archivo 
+        PrintWriter escritor = new PrintWriter(archivo); // Crea el objeto escritor para escribir en el archivo
+
         if((int) resumen_datos[5] == 1){
             typeEvent = "Social";
             // Tamaño Pequeño, Tipo Social -> Todo x 1 (ó sin multiplicar)
@@ -891,7 +879,11 @@ public class Matrix {
                 resumen_datos[7] = "Grande";
             }
         }
-                
+        escritor.println(); 
+        escritor.print("""
+            +----------------+
+            | TICKET DE PAGO |
+            +----------------+""");
         escritor.printf("""
                                 \n----------------------------------------------------------------------
                                 | Nombre:                   %-40s |
@@ -902,6 +894,7 @@ public class Matrix {
                                 | Tipo de evento:           %-40s |
                                 | Evento contratado:        %-40s |
                                 | Tamaño del evento:        %-40s |
+                                | Fecha de compra:          %-40s |
                                 +-------------------------------------------------------------------------------------------------------------------------+
                                 """,
                         resumen_datos[0],  // Nombre
@@ -910,9 +903,9 @@ public class Matrix {
                         resumen_datos[3],  // Personas
                         resumen_datos[4],  // Días
                         typeEvent,         // Tipo de evento
-                        resumen_datos[6], // Evento contratado
-                        resumen_datos[7]          // Tamaño del evento
-                );
+                        resumen_datos[6],  // Evento contratado
+                        resumen_datos[7],  // Tamaño del evento
+                        java.time.LocalDate.now()); // Fecha de compra
 
                 ///* Muestra en pantalla: | Equipamiento ...
                 escritor.printf("| %-27s | %-5s | %-10s | %-65s |", "Equipamiento", "Cantidad", "Precio c/u", "Cantidad x Precio c/u x (" + resumen_datos[4] + ") día(s) x Tamaño evento x Tipo evento");
@@ -934,12 +927,11 @@ public class Matrix {
                 escritor.printf("| %-27s | %-8s | %-10s | $%-64s |\n", servicio[servicio.length-1], "", "", (sumatotalServicio * porcentaje));
                 escritor.println("+-------------------------------------------------------------------------------------------------------------------------+");
                 escritor.printf("| Total a pagar: $%-103s |%n", (sumatotalEquipamiento + sumatotalServicio) * porcentaje);
+                escritor.printf("| Pagó con: $$%-107s |%n", pagoRealizado); 
+                escritor.printf("| Su cambio es de: $%-101s |%n", (pagoRealizado - (sumatotalEquipamiento + sumatotalServicio) * porcentaje));
                 escritor.println("+-------------------------------------------------------------------------------------------------------------------------+");
                 /// * Fin Servicio
-                //sc.nextLine(); // Limpia el buffer
-                escritor.print("\uD83D\uDC46 Presiona enter para volver: ");
-                //sc.nextLine(); // Limpia el buffer
+                escritor.println();
             escritor.close();
-        System.out.println(); // Salto de línea para mejor apariencia
     }
 }
