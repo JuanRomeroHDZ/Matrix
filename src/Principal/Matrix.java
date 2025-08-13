@@ -92,11 +92,17 @@ public class Matrix {
                     int tipo_Evento= 2;
                     System.out.print("| \u2600\uFE0F  Cantidad de días que reservará el evento: ");
                     int diasUsuario = sc.nextInt();
-                    System.out.println("+---------------------------------------------------------------------------------------");
-                    System.out.println(); // -> Apariencia
-                    Object[] resumen_datos = new Object[]{nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario, tipo_Evento, "titulo", "tamanoEvento"}; // <- Nada más se está utilizando aquí
-                    opciones(sc, resumen_datos);
-                    break;
+                    if (diasUsuario <= 0){
+                        System.out.println();
+                        System.out.println("\\u274C Error: Cantidad invalida");
+                        System.out.println();
+                        return;
+                    }else{
+                        System.out.println("+---------------------------------------------------------------------------------------");
+                        System.out.println(); // -> Apariencia
+                        Object[] resumen_datos = new Object[]{nombreUsuario, telefonoUsuario, correoUsuario, personasUsuario, diasUsuario, tipo_Evento, "titulo", "tamanoEvento"}; // <- Nada más se está utilizando aquí
+                        opciones(sc, resumen_datos);
+                    }
                 }
 
             } catch (InputMismatchException e) {
@@ -608,15 +614,32 @@ public class Matrix {
                     for (int i = 0; i < equipamientoUniversal.length - 1; i++) {
                         System.out.print("⭐ Cantidad de "  + equipamientoUniversal[i] + ": ");
                         cantidadEquipamiento[i] = sc.nextInt();
-                        totalEquipamiento[i] = (cantidadEquipamiento[i] * (int) resumen_datos[4] * precios_equipamientoUniversal[i]);
-                        sumatotalEquipamiento += totalEquipamiento[i];
+                        if(cantidadEquipamiento[i] <= 0){
+                            System.out.println();
+                            System.out.println("Error, ingrese una cantidad valida");
+                            System.out.println();
+                            montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
+                        }else{
+                            totalEquipamiento[i] = (cantidadEquipamiento[i] * (int) resumen_datos[4] * precios_equipamientoUniversal[i]);
+                            sumatotalEquipamiento += totalEquipamiento[i];
+                        }
+                        
                     }
                     System.out.println(); // Salto de línea para preguntar sobre el personal
                     for (int i = 0; i < servicioUniversal.length - 1; i++) {
                         System.out.print("⭐ Cantidad de "  + servicioUniversal[i] + ": ");
                         cantidadServicio[i] = sc.nextInt();
-                        totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * precios_servicioUniversal[i]);
-                        sumatotalServicio += totalServicio[i];
+                        if (cantidadServicio[i] <= 0){
+                            System.out.println();
+                            System.out.println("Error, ingrese una cantidad valida");
+                            System.out.println();
+                            montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
+                        }
+                        else{
+                            totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * precios_servicioUniversal[i]);
+                            sumatotalServicio += totalServicio[i];
+                        }
+                        
                     }
                     Object[] resumen_equipo = new Object[]{equipamientoUniversal, cantidadEquipamiento, precios_equipamientoUniversal, totalEquipamiento, sumatotalEquipamiento};
                     Object[] resumen_servicios = new Object[]{servicioUniversal, cantidadServicio, precios_servicioUniversal, totalServicio, sumatotalServicio};
@@ -889,6 +912,12 @@ public class Matrix {
                                 | Nombre:                   %-40s |
                                 | Número de teléfono:       %-40s |
                                 | Correo:                   %-40s |
+                
+                
+                
+                
+                
+                
                                 | Cantidad de personas:     %-40s |
                                 | Días de renta:            %-40s |
                                 | Tipo de evento:           %-40s |
