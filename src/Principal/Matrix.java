@@ -1,4 +1,3 @@
-package Matrix.src;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.*; // -> Para utilizar el escritor y se cree el archivo
