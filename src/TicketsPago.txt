@@ -1,0 +1,37 @@
+
++----------------+
+| TICKET DE PAGO |
++----------------+
+----------------------------------------------------------------------
+| Nombre:                   Romero Hernandez Juan José               |
+| Número de teléfono:       6644267704                               |
+| Correo:                   0324108222@ut-tijuana.edu.mx             |
+| Cantidad de personas:     150                                      |
+| Días de renta:            4                                        |
+| Tipo de evento:           Social                                   |
+| Evento contratado:        Salón                                    |
+| Tamaño del evento:        Grande                                   |
+| Fecha de compra:          2025-08-13                               |
++-------------------------------------------------------------------------------------------------------------------------+
+| Equipamiento                | Cantidad | Precio c/u | Cantidad x Precio c/u x (4) día(s) x Tamaño evento x Tipo evento  |
+| Mesas                       | 10       | $50.0      | $4000.0                                                           |
+| Sillas                      | 1        | $10.0      | $80.0                                                             |
+| Aires acondicionados        | 2        | $80.0      | $1280.0                                                           |
+| Pantallas                   | 4        | $30.0      | $960.0                                                            |
+| Proyectores                 | 1        | $40.0      | $320.0                                                            |
+| Focos reflectantes          | 5        | $20.0      | $800.0                                                            |
+| Total:                      |          |            | $7440.0                                                           |
+|                                                                                                                         |
+| Servicio                    | Cantidad | Precio c/u | Cantidad x Precio c/u x (4) día(s) x Tamaño evento x Tipo evento  |
+| Personal de limpieza        | 2        | $100.0     | $1600.0                                                           |
+| Personal de soporte técnico | 3        | $70.0      | $1680.0                                                           |
+| Personal de cocina          | 1        | $25.0      | $200.0                                                            |
+| Personal de decoración      | 5        | $150.0     | $6000.0                                                           |
+| Total:                      |          |            | $9480.0                                                           |
++-------------------------------------------------------------------------------------------------------------------------+
+| Total a pagar: $16920.0                                                                                                 |
+| Pagó con: $$500000.0                                                                                                    |
+| Su cambio es de: $483080.0                                                                                              |
++-------------------------------------------------------------------------------------------------------------------------+
+
+^-^-^-^-^-^-^ Fue realizado a ejemplo de prueba ^-^-^-^-^-^-^ 

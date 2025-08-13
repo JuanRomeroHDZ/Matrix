@@ -1,6 +1,7 @@
+package Matrix.src;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.io.*;
+import java.io.*; // -> Para utilizar el escritor y se cree el archivo
 
 public class Matrix {
     public static void main(String[] args) throws Exception{
@@ -81,7 +82,6 @@ public class Matrix {
 
                 System.out.print("| \uD83D\uDC65 Cantidad de personas a asistir al evento: ");
                 int personasUsuario = sc.nextInt();
-
                 if(personasUsuario <= 0){
                     System.out.println(); // Salto de línea para mejor apariencia
                     System.out.println("\u274C Error: Cantidad inválida");
@@ -94,7 +94,7 @@ public class Matrix {
                     int diasUsuario = sc.nextInt();
                     if (diasUsuario <= 0){
                         System.out.println();
-                        System.out.println("\\u274C Error: Cantidad invalida");
+                        System.out.println("\u274C Error: Cantidad invalida");
                         System.out.println();
                         return;
                     }else{
@@ -104,9 +104,7 @@ public class Matrix {
                         opciones(sc, resumen_datos);
                     }
                 }
-
             } catch (InputMismatchException e) {
-                
                 System.out.println("\n\u274C Error: Solo números, no espacios ni letras\n");
                 sc.nextLine(); //
             }
@@ -616,7 +614,7 @@ public class Matrix {
                         cantidadEquipamiento[i] = sc.nextInt();
                         if(cantidadEquipamiento[i] <= 0){
                             System.out.println();
-                            System.out.println("Error, ingrese una cantidad valida");
+                            System.out.println("❌ Error, ingrese una cantidad válida");
                             System.out.println();
                             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
                         }else{
@@ -631,7 +629,7 @@ public class Matrix {
                         cantidadServicio[i] = sc.nextInt();
                         if (cantidadServicio[i] <= 0){
                             System.out.println();
-                            System.out.println("Error, ingrese una cantidad valida");
+                            System.out.println("❌ Error, ingrese una cantidad válida");
                             System.out.println();
                             montajeUniversal(sc, resumen_datos, equipamientoUniversal, precios_equipamientoUniversal, servicioUniversal, precios_servicioUniversal);
                         }
@@ -639,7 +637,6 @@ public class Matrix {
                             totalServicio[i] = (cantidadServicio[i] * (int) resumen_datos[4] * precios_servicioUniversal[i]);
                             sumatotalServicio += totalServicio[i];
                         }
-                        
                     }
                     Object[] resumen_equipo = new Object[]{equipamientoUniversal, cantidadEquipamiento, precios_equipamientoUniversal, totalEquipamiento, sumatotalEquipamiento};
                     Object[] resumen_servicios = new Object[]{servicioUniversal, cantidadServicio, precios_servicioUniversal, totalServicio, sumatotalServicio};
@@ -649,7 +646,6 @@ public class Matrix {
                     System.out.println("\n\u274C Error: No se permiten letras ni caracteres especiales\n");
                     sc.nextLine();
                 }
-            //return;
             } while (true);
     }
     public static void decFinal(Scanner sc,Object[]resumen_datos,Object[] datos_equipamiento, Object[]datos_servicio) throws Exception{
@@ -912,12 +908,6 @@ public class Matrix {
                                 | Nombre:                   %-40s |
                                 | Número de teléfono:       %-40s |
                                 | Correo:                   %-40s |
-                
-                
-                
-                
-                
-                
                                 | Cantidad de personas:     %-40s |
                                 | Días de renta:            %-40s |
                                 | Tipo de evento:           %-40s |

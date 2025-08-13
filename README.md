@@ -1,5 +1,5 @@
+#### ARCHIVO DENTRO DE src ###
 # Proyecto Matrix
-
 Proyecto colaborativo en la cuales se ven implicadas las siguientes materias:
 1. Redes
 2. Sistemas operativos
@@ -10,7 +10,7 @@ Nombre de los integrantes:
 2. Montaño
 3. Romero
 
-## Instrucciones
+# Instrucciones
 1. Clona el repositorio
 
 git clone https://github.com/JuanRomeroHDZ/Matrix.git
@@ -26,17 +26,13 @@ javac src/Matrix.java
 4. Ejecutar el programa
 
 java -cp src Matrix
-
-
-
-
-# ------------------------------------------------------ #
+# ------------------------------------------------------- #
 
 1. Se indicaran la cantidad de eventos (2) 
 2. Dependiendo el tipo de evento será el costo de cada cosa (El empresarial debe ser más caro que el social)
 3. El usuario deberá poder elegir la cantidad de días a rentar el tipo de montaje.
 
-------------------------------------
+# ------------------------------------------------------- #
 1. Conferencia
 Equipamiento:
 Sillas alineadas (sin mesas)
@@ -56,7 +52,6 @@ Café o coffee break
 Personal técnico (audio/video)
 Material de apoyo (bolígrafos, carpetas)
 Wi-fi
-
 ------------------------------------
 2. Teatro
 Equipamiento:
@@ -76,7 +71,6 @@ Servicios de cafetería o snacks
 Publicidad y promoción
 Servicios de limpieza
 Asistencia técnica en luces/sonido
-
 ------------------------------------
 3. Recepción
 Equipamiento:
@@ -95,7 +89,6 @@ Guardarropa
 Valet parking
 Seguridad
 Personal de atención (meseros, anfitriones)
-
 ------------------------------------
 4. Banquete
 Equipamiento:
@@ -114,7 +107,6 @@ Pastel (en eventos formales)
 Fotografía profesional
 Organización de brindis y discursos
 Estación de bebidas
-
 ------------------------------------
 5. Salón
 (Espacio multifuncional que se adapta a diferentes tipos de eventos)
@@ -135,7 +127,6 @@ Soporte técnico
 Wi-Fi
 Servicio de café o refrigerio
 Decoración opcional
-
 ------------------------------------
 6. Disposición en forma de U
 (Ideal para reuniones, capacitaciones, talleres)
